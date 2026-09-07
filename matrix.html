@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>特徵矩陣 · Claude 系統提示詞演進</title>
+<meta name="description" content="118 個關鍵片語 × 32 個版本的出現矩陣，可搜尋、可點擊回到原文驗證。">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <nav class="main">
+      <a href="index.html">總覽</a>
+      <a href="versions.html">版本總表</a>
+      <a href="shifts.html">五次躍遷</a>
+      <a href="themes.html">主題軌跡</a>
+      <a href="branches.html">分支與兄弟版</a>
+      <a href="matrix.html">特徵矩陣</a>
+      <a href="method.html">方法與證據</a>
+      <a href="quiz.html">自我檢測</a>
+    </nav>
+    <button class="theme-btn" data-theme-toggle aria-label="切換深淺色">☾</button>
+  </div>
+</header>
+
+<div class="wrap"><main class="page wide">
+
+<p class="kicker" style="margin-top:34px">第 4 步 · 動手驗證</p>
+<h1>特徵矩陣</h1>
+<p class="lede">
+118 個關鍵片語 × 32 個版本，以字串比對（不分大小寫）檢查是否出現。
+這是全站唯一「不靠敘述、只靠出現與不出現」的視圖——所有 diff 結論都要能在這裡交叉驗證。
+<strong>點任一個方塊</strong>就會開啟該版原文並自動高亮該片語。
+</p>
+
+<div class="goal">
+  <p class="kicker">怎麼用這一頁自學</p>
+  <ol style="margin:0;font-size:14.5px">
+    <li>先在搜尋框輸入一個你剛讀過的規則關鍵字，例如 <code>election_info</code>、<code>emoji</code>、<code>face blind</code>。</li>
+    <li>看它的橫列分布，判斷是「一路保留」「加了又刪」還是「只在某一系」。</li>
+    <li>點一個方塊進原文確認，再點一個空格對照的相鄰版本——確認那句真的不見了。</li>
+    <li>最後回到<a href="themes.html">主題軌跡</a>，看敘述是否與你看到的分布一致。</li>
+  </ol>
+</div>
+
+<div class="toolbar">
+  <input type="search" id="q" placeholder="搜尋片語，例如 election_info、tool_search、genuinely…">
+  <button class="chip" data-preset="election_info">election_info</button>
+  <button class="chip" data-preset="face blind">face blind</button>
+  <button class="chip" data-preset="emoji">emoji</button>
+  <button class="chip" data-preset="tool">tool*</button>
+  <button class="chip" data-preset="">清除</button>
+  <span class="count" id="cnt"></span>
+</div>
+
+<div class="hm"><table class="hm-t" id="hm"></table></div>
+
+<p style="font-size:13px;color:var(--muted);margin-top:10px">
+  欄號 1–32 與 <code>evidence/feature_matrix.txt</code> 的 COLUMN KEY 一致，依日期排列（第 12 欄的標籤日期不可信，見 <a href="method.html#q1">Q1</a>，故排在第 11 欄之前）。
+  顏色＝模型系。滑過欄號可看版本名稱。
+</p>
+
+<h2>欄號對照</h2>
+<div class="tbl-wrap"><table id="legend">
+  <thead><tr><th style="width:44px">#</th><th style="width:120px">模型</th><th style="width:100px">日期</th><th style="width:110px">變體</th><th style="width:70px">字數</th><th>版本檔</th></tr></thead>
+  <tbody></tbody>
+</table></div>
+
+<div class="selfcheck">
+  <p class="kicker">自我檢核</p>
+  <ol>
+    <li>搜尋 <code>docs.anthropic.com</code> 與 <code>docs.claude.com</code>。第 8 欄與第 12 欄（Haiku 3.5）的分布，為什麼構成「頁面被回溯改寫」的證據？</li>
+    <li>搜尋 <code>The assistant is Claude, created by</code>。它在第 12 欄是空的——這是漏抓還是有意義的空白？</li>
+    <li>找出一個「只在單一欄出現」的片語，說明它為什麼是那一版獨有的。</li>
+  </ol>
+</div>
+
+<footer class="site">
+  <p>矩陣原始檔：<a href="evidence/feature_matrix.txt">evidence/feature_matrix.txt</a>（PowerShell <code>IndexOf(OrdinalIgnoreCase)</code> 逐一比對產生）。</p>
+</footer>
+
+</main></div>
+
+<script src="data/matrix.js"></script>
+<script src="assets/app.js"></script>
+<script>
+var cols = MATRIX.columns.slice().sort(function (a, b) { return a.i - b.i; });
+var hm = document.getElementById('hm');
+
+function head() {
+  var h = '<thead><tr><th class="ph">片語（' + MATRIX.phrases.length + '）</th>';
+  cols.forEach(function (c) {
+    h += '<th title="' + esc(c.model + ' ' + c.date + (c.variant !== '—' ? ' · ' + c.variant : '')) + '">' + (c.i % 10) + '</th>';
+  });
+  return h + '</tr></thead>';
+}
+
+function render(term) {
+  var t = (term || '').trim().toLowerCase();
+  var rows = MATRIX.phrases.filter(function (p) { return !t || p.p.toLowerCase().indexOf(t) >= 0; });
+  var body = rows.map(function (p) {
+    var tds = '';
+    for (var k = 0; k < 32; k++) {
+      var c = cols[k], on = p.v[k] === 'Y';
+      tds += '<td class="' + (on ? 'y fam-' + c.family : '') + '"' +
+        (on ? ' data-open="' + c.file + '.txt" data-title="' + esc(c.model + ' · ' + c.date) + '" data-term="' + esc(p.p) + '" title="' + esc(c.model + ' ' + c.date + ' — 點擊看原文') + '" style="cursor:pointer"' : '') +
+        '><i></i></td>';
+    }
+    return '<tr><th class="ph" title="' + esc(p.p) + '">' + esc(p.p) + '</th>' + tds + '</tr>';
+  }).join('');
+  hm.innerHTML = head() + '<tbody>' + body + '</tbody>';
+  document.getElementById('cnt').textContent = rows.length + ' / ' + MATRIX.phrases.length + ' 個片語';
+}
+
+document.getElementById('q').addEventListener('input', function () { render(this.value); });
+document.querySelectorAll('.chip[data-preset]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    document.getElementById('q').value = b.dataset.preset;
+    render(b.dataset.preset);
+  });
+});
+render('');
+
+document.querySelector('#legend tbody').innerHTML = cols.map(function (c) {
+  return '<tr class="fam-' + c.family + '"><td class="num">' + c.i + '</td>' +
+    '<td><span class="dot"></span>' + esc(c.model) + '</td>' +
+    '<td class="num">' + c.date + '</td>' +
+    '<td style="font-size:13px">' + esc(c.variant) + '</td>' +
+    '<td class="num">' + c.words.toLocaleString() + '</td>' +
+    '<td style="font-size:12.5px"><a href="#" data-open="' + c.file + '.txt" data-title="' + esc(c.model + ' · ' + c.date) + '">' + c.file + '.txt</a></td></tr>';
+}).join('');
+</script>
+</body>
+</html>

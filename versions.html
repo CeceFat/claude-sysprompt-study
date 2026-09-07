@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>版本總表 · Claude 系統提示詞演進</title>
+<meta name="description" content="32 個 claude.ai 系統提示詞版本的日期、字數、自述知識截止、結構型態與一句話摘要，可篩選並直接讀原文。">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <nav class="main">
+      <a href="index.html">總覽</a>
+      <a href="versions.html">版本總表</a>
+      <a href="shifts.html">五次躍遷</a>
+      <a href="themes.html">主題軌跡</a>
+      <a href="branches.html">分支與兄弟版</a>
+      <a href="matrix.html">特徵矩陣</a>
+      <a href="method.html">方法與證據</a>
+      <a href="quiz.html">自我檢測</a>
+    </nav>
+    <button class="theme-btn" data-theme-toggle aria-label="切換深淺色">☾</button>
+  </div>
+</header>
+
+<div class="wrap"><main class="page wide">
+
+<p class="kicker" style="margin-top:34px">第 1 步</p>
+<h1>版本總表</h1>
+<p class="lede">32 個納入分析的版本，依日期排列。編號沿用特徵矩陣的欄號，所以第 12 欄（Haiku 3.5 text+images）會排在第 11 欄前面——因為它的標籤日期不可信。</p>
+
+<div class="goal">
+  <p class="kicker">學習目標</p>
+  <ul>
+    <li>建立時間座標：哪一段時期屬於哪一種結構型態。</li>
+    <li>認出三個轉折點：2024-10-22（翻倍）、2025-09-29（砍半）、2026-09-01（最長）。</li>
+    <li>學會分辨「模型系」——同一天發布的兄弟版本並不一定內容相同。</li>
+  </ul>
+</div>
+
+<div class="toolbar">
+  <input type="search" id="q" placeholder="搜尋摘要、結構、模型名…">
+  <button class="chip" data-fam="all" aria-pressed="true">全部</button>
+  <button class="chip" data-fam="Sonnet" aria-pressed="false">Sonnet</button>
+  <button class="chip" data-fam="Opus" aria-pressed="false">Opus</button>
+  <button class="chip" data-fam="Haiku" aria-pressed="false">Haiku</button>
+  <button class="chip" data-fam="Fable" aria-pressed="false">Fable</button>
+  <button class="chip" data-fam="milestone" aria-pressed="false">只看轉折點</button>
+  <span class="count" id="cnt"></span>
+</div>
+
+<div class="tbl-wrap">
+  <table id="tbl">
+    <thead><tr>
+      <th style="width:52px">#</th>
+      <th style="width:132px">模型頁</th>
+      <th style="width:104px">日期條目</th>
+      <th style="width:120px">變體</th>
+      <th style="width:66px">字數</th>
+      <th style="width:130px">自述 cutoff</th>
+      <th style="width:190px">結構</th>
+      <th>一句話摘要</th>
+      <th style="width:96px">原文</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<p style="font-size:13px;color:var(--muted)">
+  字數為以空白切詞的 word count，由本站對 <code>evidence/versions/*.txt</code> 重新計算，與報告數字一致。
+  cutoff 為條文自述，不等於實際訓練截止。同格兩個數字代表兩個變體或兩個兄弟模型檔。
+</p>
+
+<h2>字數走勢，換個看法</h2>
+<p>把同一列排開，比較容易看出「增生—重置」的節奏：每次大改寫之後，字數會在 3 到 6 個月內回到原來的軌跡上。</p>
+<div class="card" style="padding:16px 18px"><div id="bars"></div></div>
+
+<div class="selfcheck">
+  <p class="kicker">自我檢核</p>
+  <ol>
+    <li>2025-09-29 這一版砍掉了約 900 字。它砍的是哪一類內容？（提示：不是產品資訊）</li>
+    <li>為什麼 2025-08-05 有兩列，而其中一列的摘要寫「與 07-31 逐字相同」？</li>
+    <li>Haiku 3.5 的兩個變體，自述 cutoff 一個是 Jul 2024、一個是 start of Dec 2024。這說明了什麼？</li>
+  </ol>
+</div>
+
+<footer class="site">
+  <p>資料來源：<a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">Anthropic 官方 System prompts 發行說明</a>。本站為個人研究整理，非官方出版品。</p>
+</footer>
+
+</main></div>
+
+<script src="data/matrix.js"></script>
+<script src="data/versions.js"></script>
+<script src="assets/app.js"></script>
+<script>
+var tbody = document.querySelector('#tbl tbody');
+var fam = 'all', term = '';
+
+function rows() {
+  return VERSIONS.filter(function (v) {
+    if (fam === 'milestone' && !v.milestone) return false;
+    if (fam !== 'all' && fam !== 'milestone') {
+      var hit = v.cols.some(function (c) { var ci = colInfo(c); return ci && ci.family === fam; });
+      if (!hit && v.family !== fam) return false;
+    }
+    if (term) {
+      var hay = [v.model, v.date, v.variant, v.cutoff, v.struct, v.sum, v.n].join(' ').toLowerCase();
+      if (hay.indexOf(term) < 0) return false;
+    }
+    return true;
+  });
+}
+
+function render() {
+  var list = rows();
+  tbody.innerHTML = list.map(function (v) {
+    var infos = v.cols.map(colInfo).filter(Boolean);
+    var words = infos.map(function (c) { return c.words.toLocaleString(); }).join(' / ');
+    var links = infos.map(function (c) {
+      var lab = c.variant !== '—' ? c.variant : c.model;
+      return '<a href="#" data-open="' + c.file + '.txt" data-title="' + esc(c.model + ' · ' + c.date + (c.variant !== '—' ? ' · ' + c.variant : '')) + '">' + esc(lab) + '</a>';
+    });
+    (v.extra || []).forEach(function (e) {
+      links.push('<a href="#" data-open="' + e.file + '" data-title="' + esc(e.label) + '">' + esc(e.label) + '</a>');
+    });
+    var flag = v.flag ? ' <a class="tag del" href="method.html#' + v.flag.toLowerCase() + '" title="資料品質警語">' + v.flag + '</a>' : '';
+    var ms = v.milestone ? ' <span class="tag on">轉折</span>' : '';
+    var dn = v.dateNote ? '<br><span style="font-size:11.5px;color:var(--warn)">' + esc(v.dateNote) + '</span>' : '';
+    return '<tr class="fam-' + v.family + '">' +
+      '<td class="num">' + v.n + '</td>' +
+      '<td><span class="dot"></span>' + esc(v.model) + ms + flag + '</td>' +
+      '<td class="num">' + v.date + dn + '</td>' +
+      '<td style="font-size:13px">' + esc(v.variant) + '</td>' +
+      '<td class="num">' + words + '</td>' +
+      '<td style="font-size:13px">' + esc(v.cutoff) + '</td>' +
+      '<td style="font-size:13px"><code>' + esc(v.struct) + '</code></td>' +
+      '<td>' + esc(v.sum) + '</td>' +
+      '<td style="font-size:12.5px;line-height:2">' + links.join('<br>') + '</td>' +
+      '</tr>';
+  }).join('');
+  var covered = list.reduce(function (s, v) { return s + v.cols.length; }, 0);
+  var total = VERSIONS.reduce(function (s, v) { return s + v.cols.length; }, 0);
+  document.getElementById('cnt').textContent = list.length + ' 列（涵蓋 ' + covered + ' / ' + total + ' 版）';
+}
+
+document.querySelectorAll('.chip[data-fam]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    fam = b.dataset.fam;
+    document.querySelectorAll('.chip[data-fam]').forEach(function (o) { o.setAttribute('aria-pressed', o === b); });
+    render();
+  });
+});
+document.getElementById('q').addEventListener('input', function () { term = this.value.trim().toLowerCase(); render(); });
+render();
+
+/* 橫條圖 */
+(function () {
+  var cols = MATRIX.columns.slice().sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : a.i - b.i; });
+  var COL = { Sonnet: '#3d6fa8', Opus: '#8a5bb5', Haiku: '#3f8a72', Fable: '#b0502a' };
+  var W = 900, rowH = 17, T = 6, L = 176, max = 4400;
+  var H = T * 2 + cols.length * rowH;
+  var s = ['<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="各版本字數橫條圖">'];
+  cols.forEach(function (c, k) {
+    var y = T + k * rowH, w = (c.words / max) * (W - L - 60);
+    var lab = c.model + ' ' + c.date.slice(2) + (c.variant !== '—' ? ' ' + c.variant.slice(0, 4) : '');
+    s.push('<text x="' + (L - 8) + '" y="' + (y + 11) + '" text-anchor="end" style="font-size:10px">' + lab + '</text>');
+    s.push('<g class="pt" data-open="' + c.file + '.txt" data-title="' + c.model + ' · ' + c.date + '">' +
+      '<rect x="' + L + '" y="' + (y + 3) + '" width="' + w + '" height="' + (rowH - 6) + '" rx="2" fill="' + COL[c.family] + '" opacity=".82"/>' +
+      '<text x="' + (L + w + 6) + '" y="' + (y + 11) + '" style="font-size:9.5px">' + c.words.toLocaleString() + '</text>' +
+      '<title>' + c.model + ' ' + c.date + ' — ' + c.words + ' 字（點擊讀原文）</title></g>');
+  });
+  s.push('</svg>');
+  document.getElementById('bars').innerHTML = s.join('');
+})();
+</script>
+</body>
+</html>

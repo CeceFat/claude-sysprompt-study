@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分支與兄弟版 · Claude 系統提示詞演進</title>
+<meta name="description" content="Opus 系、Sonnet／Haiku 系、Fable 系三條分支的交叉搬運證據，同日兄弟版本的逐字差異，以及對使用者的實務含意。">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <nav class="main">
+      <a href="index.html">總覽</a>
+      <a href="versions.html">版本總表</a>
+      <a href="shifts.html">五次躍遷</a>
+      <a href="themes.html">主題軌跡</a>
+      <a href="branches.html">分支與兄弟版</a>
+      <a href="matrix.html">特徵矩陣</a>
+      <a href="method.html">方法與證據</a>
+      <a href="quiz.html">自我檢測</a>
+    </nav>
+    <button class="theme-btn" data-theme-toggle aria-label="切換深淺色">☾</button>
+  </div>
+</header>
+
+<div class="wrap"><main class="page wide">
+
+<p class="kicker" style="margin-top:34px">第 5 步</p>
+<h1>分支與兄弟版</h1>
+<p class="lede">
+這一頁要拆掉一個直覺：以為 prompt 是一份不斷往前修改的主文件。
+實際上它至少有三條分支——Opus 系、Sonnet／Haiku 系、Fable 系——各自從不同時間點的母版分叉，再交叉搬運段落。
+任何「某規則自 X 版起生效」的敘述，都必須限定模型系。
+</p>
+
+<div class="goal">
+  <p class="kicker">學習目標</p>
+  <ul>
+    <li>用「規則來回出現」的證據推翻單一主幹假設。</li>
+    <li>知道同一天發布的兩個模型，prompt 可以差到幾十段。</li>
+    <li>把這些結構理解轉成實際使用 Claude 時的預期管理。</li>
+  </ul>
+</div>
+
+<h2>規則來回出現：分支維護的直接證據</h2>
+<p>如果只有一條主幹，一條規則被刪掉之後不該再出現。下表每一列都是反例。</p>
+
+<div class="tbl-wrap">
+  <table>
+    <thead><tr><th style="width:270px">規則</th><th style="width:170px">出現</th><th style="width:190px">消失</th><th>再出現</th></tr></thead>
+    <tbody>
+      <tr><td><code class="xml">election_info</code></td><td class="num">2025-05-22</td><td class="num">Opus 4.5（11-24）</td><td class="num">Opus 4.6（02-05）；Sonnet 4.6 起永久刪</td></tr>
+      <tr><td>web search 不問許可</td><td class="num">Sonnet 4.5 09-29</td><td class="num">11-19</td><td>—</td></tr>
+      <tr><td>"genuinely" 禁詞</td><td class="num">Opus 4.6</td><td class="num">Opus 4.7</td><td class="num">Opus 4.8（改 actually）；Fable 5 刪；Opus 5、Fable 5.1 恢復</td></tr>
+      <tr><td>星號動作禁令</td><td class="num">2025-07-31</td><td class="num">Opus 4.7</td><td>—</td></tr>
+      <tr><td>emoji 規則</td><td class="num">2025-07-31</td><td class="num">Fable 5</td><td>—</td></tr>
+      <tr><td><code>long_conversation_reminder</code> 列名</td><td class="num">2026-01-18</td><td class="num">Opus 4.8</td><td class="num">Fable 5</td></tr>
+      <tr><td><code class="xml">tool_discovery</code>／<code class="xml">capability_check</code></td><td class="num">Opus 4.7／4.8</td><td class="num">Fable 5</td><td>—</td></tr>
+      <tr><td><code class="xml">default_stance</code></td><td class="num">Opus 4.8</td><td class="num">Fable 5</td><td class="num">Opus 5</td></tr>
+      <tr><td><code>end_conversation</code> 工具</td><td class="num">Fable 5</td><td class="num">Opus 5、Fable 5.1</td><td>—</td></tr>
+      <tr><td>反過度依賴段</td><td class="num">Sonnet 4.6</td><td class="num">Opus 4.7</td><td class="num">Opus 4.8、Fable 5；Opus 5、5.1 刪</td></tr>
+      <tr><td>「intellectually curious／authentic conversation」段</td><td class="num">2024-10-22</td><td class="num">2025-05-22</td><td class="num">Opus 5（隔了 20 個月）</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="infer">
+  <b>結論</b>　至少存在 Opus 系、Sonnet／Haiku 系、Fable 系三條分支，各自從不同時間點的母版分叉，交叉搬運段落。
+  最戲劇性的一列是最後一列：一段 2024 年 10 月的文字，在 2025 年 5 月被刪除，20 個月後原封不動出現在 Opus 5 裡。
+</div>
+
+<h2>三條分支的骨架承接</h2>
+<div class="grid c3">
+  <div class="card fam-Opus">
+    <p class="kicker"><span class="dot"></span>Opus 系</p>
+    <p style="font-size:14.5px;margin:0">4.5 → 4.6 → 4.7 → 4.8 → <b>Opus 5</b>。保留全套 CBRN＋常規武器段、<code class="xml">default_stance</code>、<code class="xml">tone_preference</code>。Opus 5 的骨架承自 <b>Opus 4.8</b>，不是同期的 Fable 5。</p>
+  </div>
+  <div class="card fam-Sonnet">
+    <p class="kicker"><span class="dot"></span>Sonnet／Haiku 系</p>
+    <p style="font-size:14.5px;margin:0">4.5（Sonnet／Haiku 幾乎共用同一份，只差名稱與定位語）→ 4.6。這一系最早進入 <code class="xml">&lt;claude_behavior&gt;</code>，也是動態提醒機制的首發。</p>
+  </div>
+  <div class="card fam-Fable">
+    <p class="kicker"><span class="dot"></span>Fable 系</p>
+    <p style="font-size:14.5px;margin:0">Fable 5 → Fable 5.1。從 4.8 骨架分叉後刪掉 <code class="xml">default_stance</code>／<code class="xml">tool_discovery</code>；CBRN 字樣只留 explosives；獨有毒品段與（5.1）著作權段。</p>
+  </div>
+</div>
+
+<h2>同日兄弟版本差異</h2>
+<p>同一天發布不代表同一份文字。這裡是 21 組 word-diff 中，跨模型比對的七組結果。</p>
+
+<div class="tbl-wrap">
+  <table>
+    <thead><tr><th style="width:220px">比對</th><th>差異</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Sonnet 4 vs Opus 4</b><br><span class="num" style="font-size:12.5px">2025-05-22／07-31／08-05</span></td>
+        <td>只有名稱、model string、定位語：<span class="en">a smart, efficient model for everyday use</span> vs <span class="en">the most powerful model for complex challenges</span>；05-22 的 Sonnet 版少一個句號。
+        <br><a href="#" data-open="claude-sonnet-4__May_22_2025__default.txt" data-title="Sonnet 4 · 2025-05-22">讀 Sonnet 4</a> ／ <a href="#" data-open="claude-opus-4__May_22_2025__default.txt" data-title="Opus 4 · 2025-05-22">讀 Opus 4</a></td>
+      </tr>
+      <tr>
+        <td><b>Sonnet 4 vs Opus 4.1</b><br><span class="num" style="font-size:12.5px">2025-08-05</span></td>
+        <td>4.1 多 <code class="xml">&lt;evenhandedness&gt;</code> 六段；用語 human → person；家族列 <span class="en">Claude Opus 4.1, Claude Opus 4, and Claude Sonnet 4</span>。
+        <br><a href="#" data-open="claude-sonnet-4__August_5_2025__default.txt" data-title="Sonnet 4 · 2025-08-05">讀 Sonnet 4</a> ／ <a href="#" data-open="claude-opus-4-1__August_5_2025__default.txt" data-title="Opus 4.1 · 2025-08-05">讀 Opus 4.1</a></td>
+      </tr>
+      <tr>
+        <td><b>Sonnet 4.5（09-29）vs Haiku 4.5（10-15）</b></td>
+        <td>Haiku <span class="en">the fastest model for quick questions</span>；Haiku 的 cutoff 段已是 11-19 寫法但用字 <span class="en">web search feature</span> 而非 <span class="en">tool</span>；其餘逐字相同。</td>
+      </tr>
+      <tr>
+        <td><b>Sonnet 4.5 vs Haiku 4.5</b><br><span class="num" style="font-size:12.5px">11-19、01-18</span></td>
+        <td>只有名稱與定位語；11-19 的 Haiku 版 <code class="xml">&lt;evenhandedness&gt;</code> 標籤多打一個 <code>&lt;</code>。</td>
+      </tr>
+      <tr>
+        <td><b>Sonnet 4.5（11-19）vs Opus 4.5（11-24）</b></td>
+        <td>Opus 多：四段危機協定、CommonMark 空行規則、<span class="en">Claude uses a warm tone</span>、影像未上傳提醒、以 <span class="en">uses accurate medical ... information</span> 取代 <span class="en">provides emotional support alongside</span>；Opus 刪 election_info；cutoff Jan 2025 → May 2025；區塊名 <code class="xml">&lt;when_to_use_lists_and_bullets&gt;</code> → <code class="xml">&lt;lists_and_bullets&gt;</code>。</td>
+      </tr>
+      <tr>
+        <td><b>Opus 4.6（02-05）vs Sonnet 4.6（02-17）</b></td>
+        <td>Sonnet 多 PowerPoint、危機直接給資源、不做風險評估、不肯定迴避求助、反過度依賴；Sonnet 刪 election_info；cutoff May 2025 → beginning of Aug 2025；家族名 <span class="en">Claude 4.5 model family</span> vs <span class="en">Claude 4.6 model family</span>。</td>
+      </tr>
+      <tr>
+        <td><b>Fable 5（06-09）vs Opus 5（07-24）</b><br><span class="tag on">差異最大的一組</span></td>
+        <td><b>Opus 5 多：</b>出口管制通知、<code class="xml">&lt;fable_safeguards_routing&gt;</code>、<code class="xml">&lt;default_stance&gt;</code>、Claude Tag、Claude Design、CBRN＋常規武器段、「未成年人表明欲性化自身」條、intellectually curious 段、<span class="en">prioritizes their wellbeing over completing the task</span>、<code class="xml">&lt;tone_preference&gt;</code>。
+        <br><b>Fable 5 多：</b>毒品段、兒少 pattern level 與 detection mechanics 兩條、不臆測心理狀態段、不點名診斷、替代技巧擴充、過往求助創傷段、飲食心理敘事禁令、反映聆聽段、反過度依賴、<code>end_conversation</code>。
+        <br>cutoff Jan 2026 vs May 2026。
+        <br><a href="#" data-open="claude-fable-5__June_9_2026__default.txt" data-title="Fable 5 · 2026-06-09">讀 Fable 5</a> ／ <a href="#" data-open="claude-opus-5__July_24_2026__default.txt" data-title="Opus 5 · 2026-07-24">讀 Opus 5</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="note">
+  想自己看逐字差異，21 組 word-diff 都在 <a href="evidence/diffs/">evidence/diffs/</a>，格式是 <code>[-舊-]{+新+}</code>。
+  檔名前綴是比對編號，例如 <code>13_f5_vs_o5.diff</code> 就是上表最後一列。
+</div>
+
+<h2>對使用者的實務含意</h2>
+<p class="lede" style="font-size:15.5px">
+以下六點是<strong>推論</strong>，不是文件明文，但每一點都能追到具體條文。
+它們回答的是同一個問題：知道了這些結構，實際跟 Claude 工作時該怎麼調整？
+</p>
+
+<div class="grid c2">
+  <div class="card">
+    <p class="kicker">1 · 法律與財務問題</p>
+    <p style="font-size:14.5px;margin:0"><code class="xml">&lt;legal_and_financial_advice&gt;</code>（2025-11-19 起）會把回答壓成「提供事實資訊、避免明確建議、附非律師聲明」。這是 prompt 層行為，不是硬限制；在使用者偏好或 Project 指令中表明執業身分與所需輸出形式，可以改變預設。</p>
+  </div>
+  <div class="card">
+    <p class="kicker">2 · 要求單方論證時</p>
+    <p style="font-size:14.5px;margin:0"><code class="xml">&lt;evenhandedness&gt;</code>（2025-08-05 起）會讓 Claude 在結尾附上反方觀點。如果你要的是純粹的一方立場（例如對抗性書狀論點），必須明示「不附反方」。</p>
+  </div>
+  <div class="card">
+    <p class="kicker">3 · 著作權比對工作</p>
+    <p style="font-size:14.5px;margin:0">Fable 5.1 的著作權區塊會拒絕逐字重現歌詞、詩、書摘與已知角色圖像，但允許「以文字描述或分析受保護的視覺作品」。做侵權比對時，用「描述／分析」而不是「重現」的要求方式。</p>
+  </div>
+  <div class="card">
+    <p class="kicker">4 · 為什麼不叫你的名字</p>
+    <p style="font-size:14.5px;margin:0">Fable 5.1：<span class="en">does not use a name the person has not given, including one inferred from an email address</span>。從帳號推得的姓名不會被拿來稱呼你，這是規則不是失憶。</p>
+  </div>
+  <div class="card">
+    <p class="kicker">5 · 模型自稱不一致時</p>
+    <p style="font-size:14.5px;margin:0">Fable 5 的 safeguards routing 表示不到 5% 的 session 可能實際由 Opus 5 回覆。當回覆自稱的模型或 cutoff 與你選的不一致，這是預期行為而非故障。</p>
+  </div>
+  <div class="card">
+    <p class="kicker">6 · 追問「你為什麼拒絕」</p>
+    <p style="font-size:14.5px;margin:0">Opus 4.8 起 <span class="en">does not attribute its behavior to its system prompt</span>。追問規則出處得不到引用；要查規則只能對照本站這類外部整理。</p>
+  </div>
+</div>
+
+<div class="selfcheck">
+  <p class="kicker">自我檢核</p>
+  <ol>
+    <li>「Claude 從 Opus 4.8 起會把 tool_search 視為免費」——這句話錯在哪裡？</li>
+    <li>Fable 5 與 Opus 5 相差不到七週。為什麼差異卻比相隔一年的兩個 Sonnet 版本還大？</li>
+    <li>若你要向同事說明「Claude 為什麼突然改變回答風格」，你會先查哪一個表？</li>
+  </ol>
+</div>
+
+<footer class="site">
+  <p>差異來源：<a href="evidence/diffs/">evidence/diffs/</a> 的 21 組 <code>git diff --no-index --word-diff</code> 輸出。實務含意為本站推論。</p>
+</footer>
+
+</main></div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

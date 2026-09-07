@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>方法與證據 · Claude 系統提示詞演進</title>
+<meta name="description" content="資料抓取與比對方法、七項文件品質警語、知識截止與 model string 附錄、XML schema 演變，以及本站的獨立查核紀錄。">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <nav class="main">
+      <a href="index.html">總覽</a>
+      <a href="versions.html">版本總表</a>
+      <a href="shifts.html">五次躍遷</a>
+      <a href="themes.html">主題軌跡</a>
+      <a href="branches.html">分支與兄弟版</a>
+      <a href="matrix.html">特徵矩陣</a>
+      <a href="method.html">方法與證據</a>
+      <a href="quiz.html">自我檢測</a>
+    </nav>
+    <button class="theme-btn" data-theme-toggle aria-label="切換深淺色">☾</button>
+  </div>
+</header>
+
+<div class="wrap"><main class="page">
+
+<p class="kicker" style="margin-top:34px">可查核性</p>
+<h1>方法與證據</h1>
+<p class="lede">
+一份講「文件怎麼變」的整理，如果自己不能被查核就沒有價值。
+這一頁交代資料怎麼來、哪裡不可靠、以及本站在轉成網頁時重跑了哪些查核。
+</p>
+
+<h2>資料怎麼來</h2>
+<ol>
+  <li>以 <code>curl</code> 抓取 overview 與 18 個子頁的 <code>.md</code> 原始檔（Mintlify 原始 MDX），不經任何摘要模型。
+    <div class="q" style="font-family:var(--mono);font-size:12.5px">curl -sL -H "Accept: text/markdown" https://platform.claude.com/docs/en/release-notes/system-prompts/&lt;slug&gt;.md</div>
+  </li>
+  <li>依每頁的 <code>## &lt;日期&gt;</code> 標題與 <code>Text only:</code> ／ <code>Text and images:</code> 標籤，把 <code>```text</code> 圍欄內文切成 34 個版本檔（分析矩陣取 32 欄）。Oct 22 2024 條目原文以字面 <code>\n</code> 表示換行，已正規化。</li>
+  <li>以 <code>git diff --no-index -U0 --word-diff=plain</code> 做 21 組逐字比對（同頁相鄰日期、同日兄弟模型、跨世代承接），輸出 <code>[-舊-]{+新+}</code> 格式。</li>
+  <li>以關鍵片語對 32 版做出現矩陣，PowerShell <code>IndexOf(OrdinalIgnoreCase)</code> 逐一比對，交叉驗證 diff 結論。</li>
+</ol>
+<p>抓取時間 2026-09-07。<code>evidence/sources/</code> 是官方頁面原文；<code>versions/</code>、<code>diffs/</code>、<code>feature_matrix.txt</code> 是分析產物。</p>
+
+<h2 id="recheck">本站的獨立查核紀錄</h2>
+<p>把報告轉成網頁之前，重跑了一輪查核。結果如下——包含一項與原報告不符之處。</p>
+
+<div class="tbl-wrap">
+  <table>
+    <thead><tr><th style="width:190px">查核項目</th><th style="width:80px">結果</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>22 條關鍵引文逐字存在</td><td><span class="tag add">通過</span></td><td>橫跨 Haiku 3 到 Fable 5.1，以 <code>grep -F</code> 在對應版本檔中全部命中，無 paraphrase。</td></tr>
+      <tr><td>Q2：2025-08-05 與 07-31 逐字相同</td><td><span class="tag add">通過</span></td><td>Sonnet 4 與 Opus 4 兩組 <code>diff</code> 均為空。</td></tr>
+      <tr><td>字數重算</td><td><span class="tag add">通過</span></td><td>抽驗 114／1,973／3,678／4,267 四個關鍵值，與矩陣一致。</td></tr>
+      <tr><td>來源網域</td><td><span class="tag add">通過</span></td><td>19 個 <code>sources/*.md</code> 的 frontmatter <code>url:</code> 全部指向 <code>platform.claude.com</code> 官方文件路徑。</td></tr>
+      <tr><td>檔案數量</td><td><span class="tag add">通過</span></td><td>34 個版本檔、21 組 diff，與報告附錄 D 相符。</td></tr>
+      <tr><td><b>片語數量</b></td><td><span class="tag del">不符</span></td><td>報告與證據包 README 都寫「115 個片語」，實際 <code>feature_matrix.txt</code> 有 <b>118</b> 列（無重複）。本站各頁一律以 118 為準；這不影響任何一條實質結論，但說明數字沒有被重新核對過。</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 id="quality">七項文件品質警語</h2>
+<p>這些是<strong>官方文件本身</strong>的瑕疵，不是整理過程造成的。引用前先看一眼。</p>
+
+<details class="acc" id="q1" open>
+  <summary>Q1　Haiku 3.5 的 text+images 變體，日期標籤不可信<span class="sub">影響最大</span></summary>
+  <div class="body">
+    <p>該變體標在 2024-10-22 之下，內容卻寫著 <span class="en">The Claude 3 family currently consists of Claude Haiku 3.5, Claude Opus 3, Claude Sonnet 3.5, and Claude Sonnet 3.7</span>、model string <code>claude-3-7-sonnet-20250219</code>、cutoff <span class="en">start of December 2024</span>、網址 <code>docs.claude.com</code>。</p>
+    <p><b>座標</b>〔Haiku 3.5 / 2024-10-22 / text+images〕　<b>影響</b>：該變體實為 2025-02 之後的 3.7 世代模板套用於 Haiku，日期標籤不可信。本站在版本表與矩陣中都把它排在第 12 位並加註。</p>
+    <p><a href="#" data-open="claude-haiku-3-5__October_22_2024__textimages.txt" data-title="Haiku 3.5 · 標 2024-10-22 · text+images" data-term="Claude Sonnet 3.7">開原文看這一段</a></p>
+  </div>
+</details>
+
+<details class="acc" id="q2">
+  <summary>Q2　2025-08-05 條目與 07-31 逐字相同</summary>
+  <div class="body">
+    <p>Sonnet 4 與 Opus 4 的 2025-08-05 條目與 2025-07-31 條目完全一致（diff 為空，本站已重跑確認）。</p>
+    <p><b>影響</b>：08-05 只是 Opus 4.1 發布日的同步收錄，不是一次變更。把它當成「一次改版」會高估改版頻率。</p>
+  </div>
+</details>
+
+<details class="acc" id="q3">
+  <summary>Q3　網域被回溯改寫，URL 不能當年代證據</summary>
+  <div class="body">
+    <p>Haiku 3.5 的 text-only 變體已寫 <code>support.claude.com</code>／<code>docs.claude.com</code>，但同期的 Sonnet 3.5（2024-11-22）仍是 <code>anthropic.com</code>；<code>claude.com</code> 網域在其他頁首次出現於 2025-09-29。</p>
+    <p><b>影響</b>：頁面曾被回溯做網域替換。用 URL 推斷條文年代會出錯。可在<a href="matrix.html">特徵矩陣</a>搜 <code>docs.anthropic.com</code> 與 <code>docs.claude.com</code> 對照分布。</p>
+  </div>
+</details>
+
+<details class="acc" id="q4">
+  <summary>Q4　只有四個條目自己標了差異</summary>
+  <div class="body">
+    <p>只有 Sonnet 3.5 的 2024-09-09，以及 Sonnet 4.5、Haiku 4.5、Opus 4.5 的 2026-01-18，在頁首說明句中用 <code>**</code> 標記與前版的差異。</p>
+    <p><b>影響</b>：其餘差異必須自行 diff。這正是這份整理存在的理由。</p>
+  </div>
+</details>
+
+<details class="acc" id="q5">
+  <summary>Q5　Opus 4.6 的 election_info 失去格式</summary>
+  <div class="body">
+    <p><code class="xml">&lt;election_info&gt;</code> 整段擠成一行，條列格式消失。</p>
+    <p><b>座標</b>〔Opus 4.6 / 2026-02-05 / knowledge_cutoff〕　<b>影響</b>：顯示為手動貼回，不是流程產出。搭配它「刪除後又重現」的軌跡看，是分支手動維護的強證據。</p>
+  </div>
+</details>
+
+<details class="acc" id="q6">
+  <summary>Q6　Fable 5.1 頁面被 MDX 切成兩塊</summary>
+  <div class="body">
+    <p>該頁在 <code class="xml">&lt;example&gt;</code> 內含巢狀 <code>```</code> 圍欄，導致 MDX 把 prompt 切成兩個程式碼區塊。</p>
+    <p><b>影響</b>：本站證據包已合併還原為單一 prompt。這是 34 個版本檔中唯一需要人工介入的一份，字數 4,267 是還原後的數字。</p>
+  </div>
+</details>
+
+<details class="acc" id="q7">
+  <summary>Q7　長期未修的錯字，佐證人手編修</summary>
+  <div class="body">
+    <ul>
+      <li><code>as as</code>、<code>being being</code>（Opus 4.1 → 2026-01-18 才修）</li>
+      <li><code>can't or won't with</code>（Claude 4 全期）</li>
+      <li><code>crises</code>（Opus 4.5 起）</li>
+      <li><code>Claude can instead treats</code>（至 Opus 4.7）</li>
+      <li><code>the left of the right</code>（Haiku 3.5）</li>
+      <li><code>National Alliance for Eating Disorder</code>（Opus 4.8 才補 s）</li>
+    </ul>
+    <p><b>影響</b>：錯字能存活數個版本、跨越數個模型，佐證 prompt 是人手逐段編修並在分支間複製貼上，而不是由單一來源產生。</p>
+  </div>
+</details>
+
+<h2>附錄 A　knowledge cutoff 一覽</h2>
+<div class="tbl-wrap"><table>
+  <thead><tr><th style="width:190px">自述 cutoff</th><th>模型／版本</th></tr></thead>
+  <tbody>
+    <tr><td class="num">Aug 2023</td><td>Haiku 3、Opus 3</td></tr>
+    <tr><td class="num">Apr 2024</td><td>Sonnet 3.5 全部四個條目</td></tr>
+    <tr><td class="num">Jul 2024</td><td>Haiku 3.5 text-only</td></tr>
+    <tr><td class="num">start of Dec 2024</td><td>Haiku 3.5 text+images（<a href="#q1">Q1</a>）</td></tr>
+    <tr><td class="num">end of Oct 2024</td><td>Sonnet 3.7</td></tr>
+    <tr><td class="num">end of Jan 2025</td><td>Sonnet 4、Opus 4、Opus 4.1、Sonnet 4.5、Haiku 4.5</td></tr>
+    <tr><td class="num">end of May 2025</td><td>Opus 4.5、Opus 4.6</td></tr>
+    <tr><td class="num">beginning of Aug 2025</td><td>Sonnet 4.6</td></tr>
+    <tr><td class="num">end of Jan 2026</td><td>Opus 4.7、Opus 4.8、Fable 5</td></tr>
+    <tr><td class="num">end of May 2026</td><td>Opus 5</td></tr>
+    <tr><td class="num">end of Jun 2026</td><td>Fable 5.1</td></tr>
+  </tbody>
+</table></div>
+<p style="font-size:13.5px;color:var(--muted)">注意這是<strong>條文自述</strong>的 cutoff，不等於實際訓練資料截止；2025-05-22 起的措辭是 <span class="en">reliable knowledge cutoff date</span>，本身就是一個保守值。</p>
+
+<h2>附錄 B　prompt 內出現的 model string</h2>
+<div class="tbl-wrap"><table>
+  <thead><tr><th style="width:230px">版本</th><th>strings</th></tr></thead>
+  <tbody>
+    <tr><td>Sonnet 3.5 2024-10 → 11、Haiku 3.5 text-only</td><td><code>claude-3-5-sonnet-20241022</code></td></tr>
+    <tr><td>Sonnet 3.7、Haiku 3.5 text+images</td><td><code>claude-3-7-sonnet-20250219</code></td></tr>
+    <tr><td>Sonnet 4／Opus 4</td><td><code>claude-sonnet-4-20250514</code>／<code>claude-opus-4-20250514</code></td></tr>
+    <tr><td>Opus 4.1</td><td><code>claude-opus-4-1-20250805</code></td></tr>
+    <tr><td>Sonnet 4.5 09-29／11-19</td><td><code>claude-sonnet-4-5-20250929</code></td></tr>
+    <tr><td>Haiku 4.5 10-15</td><td><code>claude-sonnet-4-5-20250929</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>Opus 4.5、Sonnet／Haiku 4.5 01-18</td><td><code>claude-opus-4-5-20251101</code>、<code>claude-sonnet-4-5-20250929</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>Opus 4.6</td><td><code>claude-opus-4-6</code>、<code>claude-sonnet-4-5-20250929</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>Sonnet 4.6</td><td><code>claude-opus-4-6</code>、<code>claude-sonnet-4-6</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>Opus 4.7</td><td><code>claude-opus-4-7</code>、<code>claude-sonnet-4-6</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>Opus 4.8</td><td><code>claude-opus-4-8</code>、<code>claude-opus-4-7</code>、<code>claude-opus-4-6</code>、<code>claude-sonnet-4-6</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>Fable 5</td><td><code>claude-fable-5</code>、<code>claude-opus-4-8</code>、<code>claude-sonnet-4-6</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>Opus 5</td><td><code>claude-fable-5</code>、<code>claude-opus-5</code>、<code>claude-sonnet-5</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>Fable 5.1</td><td><code>claude-fable-5-1</code>、<code>claude-opus-5</code>、<code>claude-sonnet-5</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
+  </tbody>
+</table></div>
+<p style="font-size:13.5px;color:var(--muted)">Opus 4.6 起改為 undated ID，與 overview「Starting with the Claude 4.6 generation, each model ID is a single fixed snapshot」的說法一致。</p>
+
+<h2>附錄 C　XML 區塊 schema 演變</h2>
+<div class="tbl-wrap"><table>
+  <thead><tr><th style="width:170px">版本</th><th style="width:210px">頂層</th><th>子區塊</th></tr></thead>
+  <tbody>
+    <tr><td class="num">Sonnet 3.5 2024-07／09</td><td>—</td><td><code>claude_info</code>、<code>claude_image_specific_info</code>、<code>claude_3_family_info</code></td></tr>
+    <tr><td class="num">2024-10 → 2025-08</td><td>無 XML（僅 2025-05 起的 <code>election_info</code>）</td><td>—</td></tr>
+    <tr><td class="num">Sonnet 4.5 2025-09-29</td><td><code>behavior_instructions</code></td><td><code>general_claude_info</code>、<code>refusal_handling</code>、<code>tone_and_formatting</code>、<code>user_wellbeing</code>、<code>knowledge_cutoff</code>（含 election_info）、<code>evenhandedness</code></td></tr>
+    <tr><td class="num">2025-11-19</td><td><code>claude_behavior</code></td><td><code>product_information</code>、<code>refusal_handling</code>、<code>legal_and_financial_advice</code>、<code>tone_and_formatting</code>（含 <code>when_to_use_lists_and_bullets</code>）、<code>user_wellbeing</code>、<code>knowledge_cutoff</code>、<code>anthropic_reminders</code>、<code>evenhandedness</code>、<code>additional_info</code></td></tr>
+    <tr><td class="num">Opus 4.5 2025-11-24</td><td>同上</td><td><code>lists_and_bullets</code> 取代 <code>when_to_use_lists_and_bullets</code>；<code>knowledge_cutoff</code> 移到最後</td></tr>
+    <tr><td class="num">Opus 4.5 2026-01-18</td><td>同上</td><td><code>additional_info</code> → <code>responding_to_mistakes_and_criticism</code></td></tr>
+    <tr><td class="num">Opus 4.7</td><td>同上</td><td>＋<code>critical_child_safety_instructions</code>、<code>acting_vs_clarifying</code>、<code>capability_check</code></td></tr>
+    <tr><td class="num">Opus 4.8</td><td><code>claude_behavior</code>＋<code>tone_preference</code></td><td>＋<code>default_stance</code>、<code>respond_without_citing_system_prompt</code>、<code>tool_discovery</code>；－<code>acting_vs_clarifying</code>、<code>capability_check</code></td></tr>
+    <tr><td class="num">Fable 5</td><td><code>claude_behavior</code></td><td>－<code>default_stance</code>、<code>respond_without_citing_system_prompt</code>、<code>tool_discovery</code>、<code>tone_preference</code></td></tr>
+    <tr><td class="num">Opus 5</td><td><code>claude_behavior</code>＋<code>tone_preference</code></td><td>＋<code>fable_safeguards_routing</code>、<code>default_stance</code></td></tr>
+    <tr><td class="num">Fable 5.1</td><td><code>claude_behavior</code>＋<code>tone_preference</code></td><td>＋<code>reply_after_tool_calls</code>、<code>example</code>（含 <code>response</code>、<code>rationale</code>）</td></tr>
+  </tbody>
+</table></div>
+
+<h2>附錄 D　證據包</h2>
+<div class="grid c2">
+  <div class="card">
+    <p class="kicker"><a href="evidence/sources/">evidence/sources/</a></p>
+    <p style="font-size:14.5px;margin:0">overview 與 18 個模型頁的原始 <code>.md</code>（2026-09-07 抓取）。這是唯一的一手資料。</p>
+  </div>
+  <div class="card">
+    <p class="kicker"><a href="evidence/versions/">evidence/versions/</a></p>
+    <p style="font-size:14.5px;margin:0">34 個拆分後的版本純文字，檔名格式 <code>模型__日期__變體.txt</code>。全站所有引文都能在這裡搜到。</p>
+  </div>
+  <div class="card">
+    <p class="kicker"><a href="evidence/diffs/">evidence/diffs/</a></p>
+    <p style="font-size:14.5px;margin:0">21 組 word-diff，<code>[-舊-]{+新+}</code> 格式。想看某次改版到底動了什麼，直接讀這裡最快。</p>
+  </div>
+  <div class="card">
+    <p class="kicker"><a href="evidence/feature_matrix.txt">evidence/feature_matrix.txt</a></p>
+    <p style="font-size:14.5px;margin:0">118 個片語 × 32 版出現矩陣與字數表。互動版在<a href="matrix.html">特徵矩陣</a>。</p>
+  </div>
+</div>
+<p style="margin-top:16px">
+  完整中文報告原檔：<a href="report/changelog-zh-TW.md">report/changelog-zh-TW.md</a>（本站是它的網頁化版本）。
+  重現步驟：<a href="evidence/README.md">evidence/README.md</a>。
+</p>
+
+<h2>引用規則與聲明</h2>
+<ul>
+  <li>所有條文引文為官方原文逐字（英文），座標格式〔模型頁／日期條目／變體或區塊名〕。</li>
+  <li>標「推論」者為本站解讀，非文件明文。同一段裡若有推論成分，會另外標出。</li>
+  <li>本站為個人研究整理，<strong>非 Anthropic 官方出版品</strong>，也不代表任何雇主立場。</li>
+  <li>引文著作權屬 Anthropic，僅為研究、評註與教學目的節錄使用；如需完整原文請直接參閱<a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">官方頁面</a>。</li>
+  <li>官方頁面會持續更新，本站快照時間為 2026-09-07；新模型頁出現後需重抓才會反映。</li>
+</ul>
+
+<footer class="site">
+  <p>發現錯誤？每一條結論都設計成可被推翻——請附上版本檔名與可搜到的字串。</p>
+</footer>
+
+</main></div>
+
+<script src="assets/app.js"></script>
+<script>
+if (location.hash) { var d = document.querySelector(location.hash); if (d && d.tagName === 'DETAILS') { d.open = true; d.scrollIntoView({block:'start'}); } }
+</script>
+</body>
+</html>

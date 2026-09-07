@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme-default>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude 系統提示詞演進 · 自學站</title>
+<meta name="description" content="以 Anthropic 官方公開的 claude.ai 系統提示詞發行說明為據，整理 2024-07-12 至 2026-09-01 共 32 個版本的逐條演變、五次架構躍遷與可查核的證據包。">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <nav class="main">
+      <a href="index.html">總覽</a>
+      <a href="versions.html">版本總表</a>
+      <a href="shifts.html">五次躍遷</a>
+      <a href="themes.html">主題軌跡</a>
+      <a href="branches.html">分支與兄弟版</a>
+      <a href="matrix.html">特徵矩陣</a>
+      <a href="method.html">方法與證據</a>
+      <a href="quiz.html">自我檢測</a>
+    </nav>
+    <button class="theme-btn" data-theme-toggle aria-label="切換深淺色">☾</button>
+  </div>
+</header>
+
+<div class="wrap"><main class="page">
+
+<p class="kicker" style="margin-top:34px">自主學習教材</p>
+<h1>Claude 系統提示詞的兩年演進</h1>
+<p class="lede">
+Anthropic 會把 claude.ai 網頁與行動 app 使用的系統提示詞（system prompt）公開在官方發行說明頁上。
+本站把 2024-07-12 到 2026-09-01、18 個模型頁、32 個版本的原文抓下來逐字比對，
+整理成一套可自行查核的學習材料：每一條結論都能點回原文，每一句引文都能在證據包裡用字串搜到。
+</p>
+
+<div class="grid c4" style="margin:22px 0 8px">
+  <div class="card stat"><b>19</b><span>官方頁面（overview + 18 模型頁）</span></div>
+  <div class="card stat"><b>32</b><span>納入分析的版本</span></div>
+  <div class="card stat"><b>21</b><span>組逐字 word-diff</span></div>
+  <div class="card stat"><b>118</b><span>特徵片語 × 32 版矩陣</span></div>
+</div>
+
+<div class="note">
+  <b>先講清楚適用範圍。</b>官方明文寫著 <span class="q" style="display:inline;border:0;padding:0;background:none">These system prompt updates do not apply to the Claude API</span>。
+  這批文字約束的是 claude.ai 與行動 app 的預設行為，不是 API 呼叫；也不是模型的訓練內容。
+  2025-11-19 之後，公開的甚至已經不是完整 prompt，而是組裝式 prompt 裡的<strong>一個行為組件</strong>——這點是讀懂後半段的關鍵。
+</div>
+
+<h2>字數走勢：兩次主動瘦身，一次爆量</h2>
+<p>
+從 114 字長到 4,267 字，中間出現兩個反向點：2025-09-29（Sonnet 4.5）砍回 1,973 字，2026-05-28（Opus 4.8）壓縮改寫成 3,350 字但功能更多。
+點任一個點可直接讀那一版的原文。
+</p>
+<div class="card" style="padding:14px 10px 6px">
+  <div id="chart"></div>
+</div>
+<p style="font-size:13px;color:var(--muted)">
+  顏色＝模型系（<span class="fam-Sonnet"><span class="dot"></span>Sonnet</span>
+  <span class="fam-Opus"><span class="dot"></span>Opus</span>
+  <span class="fam-Haiku"><span class="dot"></span>Haiku</span>
+  <span class="fam-Fable"><span class="dot"></span>Fable</span>）。空心點＝Haiku 3.5 的 text+images 變體，官方標 2024-10-22 但內容明顯是 2025-02 之後（見<a href="method.html#q1">品質警語 Q1</a>），此處按標籤日期繪製。
+</p>
+
+<h2>十行結論</h2>
+<p>先讀這十句，再決定要往哪一節鑽。每句都附上該去看的章節。</p>
+<ol id="ten"></ol>
+
+<h2>建議學習路徑</h2>
+<p>全部讀完約 3–4 小時。如果只有 40 分鐘，做完第 1、2 步再直接跳自我檢測。</p>
+<ol class="path">
+  <li>
+    <h3>建立座標：先看版本總表與字數走勢</h3>
+    <p>把 32 個版本的日期、模型系、字數、結構型態放進腦裡，之後任何一條規則都能定位到「哪一系、哪一版」。</p>
+    <p class="meta">→ <a href="versions.html">版本總表</a> ・ 約 25 分鐘 ・ 檢核：能說出哪三版是轉折點</p>
+  </li>
+  <li>
+    <h3>抓骨架：五次架構躍遷</h3>
+    <p>單段落 → XML 三區塊 → 平鋪散文 → 散文加人格前言 → 全 schema 化 → agentic 作業規範。理解每次躍遷解決了什麼問題，比背條文有用。</p>
+    <p class="meta">→ <a href="shifts.html">五次躍遷</a> ・ 約 35 分鐘 ・ 檢核：能說出 2025-09-29 一次刪掉了哪一類段落，以及為什麼</p>
+  </li>
+  <li>
+    <h3>讀肉：13 條主題軌跡</h3>
+    <p>身分、知識截止、產品自我認知、格式語氣、拒絕邊界、使用者福祉、AI 本性、反諂媚、政治中立、提醒機制、agentic 工具、影像檔案、語言跟隨。每條都是一條獨立的時間線。</p>
+    <p class="meta">→ <a href="themes.html">主題軌跡</a> ・ 約 60 分鐘 ・ 檢核：任選一主題，說出它「加入 → 刪除 → 再出現」的完整歷程</p>
+  </li>
+  <li>
+    <h3>驗證：自己查一次矩陣與原文</h3>
+    <p>在特徵矩陣裡挑一個片語，看它在 32 版的出現分布，再開原文確認。這一步是把「讀過」變成「查得到」的關鍵。</p>
+    <p class="meta">→ <a href="matrix.html">特徵矩陣</a>／<a href="method.html">方法與證據</a> ・ 約 30 分鐘 ・ 檢核：能獨立指出報告中一處與證據不符之處</p>
+  </li>
+  <li>
+    <h3>收斂：分支結構與實務含意</h3>
+    <p>理解 Opus 系／Sonnet-Haiku 系／Fable 系是三條分支後，就不會再犯「某規則自 X 版起生效」這種跨系推論的錯。</p>
+    <p class="meta">→ <a href="branches.html">分支與兄弟版</a> ・ 約 25 分鐘 ・ 檢核：完成<a href="quiz.html">自我檢測</a> 15 題</p>
+  </li>
+</ol>
+
+<h2>怎麼讀這裡的引文</h2>
+<div class="grid c2">
+  <div class="card">
+    <p class="kicker">引文</p>
+    <p style="font-size:14.5px;margin:0">襯線字體、左側色條的段落一律是<strong>官方原文逐字</strong>（英文），底下標座標〔模型頁／日期／區塊〕。可以在證據包裡用字串搜到；搜不到就是本站有錯，請開 issue。</p>
+    <div class="q" style="margin-bottom:0">Claude defaults to helping.<cite>〔Opus 4.8 / 2026-05-28 / default_stance〕</cite></div>
+  </div>
+  <div class="card">
+    <p class="kicker">推論</p>
+    <p style="font-size:14.5px;margin:0">綠底標「推論」的是解讀，不是文件明文。刻意分開標示，是因為這類敘述的強度取決於證據；有些推論的唯一依據只是「某段被刪掉了」。</p>
+    <div class="infer" style="margin-bottom:0"><b>推論</b>　這些行為已被吸收進訓練，不再靠 prompt 維持。</div>
+  </div>
+</div>
+
+<div class="selfcheck">
+  <p class="kicker">開始前先自問</p>
+  <ol>
+    <li>你認為 system prompt 是「模型的規則」還是「產品的設定」？讀完後這個答案應該會變。</li>
+    <li>如果某條規則在 prompt 裡消失了，代表模型不再遵守它嗎？</li>
+    <li>當 Claude 說「我不能做 X」，那句話的來源可能有幾種？</li>
+  </ol>
+</div>
+
+<footer class="site">
+  <p>資料來源：<a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">Anthropic 官方 System prompts 發行說明</a>及其 18 個模型子頁，2026-09-07 以 curl 抓取 <code>.md</code> 原始檔。</p>
+  <p>本站為個人研究整理，非 Anthropic 官方出版品；引文著作權屬 Anthropic，僅為研究與評註目的引用。
+     證據包 <a href="evidence/README.md">evidence/</a> ・ 原始報告 <a href="report/changelog-zh-TW.md">changelog-zh-TW.md</a></p>
+</footer>
+
+</main></div>
+
+<script src="data/matrix.js"></script>
+<script src="assets/app.js"></script>
+<script>
+/* ---- 十行結論 ---- */
+var TEN = [
+ ['只適用 claude.ai 網頁與 iOS／Android app，官方明言不適用 Claude API。','method.html','範圍'],
+ ['長度從 114 字（Haiku 3）長到 4,267 字（Fable 5.1），中間在 2025-09-29 主動砍回 1,973 字，之後再逐月增生。','versions.html','版本總表'],
+ ['結構經歷五次躍遷：單段落 → XML 三區塊 → 平鋪散文 → 散文＋人格前言 → 全 schema 化 XML → agentic 作業規範與 in-prompt 範例。','shifts.html','五次躍遷'],
+ ['2025-11-19 起公開區塊不再含身分句、日期句與結尾 connected 句，只剩一個 <code>&lt;claude_behavior&gt;</code> 組件。公開的已不是完整 prompt。','shifts.html#d','躍遷 D'],
+ ['同日引入的 <code>&lt;anthropic_reminders&gt;</code> 把指令投遞架構明文化：靜態骨架之外另有分類器觸發、附在 user turn 末尾的動態提醒，並附帶 prompt-injection 防禦條款。','themes.html#t10','提醒機制'],
+ ['Claude 4（2025-05-22）拿掉 2024 年堆積的「模型弱點補丁」；Sonnet 4.5（2025-09-29）再拿掉整批「AI 本性／反諂媚／人格」段落。','themes.html#t7','AI 本性'],
+ ['心理健康與危機處理是增生最快的主題：從 2025-02-24 的一段，到 2026-06-09 的十六段。','themes.html#t6','使用者福祉'],
+ ['2026-04 起 prompt 開始描述 agent 執行架構：tool_search 延遲載入、SKILL.md 優先讀取、先做再問、多模型中途切換、safeguards routing。','themes.html#t11','agentic 工具'],
+ ['各模型的 prompt 是分支維護而非單一主幹：同一條規則反覆出現又消失，Opus 5 的骨架承自 Opus 4.8 而非同期的 Fable 5。','branches.html','分支證據'],
+ ['文件本身有可信度瑕疵：日期標籤錯置、條目重複、網域被回溯改寫、長期未修的錯字。引用前要先看警語。','method.html#quality','品質警語']
+];
+document.getElementById('ten').innerHTML = TEN.map(function (t) {
+  return '<li>' + t[0] + ' <a href="' + t[1] + '" style="font-size:12.5px;white-space:nowrap">→ ' + t[2] + '</a></li>';
+}).join('');
+
+/* ---- 字數走勢圖 ---- */
+(function () {
+  var cols = MATRIX.columns.slice().sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : a.i - b.i; });
+  var W = 900, H = 350, L = 46, R = 16, T = 18, B = 46;
+  var t = function (d) { return Date.parse(d); };
+  var x0 = t('2024-06-01'), x1 = t('2026-10-01'), y1 = 4600;
+  var X = function (d) { return L + (t(d) - x0) / (x1 - x0) * (W - L - R); };
+  var Y = function (v) { return H - B - v / y1 * (H - T - B); };
+  var COL = { Sonnet: '#3d6fa8', Opus: '#8a5bb5', Haiku: '#3f8a72', Fable: '#b0502a' };
+
+  var s = ['<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="系統提示詞字數走勢，2024 年 7 月至 2026 年 9 月">'];
+  for (var g = 0; g <= 4000; g += 1000) {
+    s.push('<line class="gl" x1="' + L + '" y1="' + Y(g) + '" x2="' + (W - R) + '" y2="' + Y(g) + '"/>');
+    s.push('<text x="' + (L - 8) + '" y="' + (Y(g) + 4) + '" text-anchor="end">' + g + '</text>');
+  }
+  ['2024-07-01','2025-01-01','2025-07-01','2026-01-01','2026-07-01'].forEach(function (d) {
+    s.push('<text x="' + X(d) + '" y="' + (H - B + 18) + '" text-anchor="middle">' + d.slice(0, 7) + '</text>');
+  });
+  s.push('<line class="axis" x1="' + L + '" y1="' + Y(0) + '" x2="' + (W - R) + '" y2="' + Y(0) + '"/>');
+
+  /* 主線：每個日期取該日最大字數，串成走勢 */
+  var byDate = {};
+  cols.forEach(function (c) { if (c.i !== 12 && (!byDate[c.date] || c.words > byDate[c.date])) byDate[c.date] = c.words; });
+  var pts = Object.keys(byDate).sort().map(function (d) { return X(d) + ',' + Y(byDate[d]); });
+  s.push('<polyline points="' + pts.join(' ') + '" fill="none" stroke="var(--line)" stroke-width="2"/>');
+
+  cols.forEach(function (c) {
+    var cx = X(c.date), cy = Y(c.words), col = COL[c.family] || '#888';
+    var hollow = c.i === 12;
+    s.push('<g class="pt" data-open="' + c.file + '.txt" data-title="' + c.model + ' · ' + c.date + (c.variant !== '—' ? ' · ' + c.variant : '') + '">' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="4.5" fill="' + (hollow ? 'var(--surface)' : col) + '" stroke="' + col + '" stroke-width="' + (hollow ? 2 : 1) + '"/>' +
+      '<title>' + c.model + ' ' + c.date + (c.variant !== '—' ? ' (' + c.variant + ')' : '') + ' — ' + c.words + ' 字（點擊讀原文）</title></g>');
+  });
+
+  [['2024-10-22', 2088, '去 XML，字數翻倍', 8, -12],
+   ['2025-08-05', 2880, '散文期高峰 2,880', -4, -12],
+   ['2025-09-29', 1973, '主動砍回 1,973', 6, 22],
+   ['2026-05-28', 3350, '壓縮改寫', -78, -12],
+   ['2026-09-01', 4267, '4,267 最長', -96, -8]
+  ].forEach(function (a) {
+    s.push('<text class="lbl" x="' + (X(a[0]) + a[3]) + '" y="' + (Y(a[1]) + a[4]) + '">' + a[2] + '</text>');
+  });
+
+  s.push('</svg>');
+  document.getElementById('chart').innerHTML = s.join('');
+})();
+</script>
+</body>
+</html>
