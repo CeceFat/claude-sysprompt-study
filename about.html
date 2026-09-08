@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme-default>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · Claude 系統提示詞演進 自學站</title>
+<meta name="description" content="這個自學站是誰做的、為什麼做：作者背景、方法立場、另一個自學站與履歷連結。">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <nav class="main">
+      <a href="about.html" aria-current="page">About</a>
+      <a href="index.html">總覽</a>
+      <a href="versions.html">版本總表</a>
+      <a href="shifts.html">五次躍遷</a>
+      <a href="themes.html">主題軌跡</a>
+      <a href="branches.html">分支與兄弟版</a>
+      <a href="matrix.html">特徵矩陣</a>
+      <a href="method.html">方法與證據</a>
+      <a href="quiz.html">自我檢測</a>
+    </nav>
+    <button class="theme-btn" data-theme-toggle aria-label="切換深淺色">☾</button>
+  </div>
+</header>
+
+<div class="wrap"><main class="page">
+
+<p class="kicker" style="margin-top:34px">About</p>
+<h1>這個站是誰做的、為什麼做</h1>
+<p class="lede">
+作者是<b>蔡宗穎 Camus Tsai</b>，台灣的智慧財產權法律人，十五年以上專利實務，
+專長專利訴訟、SEP／FRAND 授權談判，以及把 AI 當作可被稽核的分析槓桿的法律工作流。
+</p>
+<p>
+這個站是他的個人自學紀錄。他每天用 Claude Code 做專利與判決分析，想弄清楚自己所用工具的預設行為是怎麼被寫出來、又是怎麼一版一版改的，
+所以把 Anthropic 公開的 claude.ai 系統提示詞 32 個版本抓下來逐字比對，整理成可查核的教材。
+方法沿用專利實務的習慣：每一條結論都要能點回原文，每一句引文都要能在證據包裡用字串搜到；點不回去就是本站有錯。
+</p>
+<div class="note">
+  <b>怎麼讀本站的判斷</b>　襯線字體、左側色條的段落是官方原文逐字；綠底標「推論」的是解讀。
+  作者不是 Anthropic 的人，沒有任何內部資訊，全部材料都來自官方公開頁面。
+</div>
+<p>非營利、非 Anthropic 官方出版品、不代表任何雇主或客戶的立場。</p>
+
+<h2>作者的另一個自學站</h2>
+<p>
+<a href="https://cecefat.github.io/ukipo-lex/">英國 SEP／FRAND 判決因子圖譜</a>：22 件英格蘭及威爾斯判決逐案標記，
+沿 UK IPO 授權指引長成 63 因子 × 22 案的矩陣與教義圖譜，給想從判例入手學 SEP 的專利工程師與法律人用。同一套「每句解說都點得回原文」的紀律。
+</p>
+
+<p style="margin-top:26px">
+  <a href="https://cecefat.github.io/cv/" target="_blank" rel="noopener" style="display:inline-block;padding:9px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-weight:600">線上履歷 cecefat.github.io/cv →</a>
+</p>
+
+<footer class="site">
+  <p>資料來源：<a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">Anthropic 官方 System prompts 發行說明</a>及其 18 個模型子頁，2026-09-07 以 curl 抓取 <code>.md</code> 原始檔。</p>
+  <p>本站為個人研究整理，非 Anthropic 官方出版品；引文著作權屬 Anthropic，僅為研究與評註目的引用。
+     證據包 <a href="evidence/README.md">evidence/</a> ・ 原始報告 <a href="report/changelog-zh-TW.md">changelog-zh-TW.md</a></p>
+</footer>
+
+</main></div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
