@@ -1,6 +1,6 @@
 # Claude.ai 系統提示詞公開版本 Change Log（2024-07-12 → 2026-09-01）
 
-製作日期：2026-09-07
+製作日期：2026-09-07（增補 §A：2026-10-28，涵蓋 5.5 世代與舊模型回補條目，見文末；§0–§7 與附錄維持第一輪原文，與增補衝突處以 §A 為準）
 資料來源：https://platform.claude.com/docs/en/release-notes/system-prompts/overview 及其 18 個模型子頁（以 curl 抓取 `.md` 原始檔，非經摘要）
 涵蓋範圍：18 個模型頁、34 個日期／變體版本檔（分析矩陣取 32 欄：Opus 4 的 2025-07-31 與 08-05 條目與 Sonnet 4 同日版本除名稱外逐字相同，不重複列）、21 組逐字 word-diff
 證據包：本檔同層 `evidence/`（原始頁面 `sources/`、拆分版本 `versions/`、`diffs/`、`feature_matrix.txt`）
@@ -395,3 +395,51 @@
 - `evidence/diffs/`：21 組 word-diff（`[-舊-]{+新+}` 格式）
 - `evidence/feature_matrix.txt`：115 個片語 × 32 版出現矩陣與字數表
 - `evidence/README.md`：重現步驟
+
+---
+
+## 增補 §A（2026-10-28）：5.5 世代與舊模型回補
+
+### A.0 範圍與方法
+- 2026-10-28 重抓 overview 與 22 個模型頁。新頁：Claude Opus 5.5（2026-09-22）、Claude Sonnet 5.5（2026-09-28、2026-10-07）、Claude Haiku 5.5（2026-10-07）、Claude Sonnet 5（2026-06-30，09-07 快照時不存在）。舊頁：Haiku 4.5、Sonnet 4.6 各新增一個 2026-10-07 條目；其餘 16 頁只改 frontmatter 描述句，prompt 本文逐字未動。
+- 新增 7 個版本檔（欄 33–39）、11 組 diff（21–31）、28 個矩陣片語；矩陣改以 Python 重算，舊 118 × 32 逐格重現。腳本在 `evidence/tools/`。
+- 更正第一輪：(1) 「Oct 22 2024 條目已正規化」只對 Haiku 3.5 成立，Sonnet 3.5 兩檔仍為字面 `\n`，§2 字數 1,903／2,088 為未正規化計數（正規化後 1,939／2,126），保留原數字；(2) 片語數實為 118 而非 115（第一輪網頁化時已揭露）。
+- 血緣算法：以段落（版本檔一行）為單位，參照組為發布日以前已公開的所有版本；完全相同＝逐字沿用，`difflib` 相似度 ≥ 0.8＝小幅改寫，其餘＝新寫，以字數加權。
+
+### A.1 十行增補結論
+1. Opus 5.5 是組裝而非重寫：4,119 字中 69.9% 逐字沿用、21.8% 小幅改寫、新寫 339 字（8.2%，其中 265 字是灰色地帶程序與對照範例）。逐字段落出處：Fable 5.1 有、Opus 5 沒有 23.9%；Opus 5 有、Fable 5.1 沒有 10.7%；兩者都有 25.9%；其餘 9.3%。骨架承自 Opus 5（產品資訊、Claude Design、CBRN＋常規武器全段），模組來自 Fable 5.1（著作權段與兩則範例、毒品、兒少 pattern level 與 detection mechanics、福祉新增條）。
+2. Opus 5.5 新寫的 339 字幾乎只處理一件事：刪掉 Opus 5 的 `<default_stance>`「Claude defaults to helping. Claude only declines a request when helping would create a concrete, specific risk of serious harm; requests that are merely edgy, hypothetical, playful, or uncomfortable do not meet that bar.」［Opus 5 / 2026-07-24 / default_stance］，改成「When Claude is unsure whether to decline a request that nothing in this prompt or an Anthropic reminder addresses, Claude respects the person's judgment: rather than declining or calling it a bad idea, Claude says what it will help with and asks a question that would surface any real reason to decline, such as how someone else would feel.」［Opus 5.5 / 2026-09-22 / refusal_handling］，並附公開 prompt 首見的 `<bad_response>`／`<good_response>` 對照範例（Nadia 祝酒詞），rationale 為「Nadia's pregnancy is her private news, and the person knows her better than Claude does. No instruction covers this, so Claude agrees to write the toast and asks whether the hint would embarrass her, rather than declining and explaining why.」。推論：主攻過度拒絕而非放寬硬線——武器段與 Opus 5 相同、著作權段整段收進來、兒少段多了 pattern level 與 detection mechanics 兩條（只少了 Opus 5 的「未成年人表明欲性化自身」一條）。
+3. Opus 5.5 從「管語氣」改成「管份量」：刪 `<tone_preference>`「Claude's outputs are reasonably concise.」、「Claude keeps responses focused, brief, and concise to avoid overwhelming the person.」與 genuinely 禁詞，新寫「Claude matches its effort to the ask. A simple question gets a direct answer, and a request to change one thing in a longer piece gets the change, not the whole piece again, unless the person asks for the full version.」［Opus 5.5 / 2026-09-22 / lists_and_bullets］。同一禁詞仍留在 2026-10-07 回補的 Sonnet 4.6：「Claude avoids saying "genuinely", "honestly", or "straightforward".」。推論：禁詞是逐模型補丁。
+4. prompt 只補訓練資料到不了的地方：Opus 5 出口管制通知中的「These events are after Claude's training-data cutoff, so Claude knows about them only from this notice.」在 Opus 5.5（cutoff「the end of Jun 2026」）刪除，卻保留在截止日為 2025-01 的 Haiku 4.5 回補條目；`<fable_safeguards_routing>` 整段刪除。
+5. 篇幅重新分配：Opus 5.5 `<refusal_handling>` 1,774 字（佔 43%，39 版最大）；`<tone_and_formatting>` 由 Opus 4.7 的 918 字縮到 362 字；Haiku 5.5 `<user_wellbeing>` 1,513 字（39 版最大）。
+6. 同世代三種寫法：Sonnet 5.5（09-28）94.7% 逐字沿用、新寫 114 字（寬鬆條列「Claude can use bullet points and markdown formatting to make outputs more readable.」、「When a person talks about wanting to die, Claude does not say the wish makes sense, is reasonable, or is a choice to respect.」）；Haiku 5.5 新寫 1,577 字（37.1%），包括「Once Claude has declined a request or said it is concerned about one, that decision stands for the rest of the conversation, because people who want harmful content often keep asking in new ways until a model gives in.」、「Claude never adds a disclaimer, label, footer, or "for educational purposes" note as a way to produce content it would otherwise decline, since anyone can delete the note and use the content.」、故事滑坡段、持續性自殺／飲食規則、「In a crisis, Claude says plainly that it is an AI, that it cannot check on the person or send help, and that someone who can should be involved now.」［Haiku 5.5 / 2026-10-07］。指標：範例數 3／0／0、明寫 rest of the／that conversation 的句子 1／0／5、because 1／1／8、NEVER／MUST／REFUSE 全大寫 3／0／0（Opus／Sonnet 09-28／Haiku）。推論：判斷給 Opus，規則給 Haiku。
+7. 三個 5.5 版本（Opus 5.5、Sonnet 5.5 10-07、Haiku 5.5）有 1,891 字逐字相同（各佔 45.9%／59.2%／44.4%）；三條分支正收斂成「模組庫＋按層級組裝」。
+8. 行為組件去工具化：Opus 4.7／4.8 的工具段、Fable 5.1 的 `<reply_after_tool_calls>`、Sonnet 5 的 `<proactivity>` 在三個 5.5 版本都沒有；Haiku 5.5 開頭「When a question is about the person or their world, Claude checks the `<memory_listing>` before answering from the conversation alone」引用一個公開文字之外的組件。
+9. prompt 版本與模型快照脫鉤：2026-10-07 同日更新 Sonnet 5.5、Haiku 5.5、Haiku 4.5、Sonnet 4.6 四頁，皆新增 `<medical_guidance>`（兒童用藥劑量只取自產品標籤，寫法三種）；overview 刪除「Starting with the Claude 4.6 generation, each model ID is a single fixed snapshot, so those models have one entry.」（diff 31）。
+10. 第 6 章「`election_info` … Sonnet 4.6 起永久刪」一列須修正：新模型自 Sonnet 4.6 起不再有，但 Haiku 4.5 的 2026-10-07 回補條目仍保留（其 cutoff 為 2025-01）。
+
+### A.2 版本總表增補（欄號沿用矩陣）
+| # | 模型頁 | 日期條目 | 字數 | 自述 cutoff | 結構 | 一句話摘要 |
+|---|---|---|---|---|---|---|
+| 33 | Sonnet 5 | 2026-06-30 | 3,470 | end of Jan 2026 | Fable 5 為主要母版＋`<proactivity>`＋頂層 `<conversational_register>` | 出口管制「暫停中」通知；唯讀工具免問即用、需求模糊時採合理預設；`<provide_crisis_resources>` 首見；短答也仍可作答；09-07 時頁面不存在（Q9） |
+| 34 | Opus 5.5 | 2026-09-22 | 4,119 | end of Jun 2026 | Opus 5 骨架＋Fable 5.1 模組 | 見 A.1 第 1–5 點 |
+| 35 | Sonnet 5.5 | 2026-09-28 | 2,980 | end of Jun 2026 | Sonnet 5 骨架；兒少簡版三條；寬鬆條列 | 94.7% 逐字沿用；刪 `<proactivity>`、`<conversational_register>` |
+| 36 | Sonnet 5.5 | 2026-10-07 | 3,195 | end of Jun 2026 | 同上＋`<medical_guidance>` | 模型清單改列 Haiku 5.5 |
+| 37 | Haiku 5.5 | 2026-10-07 | 4,255 | end of June 2026 | Sonnet 5.5 骨架＋記憶指令＋重寫的福祉段 | 見 A.1 第 6、8 點 |
+| 38 | Haiku 4.5 | 2026-10-07 | 4,120 | end of January 2025 | 2026-01-18 骨架＋移植模組 | 保留 election_info、emoji 規則；修正「can instead treats」 |
+| 39 | Sonnet 4.6 | 2026-10-07 | 3,003 | beginning of August 2025 | 4.8 式壓縮骨架＋`<medical_guidance>` | 「Claude Sonnet 4.6 (this model, 'claude-sonnet-4-6') is from an earlier generation and remains available for people who prefer it or want to continue work started with it.」 |
+
+### A.3 第六次躍遷（F，2026-06 → 2026-10）：分層組裝
+第 3 章的五次躍遷之後，5.5 世代構成第六次：(1) 政策寫成可重用模組、按層級組裝；(2) Opus 拿程序與對照範例，Haiku 拿附理由、持續到對話結束的規則；(3) 行為組件不再承載工具說明；(4) 舊模型同日回補新模組，prompt 版本與模型快照脫鉤。
+
+### A.4 品質警語增補
+- Q6 擴充：Opus 5.5 頁同樣在 `<example>` 處被 MDX 切成兩塊；Sonnet 5 頁在 `<proactivity>` 前後被切成三塊；證據包均已接回。
+- Q7 擴充：「Claude can instead treats」在 Haiku 4.5 頁存活到 2026-01-18 條目，2026-10-07 條目改為 treat；「If neither the child's age or weight is given」（Sonnet 5.5 10-07、Haiku 5.5）與同日 Haiku 4.5、Sonnet 4.6 的「nor」並存。
+- Q8（新）：overview 刪除「4.6 世代起一個模型 ID 一個條目」一句，Sonnet 4.6 與 Haiku 4.5 隨即出現新條目；條目數不能推論 prompt 是否變更。
+- Q9（新）：Sonnet 5 頁（標 2026-06-30）在 09-07 快照時不存在，但 Opus 5（07-24）與 Fable 5.1（09-01）已列 'claude-sonnet-5'；頁面可事後補上。
+
+### A.5 附錄增補
+- 附錄 A：end of Jan 2026 加 Sonnet 5；end of Jun 2026 加 Opus 5.5、Sonnet 5.5、Haiku 5.5（寫作 end of June 2026）；回補條目不改截止日（Haiku 4.5 仍 January 2025、Sonnet 4.6 仍 August 2025）。
+- 附錄 B：Sonnet 5 列 claude-opus-4-8、claude-sonnet-5、claude-haiku-4-5-20251001；Opus 5.5 列 claude-fable-5-1、claude-opus-5-5、claude-sonnet-5、claude-haiku-4-5-20251001；Sonnet 5.5（09-28）列 claude-fable-5-1、claude-opus-5-5、claude-sonnet-5-5、claude-haiku-4-5-20251001；10-07 各頁列 claude-fable-5-1、claude-opus-5-5、claude-sonnet-5-5、claude-haiku-5-5（Haiku 4.5 另加 claude-haiku-4-5-20251001）。
+- 附錄 C：Sonnet 5＋proactivity、provide_crisis_resources、頂層 conversational_register，－lists_and_bullets；Opus 5.5＋三則 example（含 bad_response／good_response）與從嚴版 lists_and_bullets，－default_stance、fable_safeguards_routing、tone_preference；Sonnet 5.5－critical_child_safety_instructions、proactivity、conversational_register，＋寬鬆版 lists_and_bullets；10-07 各頁＋medical_guidance。
+- 附錄 D：sources 為 overview＋22 頁（2026-10-28）；versions 41 檔；diffs 32 組；feature_matrix 146 片語 × 39 版；新增 tools/。

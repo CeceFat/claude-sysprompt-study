@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Claude 系統提示詞演進 · 自學站</title>
-<meta name="description" content="以 Anthropic 官方公開的 claude.ai 系統提示詞發行說明為據，整理 2024-07-12 至 2026-09-01 共 32 個版本的逐條演變、五次架構躍遷與可查核的證據包。">
+<meta name="description" content="為什麼 Opus 5.5 與 5.5 世代的 claude.ai 系統提示詞長這樣：以官方發行說明為據，逐字比對 2024-07-12 至 2026-10-07 共 39 個版本，整理六次架構躍遷與可查核的證據包。">
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
 </head>
@@ -12,12 +12,12 @@
 
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-07 · 自學站</small></a>
     <nav class="main">
       <a href="about.html">About</a>
       <a href="index.html">總覽</a>
       <a href="versions.html">版本總表</a>
-      <a href="shifts.html">五次躍遷</a>
+      <a href="shifts.html">六次躍遷</a>
       <a href="themes.html">主題軌跡</a>
       <a href="branches.html">分支與兄弟版</a>
       <a href="matrix.html">特徵矩陣</a>
@@ -30,19 +30,182 @@
 
 <div class="wrap"><main class="page">
 
-<p class="kicker" style="margin-top:34px">自主學習教材</p>
-<h1>Claude 系統提示詞的兩年演進</h1>
+<p class="kicker" style="margin-top:34px">最新世代解析 · 2026-10-28 重抓官方頁面</p>
+<h1>為什麼 Opus 5.5 的 system prompt 長這樣</h1>
 <p class="lede">
+Opus 5.5（2026-09-22）的 prompt 不是重寫，是<strong>組裝</strong>：七成逐字沿用前代（六成出自 Opus 5 與 Fable 5.1），兩成小修，真正新寫的只有 339 字。
+其中 265 字在做同一件事——在規則沒寫到的灰色地帶，<strong>別先拒絕，先問一句</strong>。
+放回同一世代看，5.5 把「判斷」和「規則」按模型層級分開投放：Opus 拿判斷與對照範例，Haiku 拿整段對話持續有效的硬規則，Sonnet 幾乎純組裝，舊模型則用同一批模組回補。
+</p>
+
+<div class="grid c4" style="margin:20px 0 12px">
+  <div class="card stat"><b>69.9%</b><span>逐字沿用前代段落</span></div>
+  <div class="card stat"><b>21.8%</b><span>小幅改寫（相似度 ≥ 0.8）</span></div>
+  <div class="card stat"><b>339 字</b><span>真正新寫（8.2%）</span></div>
+  <div class="card stat"><b>43%</b><span>篇幅給拒絕處理（1,774 字，39 版中最大）</span></div>
+</div>
+
+<div class="card" style="padding:14px 18px 10px">
+  <p class="kicker" style="margin-bottom:8px">5.5 世代三份 prompt 的組成（以字數計）</p>
+  <div class="sb-row"><span>Opus 5.5</span><div class="sb" role="img" aria-label="Opus 5.5：逐字沿用 69.9%、小幅改寫 21.8%、新寫 8.2%"><i class="v" style="width:69.9%"></i><i class="m" style="width:21.8%"></i><i class="n" style="width:8.2%"></i></div><span class="sb-num">4,119 字</span></div>
+  <div class="sb-row"><span>Sonnet 5.5（09-28）</span><div class="sb" role="img" aria-label="Sonnet 5.5：逐字沿用 94.7%、小幅改寫 1.4%、新寫 3.8%"><i class="v" style="width:94.7%"></i><i class="m" style="width:1.4%"></i><i class="n" style="width:3.8%"></i></div><span class="sb-num">2,980 字</span></div>
+  <div class="sb-row"><span>Haiku 5.5</span><div class="sb" role="img" aria-label="Haiku 5.5：逐字沿用 55.5%、小幅改寫 7.5%、新寫 37.1%"><i class="v" style="width:55.5%"></i><i class="m" style="width:7.5%"></i><i class="n" style="width:37.1%"></i></div><span class="sb-num">4,255 字</span></div>
+  <p style="font-size:12.5px;color:var(--muted);margin:8px 0 0"><span class="sw v"></span>逐字沿用<span class="sw m"></span>小幅改寫<span class="sw n"></span>新寫<br>
+  比對單位是段落（版本檔一行一段），參照組為該版發布日以前已公開的所有版本，算法見<a href="method.html#lineage">方法與證據</a>。</p>
+</div>
+
+<h2>Opus 5.5 的四個設計原理</h2>
+<p>每一條分兩層：襯線引文是<strong>官方原文逐字</strong>，可點回證據包；綠底的<strong>技術原理與設計理念是本站推論</strong>，官方沒有說明任何一條改動的理由。</p>
+
+<section class="pr" id="p1">
+  <p class="kicker">原理 1 · 灰色地帶</p>
+  <h3>門檻句換成「程序＋對照範例」：主攻的是過度拒絕</h3>
+  <div class="pair">
+    <div>
+      <p class="lab del">刪掉：Opus 5 的 &lt;default_stance&gt;</p>
+      <div class="q" data-file="claude-opus-5__July_24_2026__default.txt" data-cite="Opus 5 / 2026-07-24 / default_stance" data-term="Claude defaults to helping">Claude defaults to helping. Claude only declines a request when helping would create a concrete, specific risk of serious harm; requests that are merely edgy, hypothetical, playful, or uncomfortable do not meet that bar.</div>
+    </div>
+    <div>
+      <p class="lab add">換上：Opus 5.5 新寫的程序</p>
+      <div class="q" data-file="claude-opus-5-5__September_22_2026__default.txt" data-cite="Opus 5.5 / 2026-09-22 / refusal_handling" data-term="Claude respects the person's judgment">When Claude is unsure whether to decline a request that nothing in this prompt or an Anthropic reminder addresses, Claude respects the person's judgment: rather than declining or calling it a bad idea, Claude says what it will help with and asks a question that would surface any real reason to decline, such as how someone else would feel.</div>
+    </div>
+  </div>
+  <p style="margin-top:12px">
+  這段附了公開 prompt 史上第一則 <code class="xml">&lt;bad_response&gt;</code>／<code class="xml">&lt;good_response&gt;</code> 對照範例：使用者要一段生日祝酒詞，要求暗示好友懷孕。
+  壞示範擅自拿掉暗示、換成「比較安全」的版本、再附上理由；好示範答應寫，只問一句會不會讓她難堪。範例自己寫出判準：
+  </p>
+  <div class="q" data-file="claude-opus-5-5__September_22_2026__default.txt" data-cite="Opus 5.5 / 2026-09-22 / example / rationale" data-term="the person knows her better than Claude does">Nadia's pregnancy is her private news, and the person knows her better than Claude does. No instruction covers this, so Claude agrees to write the toast and asks whether the hint would embarrass her, rather than declining and explaining why.</div>
+  <div class="infer">
+    <p style="margin:0 0 8px"><b>技術原理</b>　門檻句只說「線在哪」，沒說「站在線上時怎麼做」；模型在邊界上最常見的退路就是拒絕加說教，壞示範演的正是這個型態。
+    把模糊判斷改寫成一個可執行的動作——先答應能幫的部分，再問一個能讓真正理由浮現的問題，不問動機、不問「你確定嗎」、解釋最多一句——再用負例把要避免的輸出擺出來，比多寫一句抽象門檻更能校準邊界。
+    適用範圍被框在「本 prompt 與 Anthropic reminder 都沒涵蓋」的情況，所以這不是放寬硬線：武器段與 Opus 5 相同，著作權段整段收進來，兒少段多了 pattern level 與 detection mechanics 兩條（只少了 Opus 5 的「未成年人表明欲性化自身」一條）。
+    旁證：同一份 prompt 教使用者寫 prompt 時建議 <span class="en">using positive and negative examples</span>，5.5 是第一次把負例用在自己身上。</p>
+    <p style="margin:0"><b>設計理念</b>　對方比模型更了解自己的人際脈絡。灰色地帶的決定權留給使用者，模型負責把風險問出來，不負責替人決定。</p>
+  </div>
+</section>
+
+<section class="pr" id="p2">
+  <p class="kicker">原理 2 · 語氣與長度</p>
+  <h3>從「管語氣」退場，改成「管份量」</h3>
+  <div class="pair">
+    <div>
+      <p class="lab del">刪掉：Opus 5 的簡短指令與 &lt;tone_preference&gt;</p>
+      <div class="q" data-file="claude-opus-5__July_24_2026__default.txt" data-cite="Opus 5 / 2026-07-24 / tone_and_formatting・tone_preference" data-term="focused, brief, and concise">Claude keeps responses focused, brief, and concise to avoid overwhelming the person. … Claude's outputs are reasonably concise.</div>
+    </div>
+    <div>
+      <p class="lab add">換上：Opus 5.5 新寫的一句</p>
+      <div class="q" data-file="claude-opus-5-5__September_22_2026__default.txt" data-cite="Opus 5.5 / 2026-09-22 / lists_and_bullets" data-term="Claude matches its effort to the ask">Claude matches its effort to the ask. A simple question gets a direct answer, and a request to change one thing in a longer piece gets the change, not the whole piece again, unless the person asks for the full version.</div>
+    </div>
+  </div>
+  <p style="margin-top:12px">
+  一起消失的還有 genuinely／honestly／straightforward 禁詞（Opus 5 與 Fable 5.1 都有），Fable 5.1 的多輪分段、「每個字都要有新意」、每幾次工具呼叫回報、<code class="xml">&lt;reply_after_tool_calls&gt;</code> 也都沒收進來。
+  <code class="xml">&lt;tone_and_formatting&gt;</code> 從 Opus 4.7 的 918 字縮到 362 字。但同一條禁詞在兩週後更新的舊模型 Sonnet 4.6 裡照樣保留：
+  </p>
+  <div class="q" data-file="claude-sonnet-4-6__October_7_2026__default.txt" data-cite="Sonnet 4.6 / 2026-10-07 / tone_and_formatting" data-term="Claude avoids saying &quot;genuinely&quot;">Claude avoids saying "genuinely", "honestly", or "straightforward".</div>
+  <div class="infer">
+    <p style="margin:0 0 8px"><b>技術原理</b>　全域的「要簡短」會和需要長篇的任務打架——Opus 4.7 就得補一句 <span class="en">Completeness here is about covering what was asked, not about length</span>。比例原則只有一個判準、兩個方向都適用；「改一處就只給那一處」則點名一個具體失敗：被要求小改卻整篇重寫。
+    禁詞只留在舊模型，表示它是針對特定模型口頭禪的補丁（見<a href="themes.html#t4">禁詞系譜</a>）；新模型不再需要，推論是已由訓練處理。</p>
+    <p style="margin:0"><b>設計理念</b>　風格交給訓練與使用者設定——prompt 自己就把語氣與格式偏好導向 user preferences 與 style 功能——系統 prompt 只留跨使用者都成立的判準。</p>
+  </div>
+</section>
+
+<section class="pr" id="p3">
+  <p class="kicker">原理 3 · 血緣</p>
+  <h3>一份政策、多處組裝：Fable 5.1 的模組收編進 Opus</h3>
+  <p>
+  Opus 5.5 的骨架是 Opus 5：產品資訊、Claude Design、出口管制通知、CBRN＋常規武器全段。裝進來的是 Fable 5.1 的模組：著作權段與兩則範例、毒品減害段、兒少 pattern level 與 detection mechanics、自傷替代清單、求助創傷段、飲食心理敘事禁令。
+  以逐字段落的出處算：Fable 5.1 有、Opus 5 沒有的佔全文 23.9%，Opus 5 有、Fable 5.1 沒有的佔 10.7%，兩者都有的佔 25.9%，其餘 9.3% 來自 Sonnet 5 或更早版本。Fable 5.1 第二則範例原本是 <code>User:</code>／<code>Claude:</code> 加方括號說明的自由格式，到 Opus 5.5 改寫成和第一則一致的 <code class="xml">&lt;example&gt;&lt;user&gt;&lt;response&gt;&lt;rationale&gt;</code>。
+  模組多半自帶理由，例如：
+  </p>
+  <div class="q" data-file="claude-opus-5-5__September_22_2026__default.txt" data-cite="Opus 5.5 / 2026-09-22 / critical_child_safety_instructions" data-term="since narrating the boundary teaches how to reframe around it">When Claude declines or limits for child-safety reasons, it states the principle rather than the detection mechanics — not which cues tripped, where the line sits, or what test it applied — since narrating the boundary teaches how to reframe around it.</div>
+  <div class="infer">
+    <p style="margin:0 0 8px"><b>技術原理</b>　政策寫成帶理由的可重用模組，各模型只決定裝哪些；理由跟著模組走，裝到哪個模型都能被類推，而不是只能比對字面。三個 5.5 版本有 1,891 字逐字相同，上一版分析看到的三條分支（Opus／Sonnet-Haiku／Fable）正收斂成一個模組庫。</p>
+    <p style="margin:0"><b>設計理念</b>　一處修正、全線生效，減少 <a href="method.html#q5">Q5</a>、<a href="method.html#q7">Q7</a> 那種複製貼上造成的條文來回與錯字存活。</p>
+  </div>
+</section>
+
+<section class="pr" id="p4">
+  <p class="kicker">原理 4 · 時間差</p>
+  <h3>prompt 只補訓練資料到不了的地方</h3>
+  <div class="pair">
+    <div>
+      <p class="lab del">刪掉：Opus 5 出口管制通知裡的一句</p>
+      <div class="q" data-file="claude-opus-5__July_24_2026__default.txt" data-cite="Opus 5 / 2026-07-24 / product_information" data-term="so Claude knows about them only from this notice">These events are after Claude's training-data cutoff, so Claude knows about them only from this notice.</div>
+    </div>
+    <div>
+      <p class="lab add">原因：Opus 5.5 的知識截止往後推</p>
+      <div class="q" data-file="claude-opus-5-5__September_22_2026__default.txt" data-cite="Opus 5.5 / 2026-09-22 / knowledge_cutoff" data-term="is the end of Jun 2026">Claude's reliable knowledge cutoff, past which it can't answer reliably, is the end of Jun 2026.</div>
+    </div>
+  </div>
+  <p style="margin-top:12px">
+  同一句在 10-07 更新的 Haiku 4.5（截止 2025-01）裡仍然保留。同理，Opus 5 為「Fable 5 的部分查詢被安全路由改由 Opus 5 回答」寫的 <code class="xml">&lt;fable_safeguards_routing&gt;</code> 整段消失；
+  模型清單則停在 09-22 當下：列 Sonnet 5 與 Haiku 4.5；Sonnet 5.5、Haiku 5.5 的頁面要到 09-28、10-07 才出現。
+  </p>
+  <div class="infer">
+    <p style="margin:0 0 8px"><b>技術原理</b>　靜態 prompt 是「部署日減訓練截止日」這段落差的補丁層：截止日往後推，補丁就收回。同一個事件對不同截止日的模型寫法不同，證明是逐模型計算的。四條原理裡這一條推論強度最高——因果關係是 prompt 自己寫出來的。</p>
+    <p style="margin:0"><b>設計理念</b>　prompt 只寫權重不可能知道的事：今天幾號、自己是誰、兄弟模型有哪些、截止日之後發生了什麼。</p>
+  </div>
+</section>
+
+<h2>放大到整個 5.5 世代：同一個世代，三種寫法</h2>
+<p>
+Opus 5.5 新寫的字教它「少拒絕」，Haiku 5.5 新寫的字（1,577 字）除了開頭一段記憶指令，全部在教它「守住」，Sonnet 5.5 幾乎沒有新寫（114 字）。下表全部由版本檔實算：
+</p>
+<div class="tbl-wrap"><table>
+  <thead><tr><th style="width:200px">指標</th><th>Opus 5.5</th><th>Sonnet 5.5（09-28）</th><th>Haiku 5.5</th></tr></thead>
+  <tbody>
+    <tr><td>自述定位</td><td><span class="en">a powerful model for complex challenges</span></td><td>（無）</td><td><span class="en">the fastest model for quick questions</span></td></tr>
+    <tr><td>新寫內容的方向</td><td>灰色地帶先問、份量配合請求</td><td>條列可用、談到想死時不說願望合理</td><td>拒絕後不改判、危機與飲食規則持續到對話結束、記憶讀寫</td></tr>
+    <tr><td>in-prompt 範例</td><td class="num">3 則</td><td class="num">0</td><td class="num">0</td></tr>
+    <tr><td>明寫 rest of the／that conversation 的句子</td><td class="num">1（著作權）</td><td class="num">0</td><td class="num">5</td></tr>
+    <tr><td><code>because</code> 理由句</td><td class="num">1</td><td class="num">1</td><td class="num">8</td></tr>
+    <tr><td>NEVER／MUST／REFUSE 全大寫</td><td class="num">3</td><td class="num">0</td><td class="num">0</td></tr>
+    <tr><td>條列排版</td><td>從嚴</td><td>寬鬆</td><td>從嚴</td></tr>
+    <tr><td>最大的區塊</td><td>拒絕處理 1,774 字（歷來最大）</td><td>福祉 803 字</td><td>福祉 1,513 字（歷來最大）</td></tr>
+  </tbody>
+</table></div>
+<div class="q" data-file="claude-haiku-5-5__October_7_2026__default.txt" data-cite="Haiku 5.5 / 2026-10-07 / refusal_handling" data-term="that decision stands for the rest of the conversation">Once Claude has declined a request or said it is concerned about one, that decision stands for the rest of the conversation, because people who want harmful content often keep asking in new ways until a model gives in.</div>
+<div class="infer">
+  <b>推論（強度中等）</b>　官方沒有說明為什麼分層。從文本特徵反推：要靠判斷的層級拿程序與範例；定位最快的層級拿可執行、持續到對話結束、附理由的規則，而且不用全大寫強調。
+  Haiku 的理由句點名了它要防的攻擊——換個說法一直問、一步步把故事推過界。這類多輪拆解要靠模型在長對話裡一直記得先前的判斷；寫成「此後整段對話有效」的明文規則，等於不把這件事留給臨場判斷。為什麼偏偏寫給 Haiku，條文沒有說。
+</div>
+<p>
+還有一個變化發生在舊模型身上：2026-10-07 同一天，Sonnet 5.5、Haiku 5.5，以及 Haiku 4.5、Sonnet 4.6 四個模型頁一起更新，都加了兒童用藥的 <code class="xml">&lt;medical_guidance&gt;</code>；
+overview 也刪掉了「4.6 世代起一個模型 ID 一個條目」那句。模型權重凍結，政策還在變，prompt 成了把新政策送進舊快照的管道。→ <a href="shifts.html#f">躍遷 F-5</a>
+</p>
+
+<h2>和過往世代比，差在哪</h2>
+<div class="tbl-wrap"><table>
+  <thead><tr><th style="width:120px">面向</th><th>2024–2025</th><th>2026 上半（Opus 4.7 → Opus 5／Fable 5.1）</th><th>5.5 世代（2026-09 → 10）</th></tr></thead>
+  <tbody>
+    <tr><td>prompt 的主要角色</td><td>弱點補丁、訓練後行為校正</td><td>agentic 作業規範、多模型路由</td><td>判斷校準（Opus）＋持續性規則（Haiku）＋舊模型回補</td></tr>
+    <tr><td>灰色地帶</td><td>敏感任務許可清單、拒絕要短</td><td><code class="xml">&lt;default_stance&gt;</code> 門檻句</td><td>程序＋bad／good 對照範例（Opus 5.5）</td></tr>
+    <tr><td>語氣與長度</td><td>禁詞系譜、反條列</td><td>concise 指令、<code class="xml">&lt;tone_preference&gt;</code></td><td>「份量配合請求」；禁詞只留在舊模型</td></tr>
+    <tr><td>工具</td><td>幾乎不談</td><td>tool_search、SKILL.md、工具後作答寫進行為組件</td><td>三個 5.5 版本都不談；Haiku 只指向 <code>&lt;memory_listing&gt;</code></td></tr>
+    <tr><td>in-prompt 範例</td><td>無</td><td>Fable 5.1：示範怎麼拒絕</td><td>Opus 5.5：也示範怎麼「不要拒絕」</td></tr>
+    <tr><td>多輪攻防</td><td>兒少：拒絕後提高警覺</td><td>武器：看整段對話的累積產出</td><td>Haiku：拒絕後整段對話不改判；危機、飲食規則持續到對話結束</td></tr>
+    <tr><td>維護方式</td><td>各頁各自改，錯字跨版存活</td><td>三條分支交叉搬運</td><td>模組庫按層級組裝；同日更新四個模型頁，舊模型也回補</td></tr>
+  </tbody>
+</table></div>
+
+<div class="note">
+  <b>推論的限度</b>　官方只公開條文，不公開理由；本頁的「為什麼」全部由文本差異反推，強度分兩種：prompt 自己寫出理由的（例如出口管制那句、Haiku 的 <span class="en">because people who want harmful content often keep asking in new ways</span>）強度高；
+  只靠「段落消失」推論的（例如禁詞交回訓練）強度中等。另外，這批文字只約束 claude.ai 與行動 app 的預設行為，官方明言不適用 Claude API。
+  完整論證見<a href="shifts.html#f">躍遷 F</a>，逐條追蹤見<a href="themes.html">主題軌跡</a>，同世代逐字差異見<a href="branches.html">分支與兄弟版</a>。
+</div>
+
+<h2>兩年演進總覽</h2>
+<p class="lede" style="font-size:16px">
 Anthropic 會把 claude.ai 網頁與行動 app 使用的系統提示詞（system prompt）公開在官方發行說明頁上。
-本站把 2024-07-12 到 2026-09-01、18 個模型頁、32 個版本的原文抓下來逐字比對，
+本站把 2024-07-12 到 2026-10-07、22 個模型頁、39 個版本的原文抓下來逐字比對，
 整理成一套可自行查核的學習材料：每一條結論都能點回原文，每一句引文都能在證據包裡用字串搜到。
 </p>
 
 <div class="grid c4" style="margin:22px 0 8px">
-  <div class="card stat"><b>19</b><span>官方頁面（overview + 18 模型頁）</span></div>
-  <div class="card stat"><b>32</b><span>納入分析的版本</span></div>
-  <div class="card stat"><b>21</b><span>組逐字 word-diff</span></div>
-  <div class="card stat"><b>118</b><span>特徵片語 × 32 版矩陣</span></div>
+  <div class="card stat"><b>23</b><span>官方頁面（overview + 22 模型頁）</span></div>
+  <div class="card stat"><b>39</b><span>納入分析的版本</span></div>
+  <div class="card stat"><b>32</b><span>組逐字 word-diff</span></div>
+  <div class="card stat"><b>146</b><span>特徵片語 × 39 版矩陣</span></div>
 </div>
 
 <div class="note">
@@ -53,7 +216,8 @@ Anthropic 會把 claude.ai 網頁與行動 app 使用的系統提示詞（system
 
 <h2>字數走勢：兩次主動瘦身，一次爆量</h2>
 <p>
-從 114 字長到 4,267 字，中間出現兩個反向點：2025-09-29（Sonnet 4.5）砍回 1,973 字，2026-05-28（Opus 4.8）壓縮改寫成 3,350 字但功能更多。
+從 114 字長到 4,267 字（Fable 5.1，至今仍是最長），中間出現兩個反向點：2025-09-29（Sonnet 4.5）砍回 1,973 字，2026-05-28（Opus 4.8）壓縮改寫成 3,350 字但功能更多。
+5.5 世代則第一次出現「最快的模型拿最長的 prompt」：Haiku 5.5 有 4,255 字，Sonnet 5.5 只有 2,980 到 3,195 字。
 點任一個點可直接讀那一版的原文。
 </p>
 <div class="card" style="padding:14px 10px 6px">
@@ -64,6 +228,7 @@ Anthropic 會把 claude.ai 網頁與行動 app 使用的系統提示詞（system
   <span class="fam-Opus"><span class="dot"></span>Opus</span>
   <span class="fam-Haiku"><span class="dot"></span>Haiku</span>
   <span class="fam-Fable"><span class="dot"></span>Fable</span>）。空心點＝Haiku 3.5 的 text+images 變體，官方標 2024-10-22 但內容明顯是 2025-02 之後（見<a href="method.html#q1">品質警語 Q1</a>），此處按標籤日期繪製。
+  灰線是「每個日期取當天最長的一版」串起來的走勢，同一天有多個模型時只取最長者。
 </p>
 
 <h2>十行結論</h2>
@@ -71,17 +236,17 @@ Anthropic 會把 claude.ai 網頁與行動 app 使用的系統提示詞（system
 <ol id="ten"></ol>
 
 <h2>建議學習路徑</h2>
-<p>全部讀完約 3–4 小時。如果只有 40 分鐘，做完第 1、2 步再直接跳自我檢測。</p>
+<p>全部讀完約 4 小時。如果只有 40 分鐘，讀完本頁頁首、做完第 2 步再直接跳自我檢測。</p>
 <ol class="path">
   <li>
     <h3>建立座標：先看版本總表與字數走勢</h3>
-    <p>把 32 個版本的日期、模型系、字數、結構型態放進腦裡，之後任何一條規則都能定位到「哪一系、哪一版」。</p>
-    <p class="meta">→ <a href="versions.html">版本總表</a> ・ 約 25 分鐘 ・ 檢核：能說出哪三版是轉折點</p>
+    <p>把 39 個版本的日期、模型系、字數、結構型態放進腦裡，之後任何一條規則都能定位到「哪一系、哪一版」。</p>
+    <p class="meta">→ <a href="versions.html">版本總表</a> ・ 約 25 分鐘 ・ 檢核：能說出哪幾版是轉折點</p>
   </li>
   <li>
-    <h3>抓骨架：五次架構躍遷</h3>
-    <p>單段落 → XML 三區塊 → 平鋪散文 → 散文加人格前言 → 全 schema 化 → agentic 作業規範。理解每次躍遷解決了什麼問題，比背條文有用。</p>
-    <p class="meta">→ <a href="shifts.html">五次躍遷</a> ・ 約 35 分鐘 ・ 檢核：能說出 2025-09-29 一次刪掉了哪一類段落，以及為什麼</p>
+    <h3>抓骨架：六次架構躍遷</h3>
+    <p>單段落 → XML 三區塊 → 平鋪散文 → 散文加人格前言 → 全 schema 化 → agentic 作業規範 → 分層組裝。理解每次躍遷解決了什麼問題，比背條文有用。</p>
+    <p class="meta">→ <a href="shifts.html">六次躍遷</a> ・ 約 45 分鐘 ・ 檢核：能說出 2025-09-29 一次刪掉了哪一類段落，以及 5.5 世代為什麼同世代有三種寫法</p>
   </li>
   <li>
     <h3>讀肉：13 條主題軌跡</h3>
@@ -90,13 +255,13 @@ Anthropic 會把 claude.ai 網頁與行動 app 使用的系統提示詞（system
   </li>
   <li>
     <h3>驗證：自己查一次矩陣與原文</h3>
-    <p>在特徵矩陣裡挑一個片語，看它在 32 版的出現分布，再開原文確認。這一步是把「讀過」變成「查得到」的關鍵。</p>
+    <p>在特徵矩陣裡挑一個片語，看它在 39 版的出現分布，再開原文確認。這一步是把「讀過」變成「查得到」的關鍵。</p>
     <p class="meta">→ <a href="matrix.html">特徵矩陣</a>／<a href="method.html">方法與證據</a> ・ 約 30 分鐘 ・ 檢核：能獨立指出報告中一處與證據不符之處</p>
   </li>
   <li>
     <h3>收斂：分支結構與實務含意</h3>
-    <p>理解 Opus 系／Sonnet-Haiku 系／Fable 系是三條分支後，就不會再犯「某規則自 X 版起生效」這種跨系推論的錯。</p>
-    <p class="meta">→ <a href="branches.html">分支與兄弟版</a> ・ 約 25 分鐘 ・ 檢核：完成<a href="quiz.html">自我檢測</a> 15 題</p>
+    <p>理解 Opus 系／Sonnet-Haiku 系／Fable 系曾是三條分支、5.5 世代又正收斂成一個模組庫之後，就不會再犯「某規則自 X 版起生效」這種跨系推論的錯。</p>
+    <p class="meta">→ <a href="branches.html">分支與兄弟版</a> ・ 約 30 分鐘 ・ 檢核：完成<a href="quiz.html">自我檢測</a> 20 題</p>
   </li>
 </ol>
 
@@ -124,7 +289,7 @@ Anthropic 會把 claude.ai 網頁與行動 app 使用的系統提示詞（system
 </div>
 
 <footer class="site">
-  <p>資料來源：<a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">Anthropic 官方 System prompts 發行說明</a>及其 18 個模型子頁，2026-09-07 以 curl 抓取 <code>.md</code> 原始檔。</p>
+  <p>資料來源：<a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">Anthropic 官方 System prompts 發行說明</a>及其 22 個模型子頁，2026-09-07 首次抓取、2026-10-28 重抓，皆以 curl 取 <code>.md</code> 原始檔。</p>
   <p>本站為個人研究整理，非 Anthropic 官方出版品；引文著作權屬 Anthropic，僅為研究與評註目的引用。
      證據包 <a href="evidence/README.md">evidence/</a> ・ 原始報告 <a href="report/changelog-zh-TW.md">changelog-zh-TW.md</a></p>
 </footer>
@@ -137,15 +302,15 @@ Anthropic 會把 claude.ai 網頁與行動 app 使用的系統提示詞（system
 /* ---- 十行結論 ---- */
 var TEN = [
  ['只適用 claude.ai 網頁與 iOS／Android app，官方明言不適用 Claude API。','method.html','範圍'],
- ['長度從 114 字（Haiku 3）長到 4,267 字（Fable 5.1），中間在 2025-09-29 主動砍回 1,973 字，之後再逐月增生。','versions.html','版本總表'],
- ['結構經歷五次躍遷：單段落 → XML 三區塊 → 平鋪散文 → 散文＋人格前言 → 全 schema 化 XML → agentic 作業規範與 in-prompt 範例。','shifts.html','五次躍遷'],
- ['2025-11-19 起公開區塊不再含身分句、日期句與結尾 connected 句，只剩一個 <code>&lt;claude_behavior&gt;</code> 組件。公開的已不是完整 prompt。','shifts.html#d','躍遷 D'],
+ ['長度從 114 字（Haiku 3）長到 4,267 字（Fable 5.1，至今最長），中間在 2025-09-29 主動砍回 1,973 字；5.5 世代三個模型落在 2,980 到 4,255 字，同一世代差了 1,275 字。','versions.html','版本總表'],
+ ['結構經歷六次躍遷：單段落 → XML 三區塊 → 平鋪散文 → 散文＋人格前言 → 全 schema 化 XML → agentic 作業規範與 in-prompt 範例 → 按模型層級分寫的模組化組裝。','shifts.html','六次躍遷'],
+ ['2025-11-19 起公開區塊只剩一個 <code>&lt;claude_behavior&gt;</code> 組件，公開的已不是完整 prompt；公開區塊還會點名別的組件——Opus 4.8 的 <code>&lt;available_skills&gt;</code>、Haiku 5.5 開頭的 <code>&lt;memory_listing&gt;</code>。','shifts.html#d','躍遷 D'],
  ['同日引入的 <code>&lt;anthropic_reminders&gt;</code> 把指令投遞架構明文化：靜態骨架之外另有分類器觸發、附在 user turn 末尾的動態提醒，並附帶 prompt-injection 防禦條款。','themes.html#t10','提醒機制'],
  ['Claude 4（2025-05-22）拿掉 2024 年堆積的「模型弱點補丁」；Sonnet 4.5（2025-09-29）再拿掉整批「AI 本性／反諂媚／人格」段落。','themes.html#t7','AI 本性'],
- ['心理健康與危機處理是增生最快的主題：從 2025-02-24 的一段，到 2026-06-09 的十六段。','themes.html#t6','使用者福祉'],
- ['2026-04 起 prompt 開始描述 agent 執行架構：tool_search 延遲載入、SKILL.md 優先讀取、先做再問、多模型中途切換、safeguards routing。','themes.html#t11','agentic 工具'],
- ['各模型的 prompt 是分支維護而非單一主幹：同一條規則反覆出現又消失，Opus 5 的骨架承自 Opus 4.8 而非同期的 Fable 5。','branches.html','分支證據'],
- ['文件本身有可信度瑕疵：日期標籤錯置、條目重複、網域被回溯改寫、長期未修的錯字。引用前要先看警語。','method.html#quality','品質警語']
+ ['心理健康與危機處理是增生最快的主題：從 2025-02-24 的一段，到 Haiku 5.5 的 1,513 字、整段對話持續有效的危機規則。','themes.html#t6','使用者福祉'],
+ ['2026-04 起 prompt 開始描述 agent 執行架構（tool_search、SKILL.md、先做再問、safeguards routing）；到 5.5 世代，三個模型的公開區塊都不再談工具。','themes.html#t11','agentic 工具'],
+ ['分支維護正收斂成模組組裝：Opus 5.5＝Opus 5 骨架＋Fable 5.1 模組，三個 5.5 版本有 1,891 字逐字相同；2026-10-07 同日更新四個模型頁，舊模型也回補新模組。','branches.html','分支證據'],
+ ['文件本身有可信度瑕疵：日期標籤錯置、條目重複、網域被回溯改寫、頁面事後才上架（Sonnet 5）、overview 刪掉自己先前的說法。引用前要先看警語。','method.html#quality','品質警語']
 ];
 document.getElementById('ten').innerHTML = TEN.map(function (t) {
   return '<li>' + t[0] + ' <a href="' + t[1] + '" style="font-size:12.5px;white-space:nowrap">→ ' + t[2] + '</a></li>';
@@ -156,12 +321,12 @@ document.getElementById('ten').innerHTML = TEN.map(function (t) {
   var cols = MATRIX.columns.slice().sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : a.i - b.i; });
   var W = 900, H = 350, L = 46, R = 16, T = 18, B = 46;
   var t = function (d) { return Date.parse(d); };
-  var x0 = t('2024-06-01'), x1 = t('2026-10-01'), y1 = 4600;
+  var x0 = t('2024-06-01'), x1 = t('2026-11-15'), y1 = 4600;
   var X = function (d) { return L + (t(d) - x0) / (x1 - x0) * (W - L - R); };
   var Y = function (v) { return H - B - v / y1 * (H - T - B); };
   var COL = { Sonnet: '#3d6fa8', Opus: '#8a5bb5', Haiku: '#3f8a72', Fable: '#b0502a' };
 
-  var s = ['<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="系統提示詞字數走勢，2024 年 7 月至 2026 年 9 月">'];
+  var s = ['<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="系統提示詞字數走勢，2024 年 7 月至 2026 年 10 月">'];
   for (var g = 0; g <= 4000; g += 1000) {
     s.push('<line class="gl" x1="' + L + '" y1="' + Y(g) + '" x2="' + (W - R) + '" y2="' + Y(g) + '"/>');
     s.push('<text x="' + (L - 8) + '" y="' + (Y(g) + 4) + '" text-anchor="end">' + g + '</text>');
@@ -189,7 +354,8 @@ document.getElementById('ten').innerHTML = TEN.map(function (t) {
    ['2025-08-05', 2880, '散文期高峰 2,880', -4, -12],
    ['2025-09-29', 1973, '主動砍回 1,973', 6, 22],
    ['2026-05-28', 3350, '壓縮改寫', -78, -12],
-   ['2026-09-01', 4267, '4,267 最長', -96, -8]
+   ['2026-09-01', 4267, '4,267 最長', -96, -8],
+   ['2026-09-28', 2980, '5.5 世代：2,980–4,255', -118, 26]
   ].forEach(function (a) {
     s.push('<text class="lbl" x="' + (X(a[0]) + a[3]) + '" y="' + (Y(a[1]) + a[4]) + '">' + a[2] + '</text>');
   });

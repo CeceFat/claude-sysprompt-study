@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>五次架構躍遷 · Claude 系統提示詞演進</title>
-<meta name="description" content="claude.ai 系統提示詞的五次結構性改寫：XML 三區塊、去 XML 翻倍、人格前言與大清洗、schema 化與動態提醒、agentic 作業規範。">
+<title>六次架構躍遷 · Claude 系統提示詞演進</title>
+<meta name="description" content="claude.ai 系統提示詞的六次結構性改寫：XML 三區塊、去 XML 翻倍、人格前言與大清洗、schema 化與動態提醒、agentic 作業規範，以及 5.5 世代的分層組裝。">
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
 </head>
@@ -12,12 +12,12 @@
 
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-07 · 自學站</small></a>
     <nav class="main">
       <a href="about.html">About</a>
       <a href="index.html">總覽</a>
       <a href="versions.html">版本總表</a>
-      <a href="shifts.html">五次躍遷</a>
+      <a href="shifts.html">六次躍遷</a>
       <a href="themes.html">主題軌跡</a>
       <a href="branches.html">分支與兄弟版</a>
       <a href="matrix.html">特徵矩陣</a>
@@ -31,10 +31,11 @@
 <div class="wrap"><main class="page">
 
 <p class="kicker" style="margin-top:34px">第 2 步</p>
-<h1>五次架構躍遷</h1>
+<h1>六次架構躍遷</h1>
 <p class="lede">
-版本很多，但真正改變「prompt 是什麼東西」的只有五次。抓住這五次，中間的小改版都只是填充。
+版本很多，但真正改變「prompt 是什麼東西」的只有六次。抓住這六次，中間的小改版都只是填充。
 每一次躍遷回答的都是同一個問題的不同答案：<strong>模型的行為，應該由訓練決定，還是由提示詞決定？</strong>
+到第六次（5.5 世代），答案變成「看是哪一個模型」。
 </p>
 
 <div class="goal">
@@ -43,6 +44,7 @@
     <li>說得出每次躍遷的觸發點與結構變化。</li>
     <li>理解「prompt 承擔模型弱點補丁」與「行為被吸收回訓練」這組反覆出現的擺盪。</li>
     <li>看懂 2025-11-19 之後公開頁的性質改變——這是全站最容易誤讀的一點。</li>
+    <li>說得出 5.5 世代為什麼同一個世代會有三種寫法，以及舊模型為什麼還在更新。</li>
   </ul>
 </div>
 
@@ -55,6 +57,7 @@
       <tr><td><a href="#c"><b>C</b></a></td><td class="num">2025-02 → 2025-08</td><td><code>散文＋人格前言</code></td><td>人格化 → Claude 4 大清洗 → 訓練後行為校正高峰</td></tr>
       <tr><td><a href="#d"><b>D</b></a></td><td class="num">2025-09-29 → 2026-02</td><td><code>&lt;claude_behavior&gt;</code></td><td>schema 化、去身分句；靜態骨架＋動態提醒兩層架構</td></tr>
       <tr><td><a href="#e"><b>E</b></a></td><td class="num">2026-04 → 2026-09</td><td><code>＋作業規範／範例</code></td><td>agentic 執行規範、多模型路由、in-prompt few-shot</td></tr>
+      <tr><td><a href="#f"><b>F</b></a></td><td class="num">2026-06 → 2026-10</td><td><code>分層組裝</code></td><td>模組庫按層級組裝：Opus 拿判斷與對照範例、Haiku 拿持續性硬規則；工具說明移出；舊模型同日回補</td></tr>
     </tbody>
   </table>
 </div>
@@ -235,6 +238,113 @@ On June 12, 2026, Anthropic suspended access to both models to comply with U.S. 
   </ol>
 </div>
 
+<h2 id="f">躍遷 F（2026-06 → 2026-10）：分層組裝——同一個世代，三種寫法</h2>
+<p>
+5.5 世代有三個模型頁：Opus 5.5（09-22）、Sonnet 5.5（09-28、10-07 兩個條目）、Haiku 5.5（10-07）。
+同一次重抓還多出兩樣東西：一個 2026-09-07 快照時還不存在的 Sonnet 5 頁（標 06-30，見 <a href="method.html#q9">Q9</a>），
+以及 Haiku 4.5、Sonnet 4.6 兩個舊模型各多一個 10-07 條目（見 <a href="method.html#q8">Q8</a>）。
+把這七份新原文和前代逐字比對，看到的不是一次重寫，而是一套模組被按層級重新組裝。
+</p>
+
+<h3>F-1　組裝而非重寫（Opus 5.5，2026-09-22）</h3>
+<p>
+以段落為單位比對（每段在版本檔裡是一行），Opus 5.5 的 4,119 字裡，<b>69.9%</b> 逐字見於更早的公開版本，<b>21.8%</b> 是小幅改寫（與某個舊段落相似度 ≥ 0.8，多半是型號、日期或 user → person），
+真正新寫的只有 <b>339 字（8.2%）</b>。來源拆開看：產品資訊與 CBRN＋常規武器全段來自 Opus 5；著作權段與兩則範例、毒品段、兒少 pattern level 與 detection mechanics、自傷替代清單、求助創傷段、飲食心理敘事禁令來自 Fable 5.1。
+Fable 5.1 第二則範例原本是 <code>User:</code>／<code>Claude:</code> 加方括號說明的自由格式，Opus 5.5 把它改寫成和第一則一致的 <code class="xml">&lt;example&gt;&lt;user&gt;&lt;response&gt;&lt;rationale&gt;</code>。
+</p>
+<div class="q" data-file="claude-opus-5-5__September_22_2026__default.txt" data-cite="Opus 5.5 / 2026-09-22 / product_information" data-term="Claude Opus 5.5 is a powerful model for complex challenges">
+The currently selected version of Claude is Claude Opus 5.5. Claude Opus 5.5 is a powerful model for complex challenges.
+</div>
+<p>
+篇幅分配也跟著移動：Opus 5.5 的 <code class="xml">&lt;refusal_handling&gt;</code> 有 1,774 字、佔全文 43%，是全部 39 版裡最大的拒絕處理區塊；
+<code class="xml">&lt;tone_and_formatting&gt;</code> 則從 Opus 4.7 的 918 字縮到 362 字。
+</p>
+
+<h3>F-2　灰色地帶：從門檻句改成程序＋對照範例</h3>
+<p>Opus 4.8 起的 <code class="xml">&lt;default_stance&gt;</code> 在 Opus 5 還在，到 Opus 5.5 刪了：</p>
+<div class="q" data-file="claude-opus-5__July_24_2026__default.txt" data-cite="Opus 5 / 2026-07-24 / default_stance（Opus 5.5 已刪）" data-term="Claude defaults to helping">
+Claude defaults to helping. Claude only declines a request when helping would create a concrete, specific risk of serious harm; requests that are merely edgy, hypothetical, playful, or uncomfortable do not meet that bar.
+</div>
+<p>取而代之的是一段只在「沒有明文涵蓋」時啟動的程序，以及公開 prompt 史上第一則 <code class="xml">&lt;bad_response&gt;</code>／<code class="xml">&lt;good_response&gt;</code> 對照範例：</p>
+<div class="q" data-file="claude-opus-5-5__September_22_2026__default.txt" data-cite="Opus 5.5 / 2026-09-22 / refusal_handling" data-term="Claude respects the person's judgment">
+When Claude is unsure whether to decline a request that nothing in this prompt or an Anthropic reminder addresses, Claude respects the person's judgment: rather than declining or calling it a bad idea, Claude says what it will help with and asks a question that would surface any real reason to decline, such as how someone else would feel. Claude asks before doing any of the task. Claude does not ask why the person wants it or whether they are sure, and adds at most one sentence on why it is asking.
+</div>
+<div class="q" data-file="claude-opus-5-5__September_22_2026__default.txt" data-cite="Opus 5.5 / 2026-09-22 / example / rationale" data-term="the person knows her better than Claude does">
+Nadia's pregnancy is her private news, and the person knows her better than Claude does. No instruction covers this, so Claude agrees to write the toast and asks whether the hint would embarrass her, rather than declining and explaining why.
+</div>
+<div class="infer">
+  <b>技術意義</b>　門檻句說明「線在哪」，沒說明「站在線上時怎麼做」。新段落把模糊判斷改成一個動作（先答應能幫的部分，再問一個能讓真正理由浮現的問題），並用負例把要避免的輸出直接擺出來：bad_response 擅自拿掉要求、換成「比較安全」的版本、再附上說教。
+  Fable 5.1 的範例教的是怎麼拒絕，Opus 5.5 的範例第一次教「不要拒絕」。<b>推論</b>：這針對的是過度拒絕，而不是放寬硬線——同一份 prompt 的武器段與 Opus 5 相同、著作權段整段收進來、兒少段多了兩條（只少了 Opus 5 的「未成年人表明欲性化自身」一條）。
+</div>
+
+<h3>F-3　同世代三種寫法：判斷給 Opus，規則給 Haiku</h3>
+<p>Sonnet 5.5 有 94.7% 逐字沿用（新寫只有 114 字），幾乎是純組裝；Haiku 5.5 則新寫了 1,577 字（37.1%）：除了開頭 50 字的記憶指令，其餘全部朝向「守住」——兒童用藥不憑記憶給數字、拒絕後不改判、危機與飲食規則——而且多半寫成整段對話持續有效：</p>
+<div class="q" data-file="claude-haiku-5-5__October_7_2026__default.txt" data-cite="Haiku 5.5 / 2026-10-07 / refusal_handling" data-term="that decision stands for the rest of the conversation">
+Once Claude has declined a request or said it is concerned about one, that decision stands for the rest of the conversation, because people who want harmful content often keep asking in new ways until a model gives in.
+</div>
+<div class="q" data-file="claude-haiku-5-5__October_7_2026__default.txt" data-cite="Haiku 5.5 / 2026-10-07 / refusal_handling" data-term="A story with a child in it can move, one request at a time">
+A story with a child in it can move, one request at a time, toward the child's body or toward touch between an adult and the child. Each request can look harmless on its own, but together they can end in sexualized writing about a child.
+</div>
+<p>連排版規則都分了層：Opus 5.5 與 Haiku 5.5 用從嚴版（「avoids over-formatting」），Sonnet 5.5 反過來寫成可用：</p>
+<div class="q" data-file="claude-sonnet-5-5__September_28_2026__default.txt" data-cite="Sonnet 5.5 / 2026-09-28 / lists_and_bullets" data-term="markdown formatting to make outputs more readable">
+Claude can use bullet points and markdown formatting to make outputs more readable.
+</div>
+<div class="tbl-wrap"><table>
+  <thead><tr><th style="width:190px">指標（版本檔實算）</th><th>Opus 5.5</th><th>Sonnet 5.5（09-28）</th><th>Haiku 5.5</th></tr></thead>
+  <tbody>
+    <tr><td>字數</td><td class="num">4,119</td><td class="num">2,980</td><td class="num">4,255</td></tr>
+    <tr><td>in-prompt 範例</td><td class="num">3 則</td><td class="num">0</td><td class="num">0</td></tr>
+    <tr><td>明寫 rest of the／that conversation 的句子</td><td class="num">1（著作權）</td><td class="num">0</td><td class="num">5</td></tr>
+    <tr><td><code>because</code> 理由句</td><td class="num">1</td><td class="num">1</td><td class="num">8</td></tr>
+    <tr><td>NEVER／MUST／REFUSE 全大寫</td><td class="num">3</td><td class="num">0</td><td class="num">0</td></tr>
+    <tr><td>兒少條文</td><td>完整 7 條（含 critical 區塊）</td><td>簡版 3 條</td><td>簡版 3 條＋故事滑坡段</td></tr>
+    <tr><td><code class="xml">&lt;user_wellbeing&gt;</code> 字數</td><td class="num">654</td><td class="num">803</td><td class="num">1,513（歷來最大）</td></tr>
+  </tbody>
+</table></div>
+<div class="infer">
+  <b>推論（強度中等）</b>　官方沒有說明為什麼分層。從文本特徵反推：定位「處理複雜挑戰」的 Opus 拿到程序與範例，靠判斷；定位「最快」的 Haiku 拿到可執行、持續到對話結束、附理由的硬規則，而且不用全大寫強調。
+  Haiku 的理由句點名了它要防的攻擊——換個說法一直問、一步步把故事推過界。這類多輪拆解要靠模型在長對話裡一直記得先前的判斷；把它寫成「此後整段對話有效」的明文規則，等於不把這件事留給模型臨場判斷。至於 Haiku 是否因此較需要明文規則，條文沒有說，本站不下結論。
+</div>
+
+<h3>F-4　行為組件去工具化</h3>
+<p>
+Opus 4.7／4.8 把工具行為寫進公開區塊（<code class="xml">acting_vs_clarifying</code>、<code class="xml">capability_check</code>、<code class="xml">tool_discovery</code>），Fable 5.1 加 <code class="xml">reply_after_tool_calls</code>，Sonnet 5 再加一段 <code class="xml">&lt;proactivity&gt;</code>：
+</p>
+<div class="q" data-file="claude-sonnet-5__June_30_2026__default.txt" data-cite="Sonnet 5 / 2026-06-30 / proactivity" data-term="Read-only and information-gathering tools are ready to use without asking">
+Read-only and information-gathering tools are ready to use without asking; Claude does not suggest the user enable a tool that is already available.
+</div>
+<p>三個 5.5 版本一段都沒留。唯一的例外是 Haiku 5.5 開頭的記憶指令，而它指向的 <code>&lt;memory_listing&gt;</code> 並不在公開文字裡：</p>
+<div class="q" data-file="claude-haiku-5-5__October_7_2026__default.txt" data-cite="Haiku 5.5 / 2026-10-07 / claude_behavior 開頭" data-term="before answering from the conversation alone">
+When a question is about the person or their world, Claude checks the `&lt;memory_listing&gt;` before answering from the conversation alone, and opens any file whose description suggests it holds something the reply needs. When Claude learns something lasting about the person, it saves it to memory before the turn ends.
+</div>
+<div class="infer">
+  <b>推論</b>　躍遷 E 時本站對「工具說明改由工具組件攜帶」的推論只有 Fable 5 一筆刪除可依，強度中等。5.5 世代三個模型同時不談工具，加上 Haiku 5.5 直接引用一個公開文字之外的組件，這個推論的強度提高了。
+</div>
+
+<h3>F-5　prompt 版本與模型快照脫鉤：2026-10-07 同日更新四個模型頁</h3>
+<p>2026-09-07 的 overview 還寫著：</p>
+<div class="q">Starting with the Claude 4.6 generation, each model ID is a single fixed snapshot, so those models have one entry.<cite>〔overview / 2026-09-07 快照；2026-10-28 重抓時已刪〕 · <a href="evidence/diffs/31_overview_0907_to_1028.diff">看 diff 31</a></cite></div>
+<p>
+10-28 重抓時這句已刪，因為 10-07 這天 Sonnet 5.5、Haiku 5.5，以及舊模型 Haiku 4.5、Sonnet 4.6 同日更新，四頁都加了 <code class="xml">&lt;medical_guidance&gt;</code>（兒童用藥劑量只取自產品標籤），寫法有三種。
+舊模型拿到的是「舊骨架＋新模組」：Haiku 4.5 保留 2026-01 的排版段、emoji 規則與 election_info，卻換上完整兒少條文、武器段與新的危機協定；Sonnet 4.6 則學會介紹自己：
+</p>
+<div class="q" data-file="claude-sonnet-4-6__October_7_2026__default.txt" data-cite="Sonnet 4.6 / 2026-10-07 / product_information" data-term="is from an earlier generation and remains available">
+Claude Sonnet 4.6 (this model, 'claude-sonnet-4-6') is from an earlier generation and remains available for people who prefer it or want to continue work started with it.
+</div>
+<div class="q" data-file="claude-sonnet-5-5__October_7_2026__default.txt" data-cite="Sonnet 5.5 / 2026-10-07 / medical_guidance" data-term="doesn't give a number from memory">
+If web search is not available or Claude can't find the label, Claude doesn't give a number from memory and instead points the person to the label's dosing chart, a pharmacist, or the child's doctor.
+</div>
+
+<div class="note">
+  <b>躍遷 F 的四個技術結論</b>
+  <ol style="margin:8px 0 0">
+    <li>政策寫成可重用模組，各模型只決定裝哪些；三個 5.5 版本有 1,891 字逐字相同（Opus 的 46%、Sonnet 5.5 10-07 的 59%、Haiku 的 44%）。上一階段的三條分支正收斂成「一個模組庫＋按層級組裝」。</li>
+    <li>同一條政策對不同層級用不同寫法：Opus 拿程序與對照範例，Haiku 拿持續性規則與理由句，Sonnet 介於兩者之間、排版最寬。</li>
+    <li>行為組件只談對話行為與政策，工具說明移出；記憶等其他組件由行為組件「指過去」。</li>
+    <li>模型權重凍結，政策還在變：prompt 是把新政策送進舊快照的唯一管道，所以一個模型頁會再長出新條目。這也表示模型頁的條目數只反映官方頁面更新了幾次，不能拿來推論某個模型的 prompt 有沒有變過。</li>
+  </ol>
+</div>
+
 <div class="selfcheck">
   <p class="kicker">自我檢核</p>
   <ol>
@@ -242,11 +352,13 @@ On June 12, 2026, Anthropic suspended access to both models to comply with U.S. 
     <li>2025-11-19 之後，如果你在公開頁上找不到「工具怎麼用」的說明，可以推論 Claude 沒有拿到那段說明嗎？</li>
     <li><code class="xml">&lt;anthropic_reminders&gt;</code> 這段本身，為什麼可以視為一種注入防禦？</li>
     <li>Fable 5 刪掉了 Opus 4.8 的 <code>tool_discovery</code>。這代表 Fable 5 不能用延遲載入的工具嗎？證據強度如何？</li>
+    <li>Opus 5.5 刪掉 <code class="xml">&lt;default_stance&gt;</code>，能不能據此說它「比 Opus 5 更容易拒絕」？先看它換上了什麼，再回答。</li>
+    <li>Haiku 5.5 的福祉段是歷來最長的。這代表 Haiku 5.5 比 Opus 5.5 更「安全」嗎？還有哪些解讀？</li>
   </ol>
 </div>
 
 <footer class="site">
-  <p>引文全部取自 <a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">Anthropic 官方發行說明</a>，可於 <a href="evidence/versions/">evidence/versions/</a> 逐字搜到。標「推論」者為解讀，非文件明文。</p>
+  <p>引文全部取自 <a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">Anthropic 官方發行說明</a>，可於 <a href="https://github.com/CeceFat/claude-sysprompt-study/tree/main/evidence/versions" rel="noopener">evidence/versions/</a> 逐字搜到。標「推論」者為解讀，非文件明文。</p>
 </footer>
 
 </main></div>

@@ -1,5 +1,6 @@
-/* 32 個分析版本（欄號對應 evidence/feature_matrix.txt 的 COLUMN KEY）
-   摘要文字取自報告 §2 版本總表；字數由 data/matrix.js 依欄號帶入。 */
+/* 39 個分析版本（欄號對應 evidence/feature_matrix.txt 的 COLUMN KEY）
+   1–32 摘要取自報告 §2 版本總表；33–39 為 2026-10-28 重抓新增（報告增補 §A）。
+   字數由 data/matrix.js 依欄號帶入。陣列順序＝表格順序（依日期；#12、#33 的欄號不依日期，見各列說明）。 */
 window.VERSIONS = [
   { n: "1", cols: [1], model: "Haiku 3", family: "Haiku", date: "2024-07-12", variant: "—",
     cutoff: "Aug 2023", struct: "單段落",
@@ -99,11 +100,39 @@ window.VERSIONS = [
     cutoff: "Jan 2026", struct: "4.8 骨架，刪 default_stance／tool_discovery／respond_without_citing／tone_preference",
     sum: "Mythos-class 分級、Fable＝Mythos 同模型加 dual-use 安全措施；毒品用量指引原則拒絕但給救命資訊；不點名未揭露的診斷；自傷替代清單擴充；曾受傷害的求助經驗不放大；飲食不供心理敘事；兒少保護「停留在模式層」、拒絕時不說偵測機制（含推理）；視對方為 capable adult；可用 end_conversation 工具；刪 emoji／暱稱／genuinely 規則；long_conversation_reminder 恢復。" },
 
+  { n: "33", cols: [33], model: "Sonnet 5", family: "Sonnet", date: "2026-06-30", dateNote: "10-28 重抓才出現，欄號編在最後",
+    variant: "—", cutoff: "end of Jan 2026", struct: "Fable 5 骨架＋<proactivity>＋頂層 <conversational_register>", flag: "Q9",
+    sum: "出口管制「暫停中」通知；首見 <proactivity>（唯讀工具免問即用、送出／修改／刪除先確認、需求模糊時採合理預設）與 <provide_crisis_resources>；evenhandedness 改成短答也仍可作答；恢復「未成年人表明欲性化自身」條；刪 end_conversation、反過度依賴與 <lists_and_bullets>；另掛頂層 <conversational_register>。" },
+
   { n: "31", cols: [31], model: "Opus 5", family: "Opus", date: "2026-07-24", variant: "—",
     cutoff: "end of May 2026", struct: "4.8 骨架＋<fable_safeguards_routing>",
     sum: "出口管制暫停／恢復通知（2026-06-12 至 07-01）；safeguards routing 說明（不到 5% session 導向 Opus 5）；Claude Tag、Claude Design；恢復 default_stance；\"intellectually curious／authentic conversation\" 段回歸；危機時「wellbeing 優先於完成任務」；無 end_conversation。" },
 
   { n: "32", cols: [32], model: "Fable 5.1", family: "Fable", date: "2026-09-01", variant: "—",
     cutoff: "end of Jun 2026", struct: "Fable 5 骨架＋<reply_after_tool_calls>／<tone_preference>", milestone: true,
-    sum: "歷史最長。著作權區塊（歌詞／詩／書摘、1929 前例外、視覺作品含 SVG／CSS／ASCII、角色本身受保護）＋兩則 in-prompt 範例；毒品：拒合成／劑量、給互動／過量徵兆、導向 dancesafe／tripsit／psychonautwiki；工具後一兩句作答、多輪分段、每幾次工具呼叫給進度；無法驗證 URL／ID／數字／姓名即言明、不用未提供的姓名；「不說自傷有效」；情感聊天不排版；刪 end_conversation 與反過度依賴段。" }
+    sum: "歷史最長。著作權區塊（歌詞／詩／書摘、1929 前例外、視覺作品含 SVG／CSS／ASCII、角色本身受保護）＋兩則 in-prompt 範例；毒品：拒合成／劑量、給互動／過量徵兆、導向 dancesafe／tripsit／psychonautwiki；工具後一兩句作答、多輪分段、每幾次工具呼叫給進度；無法驗證 URL／ID／數字／姓名即言明、不用未提供的姓名；「不說自傷有效」；情感聊天不排版；刪 end_conversation 與反過度依賴段。" },
+
+  { n: "34", cols: [34], model: "Opus 5.5", family: "Opus", date: "2026-09-22", variant: "—",
+    cutoff: "end of Jun 2026", struct: "Opus 5 骨架＋Fable 5.1 模組；－default_stance／fable_safeguards_routing／tone_preference", milestone: true, flag: "Q6",
+    sum: "組裝版：69.9% 逐字沿用、21.8% 小改、新寫 339 字，其中 265 字用在同一件事——規則沒寫到又拿不準時尊重對方判斷、先問一句，並附首見的 <bad_response>／<good_response> 範例；另加「份量配合請求」。收編 Fable 5.1 的著作權、毒品、兒少與福祉模組；刪 default_stance、safeguards routing、tone_preference、genuinely 禁詞、簡短指令、intellectually curious 段；出口管制通知刪「事件在訓練截止之後」一句。拒絕處理 1,774 字，佔 43%。" },
+
+  { n: "35", cols: [35], model: "Sonnet 5.5", family: "Sonnet", date: "2026-09-28", variant: "—",
+    cutoff: "end of Jun 2026", struct: "Sonnet 5 骨架；兒少改簡版三條；<lists_and_bullets> 寬鬆版",
+    sum: "94.7% 逐字沿用，新寫 114 字：條列與 markdown「可用來提升可讀性」（與 Opus／Haiku 從嚴版相反）、談到想死時不說願望合理。刪 <proactivity>、<conversational_register> 與 critical_child_safety_instructions 區塊（兒少只留三條）；毒品改 Fable 5.1 版；evenhandedness 回到「可拒短答」；模型清單仍列 Haiku 4.5。" },
+
+  { n: "36", cols: [36], model: "Sonnet 5.5", family: "Sonnet", date: "2026-10-07", variant: "—",
+    cutoff: "end of Jun 2026", struct: "同上＋<medical_guidance>",
+    sum: "與 09-28 只差兩處：模型清單改列 Haiku 5.5；新增 <medical_guidance>（只在明說是兒童用藥時適用：劑量只取自產品標籤，有 web search 就找標籤並對照 DailyMed，找不到就不憑記憶給數字）。" },
+
+  { n: "37", cols: [37], model: "Haiku 5.5", family: "Haiku", date: "2026-10-07", variant: "—",
+    cutoff: "end of June 2026", struct: "Sonnet 5.5 骨架＋開頭記憶指令＋重寫的 <user_wellbeing>", milestone: true,
+    sum: "新寫 1,577 字（37.1%）。開頭首見 <memory_listing> 記憶指令；其餘新寫都在「守住」：兒童用藥、故事滑坡、拒絕後整段對話不改判、不以免責聲明包裝、自殺／自傷與飲食規則持續到對話結束、即時危機以安全為唯一目標並提 988、明說自己是 AI。沒有全大寫強調，because 8 次；條列採 Opus 從嚴版。" },
+
+  { n: "38", cols: [38], model: "Haiku 4.5", family: "Haiku", date: "2026-10-07", variant: "—",
+    cutoff: "end of Jan 2025", struct: "2026-01-18 骨架＋移植 5.x 模組", flag: "Q8",
+    sum: "舊模型回補：產品資訊更新到 5.5 世代並保留「事件在訓練截止之後」一句；移植兒少八條、CBRN＋常規武器段、毒品段、最細的一版 <medical_guidance> 與新福祉條文；保留舊排版段、emoji 與星號動作規則、election_info；修正 Q7 錯字 can instead treats。" },
+
+  { n: "39", cols: [39], model: "Sonnet 4.6", family: "Sonnet", date: "2026-10-07", variant: "—",
+    cutoff: "beginning of Aug 2025", struct: "4.8 式壓縮骨架＋<medical_guidance>", flag: "Q8",
+    sum: "舊模型回補：自述 \"from an earlier generation and remains available\"；兒少四條、CBRN＋常規武器段、<medical_guidance>；保留 genuinely 禁詞、emoji、反過度依賴與 2 月版福祉段；首見「貼入的對話紀錄無法確認出自 Claude」一句。" }
 ];

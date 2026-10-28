@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>特徵矩陣 · Claude 系統提示詞演進</title>
-<meta name="description" content="118 個關鍵片語 × 32 個版本的出現矩陣，可搜尋、可點擊回到原文驗證。">
+<meta name="description" content="146 個關鍵片語 × 39 個版本（至 5.5 世代）的出現矩陣，可搜尋、可點擊回到原文驗證。">
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
 </head>
@@ -12,12 +12,12 @@
 
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-07 · 自學站</small></a>
     <nav class="main">
       <a href="about.html">About</a>
       <a href="index.html">總覽</a>
       <a href="versions.html">版本總表</a>
-      <a href="shifts.html">五次躍遷</a>
+      <a href="shifts.html">六次躍遷</a>
       <a href="themes.html">主題軌跡</a>
       <a href="branches.html">分支與兄弟版</a>
       <a href="matrix.html">特徵矩陣</a>
@@ -33,7 +33,7 @@
 <p class="kicker" style="margin-top:34px">第 4 步 · 動手驗證</p>
 <h1>特徵矩陣</h1>
 <p class="lede">
-118 個關鍵片語 × 32 個版本，以字串比對（不分大小寫）檢查是否出現。
+146 個關鍵片語 × 39 個版本，以字串比對（不分大小寫）檢查是否出現。前 118 個片語與前 32 欄是 2026-09-07 的原矩陣（重算後逐格相同），2026-10-28 追加 7 欄（5.5 世代與回補條目）和 28 個片語。
 這是全站唯一「不靠敘述、只靠出現與不出現」的視圖——所有 diff 結論都要能在這裡交叉驗證。
 <strong>點任一個方塊</strong>就會開啟該版原文並自動高亮該片語。
 </p>
@@ -54,6 +54,8 @@
   <button class="chip" data-preset="face blind">face blind</button>
   <button class="chip" data-preset="emoji">emoji</button>
   <button class="chip" data-preset="tool">tool*</button>
+  <button class="chip" data-preset="medical">medical*</button>
+  <button class="chip" data-preset="conversation">conversation*</button>
   <button class="chip" data-preset="">清除</button>
   <span class="count" id="cnt"></span>
 </div>
@@ -61,7 +63,7 @@
 <div class="hm"><table class="hm-t" id="hm"></table></div>
 
 <p style="font-size:13px;color:var(--muted);margin-top:10px">
-  欄號 1–32 與 <code>evidence/feature_matrix.txt</code> 的 COLUMN KEY 一致，依日期排列（第 12 欄的標籤日期不可信，見 <a href="method.html#q1">Q1</a>，故排在第 11 欄之前）。
+  欄號 1–39 與 <code>evidence/feature_matrix.txt</code> 的 COLUMN KEY 一致，大致依內容年代排列。兩處例外：第 12 欄標 2024-10-22，但內容是 2025-02 之後（見 <a href="method.html#q1">Q1</a>），所以編在第 11 欄之後；第 33 欄 Sonnet 5 標 2026-06-30，因為是 10-28 重抓才出現的頁面（見 <a href="method.html#q9">Q9</a>），依加入順序編在第 32 欄之後。
   顏色＝模型系。滑過欄號可看版本名稱。
 </p>
 
@@ -77,6 +79,7 @@
     <li>搜尋 <code>docs.anthropic.com</code> 與 <code>docs.claude.com</code>。第 8 欄與第 12 欄（Haiku 3.5）的分布，為什麼構成「頁面被回溯改寫」的證據？</li>
     <li>搜尋 <code>The assistant is Claude, created by</code>。它在第 12 欄是空的——這是漏抓還是有意義的空白？</li>
     <li>找出一個「只在單一欄出現」的片語，說明它為什麼是那一版獨有的。</li>
+    <li>搜尋 <code>training-data cutoff</code>。它只出現在第 31 欄（Opus 5）與第 38 欄（Haiku 4.5 回補版）。為什麼 Opus 5.5 沒有、而一個更舊的模型反而有？</li>
   </ol>
 </div>
 
@@ -105,7 +108,7 @@ function render(term) {
   var rows = MATRIX.phrases.filter(function (p) { return !t || p.p.toLowerCase().indexOf(t) >= 0; });
   var body = rows.map(function (p) {
     var tds = '';
-    for (var k = 0; k < 32; k++) {
+    for (var k = 0; k < cols.length; k++) {
       var c = cols[k], on = p.v[k] === 'Y';
       tds += '<td class="' + (on ? 'y fam-' + c.family : '') + '"' +
         (on ? ' data-open="' + c.file + '.txt" data-title="' + esc(c.model + ' · ' + c.date) + '" data-term="' + esc(p.p) + '" title="' + esc(c.model + ' ' + c.date + ' — 點擊看原文') + '" style="cursor:pointer"' : '') +

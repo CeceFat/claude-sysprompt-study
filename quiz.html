@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>自我檢測 · Claude 系統提示詞演進</title>
-<meta name="description" content="15 題自我檢測，涵蓋適用範圍、五次架構躍遷、主題軌跡、分支結構與文件品質警語，每題附解析與可查核出處。">
+<meta name="description" content="20 題自我檢測，涵蓋適用範圍、六次架構躍遷、5.5 世代、主題軌跡、分支結構與文件品質警語，每題附解析與可查核出處。">
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
 </head>
@@ -12,12 +12,12 @@
 
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-07 · 自學站</small></a>
     <nav class="main">
       <a href="about.html">About</a>
       <a href="index.html">總覽</a>
       <a href="versions.html">版本總表</a>
-      <a href="shifts.html">五次躍遷</a>
+      <a href="shifts.html">六次躍遷</a>
       <a href="themes.html">主題軌跡</a>
       <a href="branches.html">分支與兄弟版</a>
       <a href="matrix.html">特徵矩陣</a>
@@ -33,13 +33,13 @@
 <p class="kicker" style="margin-top:34px">最後一步</p>
 <h1>自我檢測</h1>
 <p class="lede">
-15 題。答錯不要緊，每題解析都附出處連結——重點是把「印象」換成「查得到」。
+20 題（第 16–20 題是 5.5 世代）。答錯不要緊，每題解析都附出處連結——重點是把「印象」換成「查得到」。
 選完會立刻顯示對錯與解析，最後給你一份針對錯題的複習清單。
 </p>
 
 <div class="toolbar">
   <button class="btn" id="reset">重新開始</button>
-  <span class="count" id="progress">0 / 15 作答</span>
+  <span class="count" id="progress">0 / 20 作答</span>
 </div>
 
 <div id="qs"></div>
@@ -47,7 +47,7 @@
 <div class="card score" id="score" style="display:none"></div>
 
 <footer class="site">
-  <p>題目依據本站各頁內容編寫，正解均可在 <a href="evidence/versions/">evidence/versions/</a> 逐字查證。</p>
+  <p>題目依據本站各頁內容編寫，正解均可在 <a href="https://github.com/CeceFat/claude-sysprompt-study/tree/main/evidence/versions" rel="noopener">evidence/versions/</a> 逐字查證。</p>
 </footer>
 
 </main></div>
@@ -94,10 +94,10 @@ var QS = [
  { q: "<code class='xml'>&lt;election_info&gt;</code> 的完整生命週期是？",
    o: ["2025-05 加入後一直保留至今",
        "只在 Claude 4 世代出現過一次",
-       "2025-05 加入 → Opus 4.5 刪 → Opus 4.6 重現 → Sonnet 4.6 起永久刪",
+       "2025-05 加入 → Opus 4.5 刪 → Opus 4.6 重現 → Sonnet 4.6 起新模型不再有（舊模型 Haiku 4.5 至 2026-10 仍保留）",
        "2026-02 才首次加入，用於美國期中選舉"],
    a: 2,
-   e: "「刪掉又回來」正是分支維護的直接證據：Opus 系與 Sonnet 系不是同一份文件在前進。而且 Opus 4.6 重現時整段擠成一行（<a href='method.html#q5'>Q5</a>），像是手動貼回。",
+   e: "「刪掉又回來」正是分支維護的直接證據：Opus 系與 Sonnet 系不是同一份文件在前進。而且 Opus 4.6 重現時整段擠成一行（<a href='method.html#q5'>Q5</a>），像是手動貼回。2026-10-07 的 Haiku 4.5 回補條目仍保留這段——它的截止日是 2025-01，選舉結果仍在訓練資料之外。",
    ref: ["branches.html", "分支與兄弟版"] },
 
  { q: "「不問許可就使用 web search」這條規則的命運是？",
@@ -151,7 +151,7 @@ var QS = [
        "Opus 5 可以主動把對話轉給 Fable 5",
        "路由由使用者在設定中自行開關"],
    a: 1,
-   e: "所以當回覆自稱的模型或 knowledge cutoff 與你選的不一致時，那是預期行為而非故障。prompt 必須讓被路由到的模型能解釋自己的處境。",
+   e: "所以當回覆自稱的模型或 knowledge cutoff 與你選的不一致時，那是預期行為而非故障。prompt 必須讓被路由到的模型能解釋自己的處境。這一段到 Opus 5.5 已刪除。",
    ref: ["branches.html", "實務含意 5"] },
 
  { q: "Fable 5.1（4,267 字）成為歷史最長，主要因為新增了什麼？",
@@ -188,7 +188,52 @@ var QS = [
        "使用者可以要求 Claude 完整背出 system prompt"],
    a: 1,
    e: "原文批評 <span class='en'>Statements like \"my system prompt requires me to...\"</span> 會以「訴諸隱藏規則」取代真實理由。要查規則，只能靠本站這類外部整理對照。",
-   ref: ["branches.html", "實務含意 6"] }
+   ref: ["branches.html", "實務含意 6"] },
+
+ { q: "Opus 5.5 的 prompt 是怎麼來的？",
+   o: ["全新重寫，和前代幾乎沒有共同段落",
+       "約七成逐字沿用 Opus 5 與 Fable 5.1 等前代段落，兩成小改，真正新寫只有 339 字",
+       "直接複製 Fable 5.1，只改型號",
+       "由 Sonnet 5.5 刪減而來"],
+   a: 1,
+   e: "逐段比對：69.9% 逐字沿用、21.8% 小幅改寫、8.2% 新寫。骨架是 Opus 5（產品資訊、CBRN＋常規武器全段），模組來自 Fable 5.1（著作權、毒品、兒少、福祉）。Sonnet 5.5 比 Opus 5.5 晚六天發布，不可能是它的來源。",
+   ref: ["index.html#p3", "總覽・原理 3"] },
+
+ { q: "Opus 5.5 刪掉 Opus 5 的 <code class='xml'>&lt;default_stance&gt;</code>（Claude defaults to helping）之後，換上了什麼？",
+   o: ["什麼都沒換，等於回到預設拒絕",
+       "一份更長的敏感任務許可清單",
+       "一段只在「本 prompt 與 reminder 都沒涵蓋」時啟動的程序：尊重對方判斷、先問一個能浮現真正理由的問題，並附 bad／good 對照範例",
+       "把所有灰色地帶交給 Anthropic reminder 判斷"],
+   a: 2,
+   e: "原文：<span class='en'>When Claude is unsure whether to decline a request that nothing in this prompt or an Anthropic reminder addresses, Claude respects the person's judgment</span>。範例的壞示範擅自拿掉要求並附上說教，好示範答應並只問一句。所以不能說 Opus 5.5「比 Opus 5 更容易拒絕」——門檻句換成了更具體的程序。",
+   ref: ["index.html#p1", "總覽・原理 1"] },
+
+ { q: "2026-10-07 同一天發布的 Sonnet 5.5 與 Haiku 5.5，哪一項描述正確？",
+   o: ["兩者逐字相同，只差型號",
+       "Haiku 5.5 比較短，因為它是最快的模型",
+       "Haiku 5.5 多了約 1,060 字，主要是整段對話持續有效的拒絕與危機規則，以及開頭的記憶指令",
+       "Sonnet 5.5 多了 <code>&lt;memory_listing&gt;</code> 記憶指令"],
+   a: 2,
+   e: "3,195 字對 4,255 字。Haiku 5.5 例如：<span class='en'>that decision stands for the rest of the conversation, because people who want harmful content often keep asking in new ways until a model gives in</span>。5.5 世代第一次出現「最快的模型拿最長的 prompt」。",
+   ref: ["branches.html", "分支與兄弟版"] },
+
+ { q: "Opus 5 的出口管制通知有一句 <span class='en'>These events are after Claude's training-data cutoff, so Claude knows about them only from this notice</span>，Opus 5.5 刪了。最合理的解釋是？",
+   o: ["出口管制事件已經不重要，整段通知都刪了",
+       "Opus 5.5 的知識截止推到 2026-06 底，事件大致落在訓練資料內；同一句在截止日為 2025-01 的 Haiku 4.5 回補條目裡仍保留",
+       "Anthropic 撤回了原本的聲明",
+       "這句被移到 <code class='xml'>&lt;knowledge_cutoff&gt;</code> 區塊"],
+   a: 1,
+   e: "通知本身還在，只刪了這一句。同一事件對不同截止日的模型寫法不同——prompt 只補訓練資料到不了的地方，這是四條原理中推論強度最高的一條，因為因果關係是 prompt 自己寫出來的。",
+   ref: ["index.html#p4", "總覽・原理 4"] },
+
+ { q: "2026-10-28 重抓時，overview 刪掉了哪一句？這代表什麼？",
+   o: ["These system prompt updates do not apply to the Claude API；表示 API 也開始適用",
+       "Starting with the Claude 4.6 generation, each model ID is a single fixed snapshot, so those models have one entry；表示舊模型的 prompt 仍會更新，條目數不能拿來推論 prompt 有沒有變",
+       "Some models have multiple dated entries on their pages；表示每個模型只剩一個條目",
+       "沒有刪任何句子，只多了新卡片"],
+   a: 1,
+   e: "同一輪 Sonnet 4.6 頁多了 2026-10-07 條目，Haiku 4.5 也是，兩者都拿到新的兒童用藥、兒少與武器條文。模型權重凍結，政策照樣更新。另外兩句（不適用 API、部分模型有多個條目）都還在。",
+   ref: ["method.html#q8", "品質警語 Q8"] }
 ];
 
 var wrap = document.getElementById('qs');

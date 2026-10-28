@@ -160,6 +160,7 @@ th { background: var(--bg-alt); font-size: 12.5px; letter-spacing: .03em; color:
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover { background: var(--bg-alt); }
 td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+td code { overflow-wrap: anywhere; }
 
 /* ---------- accordion ---------- */
 details.acc {
@@ -312,3 +313,24 @@ td .en, li .en { font-size: 14px; }
 .theme-toc { columns: 2; column-gap: 26px; font-size: 14.5px; margin: 16px 0 26px; }
 .theme-toc a { display: block; padding: 2px 0; break-inside: avoid; }
 @media (max-width: 620px) { .theme-toc { columns: 1; } }
+
+/* ---------- 5.5 世代解析（總覽頁首） ---------- */
+.sb-row { display: grid; grid-template-columns: 140px 1fr 70px; gap: 10px; align-items: center; margin: 7px 0; font-size: 13px; white-space: nowrap; }
+.sb-row .sb-num { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.sb { display: flex; height: 16px; border-radius: 4px; overflow: hidden; background: var(--line-soft); }
+.sb i { display: block; height: 100%; }
+.sb .v, .sw.v { background: color-mix(in srgb, var(--muted) 42%, transparent); }
+.sb .m, .sw.m { background: color-mix(in srgb, var(--accent) 38%, transparent); }
+.sb .n, .sw.n { background: var(--accent); }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 5px 0 12px; vertical-align: -1px; }
+.sw:first-child { margin-left: 0; }
+.pr { border-top: 1px solid var(--line); padding-top: 6px; margin-top: 26px; }
+.pr, h2[id], h3[id], details.acc { scroll-margin-top: 72px; }
+.pr h3 { font-size: 17px; margin: 2px 0 10px; }
+.pr .kicker { color: var(--accent-ink); }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.pair .q { margin: 0; }
+.pair .lab { font-size: 12px; font-weight: 600; color: var(--muted); margin: 0 0 4px; letter-spacing: .04em; }
+.pair .lab.del { color: var(--warn); }
+.pair .lab.add { color: var(--ok); }
+@media (max-width: 620px) { .sb-row { grid-template-columns: 112px 1fr 56px; font-size: 12px; } }

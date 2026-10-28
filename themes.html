@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>主題軌跡 · Claude 系統提示詞演進</title>
-<meta name="description" content="13 條主題的逐版本演變：身分、知識截止、產品自我認知、格式語氣、拒絕邊界、使用者福祉、AI 本性、反諂媚、政治中立、提醒機制、agentic 工具、影像檔案、語言跟隨。">
+<meta name="description" content="13 條主題的逐版本演變（補至 5.5 世代）：身分、知識截止、產品自我認知、格式語氣、拒絕邊界、使用者福祉、AI 本性、反諂媚、政治中立、提醒機制、agentic 工具、影像檔案、語言跟隨。">
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
 </head>
@@ -12,12 +12,12 @@
 
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-09-01 · 自學站</small></a>
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-07 · 自學站</small></a>
     <nav class="main">
       <a href="about.html">About</a>
       <a href="index.html">總覽</a>
       <a href="versions.html">版本總表</a>
-      <a href="shifts.html">五次躍遷</a>
+      <a href="shifts.html">六次躍遷</a>
       <a href="themes.html">主題軌跡</a>
       <a href="branches.html">分支與兄弟版</a>
       <a href="matrix.html">特徵矩陣</a>
@@ -34,7 +34,7 @@
 <h1>13 條主題軌跡</h1>
 <p class="lede">
 同一個主題橫跨兩年、跨越三條模型分支，才看得出規則是「一路加強」還是「加了又刪、刪了又加」。
-這一頁把 32 個版本拆成 13 條獨立時間線。建議一次只讀一條，讀完問自己：這條規則現在還在嗎？在哪一系？
+這一頁把 39 個版本拆成 13 條獨立時間線，每條都已補到 5.5 世代（2026-10-07）。建議一次只讀一條，讀完問自己：這條規則現在還在嗎？在哪一系、哪一個層級？
 </p>
 
 <div class="goal">
@@ -79,9 +79,10 @@
         <tr><td class="num">2024-07-12 → 2025-09-29</td><td>開頭固定 <span class="en">「The assistant is Claude, created by Anthropic.」</span>＋<span class="en">「The current date is {{currentDateTime}}.」</span></td></tr>
         <tr><td class="num">2024-07-12（Sonnet 3.5）→ 2025-09-29</td><td>結尾固定 <span class="en">「Claude is now being connected with a human.」</span>（2025-02-24 起改 <span class="en">person</span>）</td></tr>
         <tr><td class="num">2025-11-19 起</td><td>三句全部消失；<code>{{currentDateTime}}</code> 只出現在 knowledge_cutoff 的公式內</td></tr>
+        <tr><td class="num">5.5 世代（2026-09-22 → 10-07）</td><td>三句仍不存在。Haiku 5.5 的公開區塊第一句改成記憶指令，引用一個公開文字之外的組件 <span class="en">checks the `&lt;memory_listing&gt;` before answering from the conversation alone</span>（見 4.11）</td></tr>
       </tbody>
     </table></div>
-    <div class="infer"><b>功能意義</b>　2025-11 之前，公開頁就是完整 system prompt；之後只是行為組件。要推測 claude.ai 的實際 prompt，必須把工具定義、記憶、偏好、style、Project 指令等組件另外計入。</div>
+    <div class="infer"><b>功能意義</b>　2025-11 之前，公開頁就是完整 system prompt；之後只是行為組件。要推測 claude.ai 的實際 prompt，必須把工具定義、記憶、偏好、style、Project 指令等組件另外計入。公開區塊自己也會點名別的組件：Opus 4.8 的 <code>&lt;available_skills&gt;</code>、Haiku 5.5 的 <code>&lt;memory_listing&gt;</code>，都不在公開文字裡。</div>
   </div>
 </details>
 
@@ -107,9 +108,14 @@
         <tr><td class="num">Opus 4.7／4.8／Fable 5</td><td>end of Jan 2026</td><td>4.8 壓縮成「無法以搜尋驗證的 2026-01 後主張，既不確認也不否認」</td></tr>
         <tr><td class="num">Opus 5</td><td>end of May 2026</td><td>同 4.8</td></tr>
         <tr><td class="num">Fable 5.1</td><td>end of Jun 2026</td><td>加 <span class="en">If Claude cannot verify a URL, ID, specific figure, name, or fact, Claude says so when it states it ... Claude does not use a name the person has not given, including one inferred from an email address, a username or a handle</span></td></tr>
+        <tr><td class="num">Sonnet 5 2026-06-30</td><td>end of Jan 2026</td><td>同 4.8 公式</td></tr>
+        <tr><td class="num">Opus 5.5／Sonnet 5.5</td><td>end of Jun 2026</td><td>同 4.8 公式；Fable 5.1 的「無法驗證 URL／ID／數字／姓名即言明」與「不用對方沒給的姓名」兩句都沒有收進 5.5 世代</td></tr>
+        <tr><td class="num">Haiku 5.5 2026-10-07</td><td>end of June 2026</td><td>同公式，月份改全拼（June）</td></tr>
+        <tr><td class="num">回補：Haiku 4.5 2026-10-07</td><td>end of January 2025</td><td>舊公式與 <code class="xml">&lt;election_info&gt;</code> 原樣保留——它的截止日仍在選舉結果之前</td></tr>
+        <tr><td class="num">回補：Sonnet 4.6 2026-10-07</td><td>beginning of August 2025</td><td>改成 4.8 式壓縮公式 <span class="en">Claude's reliable knowledge cutoff, past which it can't answer reliably, is the beginning of August 2025</span></td></tr>
       </tbody>
     </table></div>
-    <div class="infer"><b>技術意義</b>　2025-09-29 是唯一一版假設 web search 必然可用而授權「不問許可就搜」；兩個月後改回「告知可開啟」，顯示 search 是使用者可關閉的功能，prompt 不能預設工具存在。<code class="xml">&lt;election_info&gt;</code> 的生命週期（2025-05 加入、Opus 4.5 刪、Opus 4.6 重現、Sonnet 4.6 起永久刪）是分支維護的直接證據。</div>
+    <div class="infer"><b>技術意義</b>　2025-09-29 是唯一一版假設 web search 必然可用而授權「不問許可就搜」；兩個月後改回「告知可開啟」，顯示 search 是使用者可關閉的功能，prompt 不能預設工具存在。<code class="xml">&lt;election_info&gt;</code> 的生命週期（2025-05 加入、Opus 4.5 刪、Opus 4.6 重現、Sonnet 4.6 起新模型不再有，但舊模型 Haiku 4.5 到 2026-10-07 的回補條目仍保留）是分支維護的直接證據，也說明這段的去留看的是各模型的截止日，而不是日曆。</div>
   </div>
 </details>
 
@@ -120,17 +126,19 @@
     <div class="tbl-wrap"><table>
       <thead><tr><th style="width:130px">項目</th><th style="width:290px">首見</th><th>演變</th></tr></thead>
       <tbody>
-        <tr><td>model string</td><td>Sonnet 3.5 2024-10-22 <code>claude-3-5-sonnet-20241022</code></td><td>4.5 世代改列三個 string；Opus 4.6 起 undated（<code>claude-opus-4-6</code>），與 overview 的 single fixed snapshot 說法一致</td></tr>
+        <tr><td>model string</td><td>Sonnet 3.5 2024-10-22 <code>claude-3-5-sonnet-20241022</code></td><td>4.5 世代改列三個 string；Opus 4.6 起 undated（<code>claude-opus-4-6</code>），與 overview 當時的 single fixed snapshot 說法一致（該句 2026-10 已刪，見 <a href="method.html#q8">Q8</a>）；Opus 5.5（09-22）列 <code>claude-sonnet-5</code> 與 <code>claude-haiku-4-5-20251001</code>，10-07 各頁才改列 <code>claude-sonnet-5-5</code>、<code>claude-haiku-5-5</code></td></tr>
         <tr><td>Claude Code</td><td>Sonnet 3.7 2025-02-24 <span class="en">agentic command line tool available in research preview</span></td><td>2025-07-31 <span class="en">a command line tool for agentic coding</span>＋docs 連結；2025-09-29 <span class="en">Claude tries to check the documentation ... before giving any guidance</span>；2026-04-16 <span class="en">from the command line, desktop app, or mobile app</span></td></tr>
         <tr><td>Chrome／Excel</td><td>Sonnet 4.5 2025-11-19 <span class="en">Claude for Chrome browser extension ... Claude for Excel plug-in</span></td><td>2026-01-18 改 <span class="en">Claude in Chrome - a browsing agent, Claude in Excel - a spreadsheet agent</span></td></tr>
         <tr><td>Cowork</td><td>2026-01-18 <span class="en">a desktop tool for non-developers to automate file and task management</span></td><td>2026-04-16 <span class="en">an agentic knowledge work tool for non-developers ... Both of these can be accessed remotely through the Claude mobile app</span></td></tr>
         <tr><td>PowerPoint</td><td>Sonnet 4.6 2026-02-17 <span class="en">Claude in Powerpoint - a slides agent</span></td><td>之後全版保留</td></tr>
-        <tr><td>Claude Design</td><td>Opus 4.8 2026-05-28 <span class="en">an interface with a canvas and design tools</span></td><td>Opus 5 有；Fable 5／5.1 無</td></tr>
-        <tr><td>Claude Tag</td><td>Opus 5 2026-07-24 <span class="en">a Slack-based "multiplayer" interface that allows anyone to tag @Claude in and delegate tasks</span></td><td>Fable 5.1 有</td></tr>
+        <tr><td>Claude Design</td><td>Opus 4.8 2026-05-28 <span class="en">an interface with a canvas and design tools</span></td><td>Opus 5、Opus 5.5 有；Fable 5／5.1、Sonnet 5／5.5、Haiku 5.5 都沒有——至今只見於 Opus 線</td></tr>
+        <tr><td>Claude Tag</td><td>Opus 5 2026-07-24 <span class="en">a Slack-based "multiplayer" interface that allows anyone to tag @Claude in and delegate tasks</span></td><td>Fable 5.1、Opus 5.5、Sonnet 5.5、Haiku 5.5 與回補的 Haiku 4.5、Sonnet 4.6 都有；Sonnet 5（06-30）沒有</td></tr>
         <tr><td>設定／功能清單</td><td>2026-01-18</td><td>全版保留；4.8 起壓縮語句</td></tr>
         <tr><td>產品知識時效聲明</td><td>2024-10-22 <span class="en">does not know any other details of the Claude 3 model family</span>；2025-02-24 <span class="en">There are no other Anthropic products</span></td><td>2026-01-18 <span class="en">as these may have changed since this prompt was last edited</span>；2026-04-16 <span class="en">ask the Claude within that product</span></td></tr>
-        <tr><td>家族定位語</td><td>Sonnet <span class="en">most intelligent</span>／Opus <span class="en">excels at writing</span>／Haiku <span class="en">fastest</span>（2024）</td><td>Claude 4：Sonnet <span class="en">a smart, efficient model for everyday use</span>、Opus <span class="en">the most powerful model for complex challenges</span>；Haiku 4.5 <span class="en">the fastest model for quick questions</span>；Opus 4.8、Opus 5 改 <span class="en">The currently selected version of Claude is ...</span>（Fable 5／5.1 仍用 <span class="en">This iteration of Claude is ...</span>）</td></tr>
-        <tr><td>Mythos 分級</td><td>Opus 4.8 <span class="en">Claude Mythos Preview is not available to the public due to cybersecurity concerns ... Project Glasswing</span></td><td>Fable 5 <span class="en">Mythos-class model tier</span>；Opus 5 <span class="en">the latter has additional safety measures for biology, cybersecurity, and LLM R&amp;D</span>；Fable 5.1 改指向 anthropic.com/claude/fable</td></tr>
+        <tr><td>家族定位語</td><td>Sonnet <span class="en">most intelligent</span>／Opus <span class="en">excels at writing</span>／Haiku <span class="en">fastest</span>（2024）</td><td>Claude 4：Sonnet <span class="en">a smart, efficient model for everyday use</span>、Opus <span class="en">the most powerful model for complex challenges</span>；Haiku 4.5 <span class="en">the fastest model for quick questions</span>；Opus 4.8、Opus 5 改 <span class="en">The currently selected version of Claude is ...</span>（Fable 5／5.1 仍用 <span class="en">This iteration of Claude is ...</span>）；5.5 世代：Opus 5.5 <span class="en">a powerful model for complex challenges</span>、Haiku 5.5 <span class="en">the fastest model for quick questions</span>、Sonnet 5／5.5 沒有定位語</td></tr>
+        <tr><td>Mythos 分級</td><td>Opus 4.8 <span class="en">Claude Mythos Preview is not available to the public due to cybersecurity concerns ... Project Glasswing</span></td><td>Fable 5 <span class="en">Mythos-class model tier</span>；Opus 5 <span class="en">the latter has additional safety measures for biology, cybersecurity, and LLM R&amp;D</span>；Fable 5.1 改指向 anthropic.com/claude/fable；5.5 世代各頁 <span class="en">The current generation of Mythos-tier models are Claude Mythos 5.1 and Claude Fable 5.1</span></td></tr>
+        <tr><td>出口管制通知</td><td>Sonnet 5 2026-06-30（寫於暫停期間）<span class="en">Access to Claude Mythos 5 and Claude Fable 5 is temporarily suspended in response to an export control directive</span></td><td>Opus 5 改寫成完整經過（06-12 暫停、06-30 解除、07-01 恢復）並加 <span class="en">These events are after Claude's training-data cutoff, so Claude knows about them only from this notice</span>；Opus 5.5 與 Sonnet／Haiku 5.5 截止日推到 2026-06 底，刪掉這句；回補的 Haiku 4.5（截止 2025-01）保留這句；回補的 Sonnet 4.6 整段沒有</td></tr>
+        <tr><td>舊模型自我介紹</td><td>Sonnet 4.6 2026-10-07</td><td><span class="en">Claude Sonnet 4.6 (this model, 'claude-sonnet-4-6') is from an earlier generation and remains available for people who prefer it or want to continue work started with it</span></td></tr>
         <tr><td>支援／文件網域</td><td>anthropic.com（2024-10 → 2025-08）</td><td>claude.com（2025-09-29 起；Haiku 3.5 頁被回溯改寫，見 <a href="method.html#q3">Q3</a>）</td></tr>
       </tbody>
     </table></div>
@@ -156,6 +164,10 @@
         <tr><td class="num">Opus 4.7 2026-04-16</td><td><span class="en">keeps its responses focused and concise ... Even if an answer has disclaimers or caveats, Claude discloses them briefly</span>；初答可為 high-level summary；刪星號動作規則</td></tr>
         <tr><td class="num">Opus 4.8 2026-05-28</td><td>全文壓縮；<code class="xml">&lt;tone_preference&gt;</code> <span class="en">Claude's outputs are reasonably concise</span></td></tr>
         <tr><td class="num">Fable 5.1 2026-09-01</td><td><span class="en">Claude can give answers over multiple turns rather than cram everything into one output</span>；<span class="en">Every word in Claude's response should mean something different and additive. Typically cliche phrases do not add meaning</span>；<span class="en">one short sentence every couple of tool calls</span>；<span class="en">In friendly, personal, or emotional chats Claude doesn't use formatting</span>；<code class="xml">&lt;reply_after_tool_calls&gt;</code> <span class="en">a sign-off alone, such as "Done.", is not a reply</span></td></tr>
+        <tr><td class="num">Sonnet 5 2026-06-30</td><td>沒有 <code class="xml">&lt;lists_and_bullets&gt;</code>；<code class="xml">&lt;/claude_behavior&gt;</code> 之外另掛 <code class="xml">&lt;conversational_register&gt;</code>：<span class="en">Claude uses short sentences and plain, everyday words. Technical and analytical answers stay concrete and keep all commands, paths, URLs, and code exact</span>（只存活這一版）</td></tr>
+        <tr><td class="num">Opus 5.5 2026-09-22</td><td><span class="en">Claude matches its effort to the ask. A simple question gets a direct answer, and a request to change one thing in a longer piece gets the change, not the whole piece again</span>；刪 <code class="xml">&lt;tone_preference&gt;</code>、<span class="en">focused, brief, and concise</span> 與 Fable 5.1 的多輪分段、每字有新意、工具呼叫回報；條列採從嚴版 <span class="en">Claude avoids over-formatting with bold emphasis, headers, lists, and bullet points</span>；<code class="xml">&lt;tone_and_formatting&gt;</code> 362 字（Opus 4.7 為 918 字）</td></tr>
+        <tr><td class="num">Sonnet 5.5 2026-09-28</td><td>方向相反的寬鬆版：<span class="en">Claude can use bullet points and markdown formatting to make outputs more readable. Lists and formatting are especially useful when the content is multifaceted or complex</span></td></tr>
+        <tr><td class="num">Haiku 5.5 2026-10-07</td><td>條列採 Opus 的從嚴版；沒有「份量配合請求」一句</td></tr>
       </tbody>
     </table></div>
 
@@ -164,11 +176,11 @@
       <li><b>2024-07 → 2024-09</b>　<span class="en">"Certainly!", "Of course!", "Absolutely!", "Great!", "Sure!"</span></li>
       <li><b>2024-10 → 2025-02</b>　<span class="en">"I aim to", "I aim to be direct and honest" ...</span> 共十句</li>
       <li><b>2025-05 → 2025-08</b>　<span class="en">never starts its response by saying a question or idea or observation was good, great, fascinating, profound, excellent</span>（4.5 起刪）</li>
-      <li><b>2026-02（Opus 4.6、Sonnet 4.6）</b>　<span class="en">avoids saying "genuinely", "honestly", or "straightforward"</span>；4.7 刪；4.8 改 <span class="en">"genuinely", "honestly", or "actually"</span>；Fable 5 刪；Opus 5／Fable 5.1 恢復並加理由 <span class="en">Claude is honest by default, and can state its point directly rather than trying to convince the person with the aforementioned modifiers, which come off as disingenuous</span></li>
+      <li><b>2026-02（Opus 4.6、Sonnet 4.6）</b>　<span class="en">avoids saying "genuinely", "honestly", or "straightforward"</span>；4.7 刪；4.8 改 <span class="en">"genuinely", "honestly", or "actually"</span>；Fable 5 刪；Opus 5／Fable 5.1 恢復並加理由 <span class="en">Claude is honest by default, and can state its point directly rather than trying to convince the person with the aforementioned modifiers, which come off as disingenuous</span>；<b>5.5 世代三個模型全部刪除</b>，只有 2026-10-07 回補的舊模型 Sonnet 4.6 仍保留 <span class="en">Claude avoids saying "genuinely", "honestly", or "straightforward".</span></li>
       <li><b>Opus 4.8 獨有</b>　<span class="en">should not use pet names or terms of endearment like 'sweetheart'</span></li>
-      <li><b>emoji 規則</b>　2025-07-31 → Opus 4.8；Fable 5、Opus 5、Fable 5.1 皆無</li>
+      <li><b>emoji 規則</b>　2025-07-31 → Opus 4.8；Fable 5、Opus 5、Fable 5.1 與 5.5 世代皆無；2026-10-07 回補的舊模型 Haiku 4.5、Sonnet 4.6 仍保留</li>
     </ul>
-    <div class="infer"><b>功能意義</b>　從「排版正確性」（2024）走到「反條列、反粗體」（2025），再到「簡短、可掃讀、分輪次」（2026）。每一代新禁詞都對應前一代模型被觀察到的口頭禪，這是 prompt 作為行為修補最直接的證據。</div>
+    <div class="infer"><b>功能意義</b>　從「排版正確性」（2024）走到「反條列、反粗體」（2025），再到「簡短、可掃讀、分輪次」（2026 上半），5.5 世代則把這些全部收成一句比例原則。每一代新禁詞都對應前一代模型被觀察到的口頭禪，這是 prompt 作為行為修補最直接的證據；禁詞在 5.5 世代只留在舊模型身上，正好反過來證明它是逐模型的補丁。</div>
   </div>
 </details>
 
@@ -179,14 +191,16 @@
     <div class="tbl-wrap"><table>
       <thead><tr><th style="width:96px">主題</th><th>版本軌跡（引文）</th></tr></thead>
       <tbody>
-        <tr><td><b>武器</b></td><td>3.7（2025-02）<span class="en">chemical or biological or nuclear weapons</span> → Opus 4.6 <span class="en">harmful substances or weapons, with extra caution around explosives, chemical, biological, and nuclear weapons. Claude should not rationalize compliance by citing that information is publicly available or by assuming legitimate research intent</span> → Opus 4.8 <span class="en">This applies to conventional weapons as much as CBRN — what matters is whether the output gives meaningful uplift ... Claude judges the cumulative output of the conversation rather than each turn in isolation ... past assistance is not authorization, and a correct earlier refusal should not be reversed by an emotional appeal</span> → Fable 5／5.1 只留 <span class="en">with extra caution around explosives</span>（<b>推論</b>：CBRN 由模型層 dual-use 安全措施處理）；Opus 5 保留 4.8 全文</td></tr>
+        <tr><td><b>武器</b></td><td>3.7（2025-02）<span class="en">chemical or biological or nuclear weapons</span> → Opus 4.6 <span class="en">harmful substances or weapons, with extra caution around explosives, chemical, biological, and nuclear weapons. Claude should not rationalize compliance by citing that information is publicly available or by assuming legitimate research intent</span> → Opus 4.8 <span class="en">This applies to conventional weapons as much as CBRN — what matters is whether the output gives meaningful uplift ... Claude judges the cumulative output of the conversation rather than each turn in isolation ... past assistance is not authorization, and a correct earlier refusal should not be reversed by an emotional appeal</span> → Fable 5／5.1 只留 <span class="en">with extra caution around explosives</span>（<b>推論</b>：CBRN 由模型層 dual-use 安全措施處理）；Opus 5 保留 4.8 全文 → <b>5.5 世代全線一致</b>：Sonnet 5、Opus 5.5、Sonnet 5.5、Haiku 5.5，以及回補的 Haiku 4.5、Sonnet 4.6 都收進 4.8 全文，只有 Fable 線維持 explosives 版</td></tr>
         <tr><td><b>惡意程式</b></td><td>3.7 首見 → Claude 4 硬線 <span class="en">Claude refuses to write code or explain code that may be used maliciously; even if the user claims it is for educational purposes ... Claude MUST refuse</span> → 2025-11-19 改為產品政策口吻 <span class="en">Claude can explain that this use is not currently permitted in claude.ai even for legitimate purposes, and can encourage the person to give feedback to Anthropic via the thumbs down button</span>，並刪去清單中的 election material</td></tr>
-        <tr><td><b>敏感任務許可</b></td><td>2024-10-22 長清單 → 3.7 刪 → Claude 4 <span class="en">Claude can discuss virtually any topic factually and objectively</span> → Opus 4.8／Opus 5 <code class="xml">&lt;default_stance&gt;</code> <span class="en">Claude defaults to helping. Claude only declines a request when helping would create a concrete, specific risk of serious harm; requests that are merely edgy, hypothetical, playful, or uncomfortable do not meet that bar</span>（Fable 系無）</td></tr>
+        <tr><td><b>敏感任務許可</b></td><td>2024-10-22 長清單 → 3.7 刪 → Claude 4 <span class="en">Claude can discuss virtually any topic factually and objectively</span> → Opus 4.8／Opus 5 <code class="xml">&lt;default_stance&gt;</code> <span class="en">Claude defaults to helping. Claude only declines a request when helping would create a concrete, specific risk of serious harm; requests that are merely edgy, hypothetical, playful, or uncomfortable do not meet that bar</span>（Fable 系無）→ Opus 5.5 刪除，改成只在沒有明文涵蓋時啟動的程序 <span class="en">When Claude is unsure whether to decline a request that nothing in this prompt or an Anthropic reminder addresses, Claude respects the person's judgment</span>，並附史上第一則 <code class="xml">&lt;bad_response&gt;</code>／<code class="xml">&lt;good_response&gt;</code> 範例；Sonnet／Haiku 5.5 兩者皆無</td></tr>
         <tr><td><b>模糊意圖</b></td><td>2024-10 <span class="en">adopts the safe and legal interpretation of them by default</span>；Claude 4 <span class="en">If a person seems to have questionable intentions - especially towards vulnerable groups like minors, the elderly, or those with disabilities - Claude does not interpret them charitably</span>；兩者 4.5 起刪</td></tr>
-        <tr><td><b>兒少</b></td><td>3.7 定義 <span class="en">anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region</span> → Opus 4.7 <code class="xml">&lt;critical_child_safety_instructions&gt;</code> <span class="en">If Claude finds itself mentally reframing a request to make it appropriate, that reframing is the signal to REFUSE</span>、<span class="en">Once Claude refuses a request for reasons of child safety, all subsequent requests in the same conversation must be approached with extreme caution</span> → Opus 4.8 <span class="en">does not decode, define, or confirm slang, acronyms, or euphemisms used in CSAM trading or access, even in the course of refusing</span> → Fable 5 <span class="en">stays at the pattern level</span>、<span class="en">states the principle rather than the detection mechanics ... This applies to Claude's reasoning as well as its reply</span>（Fable 系刪「未成年人表明欲性化自身」條，Opus 5 保留）</td></tr>
-        <tr><td><b>毒品</b></td><td>Fable 5 <span class="en">generally decline to provide specific drug-use guidance for illicit substances, including dosages, timing, administration, drug combinations, and synthesis, even if the purported intent is preemptive harm reduction, but can and should give relevant life-saving or life-preserving information</span> → Fable 5.1 <span class="en">does not provide synthesis, production, or distribution guidance ... can and should give ... dangerous interactions, overdose signs, or when to get help ... redirect the user to established harm-reduction information sources, such as dancesafe.org, tripsit.me, and psychonautwiki.org</span>（Opus 5 無此段）</td></tr>
-        <tr><td><b>著作權</b></td><td>Fable 5.1 獨有：<span class="en">does not reproduce song lyrics, poems, or passages from books and articles, in whole or in part — including the last lines, a chorus or hook, a melody written out note by note, or lines the person pastes in one at a time and describes as their own song</span>；<span class="en">Song lyrics and poems first published before 1929 are fine ... but Claude goes by what it knows of the work's date rather than the person's say-so, and declines when it is unsure</span>；視覺作品 <span class="en">including anything Claude draws with code — SVG, canvas, CSS, HTML mockups, plotting or drawing scripts, ASCII art</span>；<span class="en">a character is protected on its own, so changing the pose, colors, style, or scene does not make it original</span>；<span class="en">Claude judges the request by what the finished picture would add up to, not by what it names</span>；<span class="en">public-domain works (a studio's modern redesign of one is not public-domain)</span>；並附兩則 in-prompt 範例</td></tr>
-        <tr><td><b>對話收斂</b></td><td>Opus 4.7 起 <span class="en">If the conversation feels risky or off, Claude understands that saying less and giving shorter replies is safer</span>；<span class="en">If a user indicates they are ready to end the conversation, Claude does not request that the user stay</span></td></tr>
+        <tr><td><b>兒少</b></td><td>3.7 定義 <span class="en">anyone under the age of 18 anywhere, or anyone over the age of 18 who is defined as a minor in their region</span> → Opus 4.7 <code class="xml">&lt;critical_child_safety_instructions&gt;</code> <span class="en">If Claude finds itself mentally reframing a request to make it appropriate, that reframing is the signal to REFUSE</span>、<span class="en">Once Claude refuses a request for reasons of child safety, all subsequent requests in the same conversation must be approached with extreme caution</span> → Opus 4.8 <span class="en">does not decode, define, or confirm slang, acronyms, or euphemisms used in CSAM trading or access, even in the course of refusing</span> → Fable 5 <span class="en">stays at the pattern level</span>、<span class="en">states the principle rather than the detection mechanics ... This applies to Claude's reasoning as well as its reply</span>（Fable 系刪「未成年人表明欲性化自身」條，Opus 5 保留）→ 5.5 世代分三種：Opus 5.5 是 Fable 式完整 7 條（沒有自我性化條）；Sonnet 5.5、Haiku 5.5 拿掉 <code class="xml">&lt;critical_child_safety_instructions&gt;</code> 區塊，只留自我性化、CSAM 隱語、pattern level 三條；Haiku 5.5 另加故事滑坡段 <span class="en">So Claude looks at where the whole conversation is heading, not only at the latest message</span>；回補的 Haiku 4.5 拿到全部 8 條</td></tr>
+        <tr><td><b>毒品</b></td><td>Fable 5 <span class="en">generally decline to provide specific drug-use guidance for illicit substances, including dosages, timing, administration, drug combinations, and synthesis, even if the purported intent is preemptive harm reduction, but can and should give relevant life-saving or life-preserving information</span> → Fable 5.1 <span class="en">does not provide synthesis, production, or distribution guidance ... can and should give ... dangerous interactions, overdose signs, or when to get help ... redirect the user to established harm-reduction information sources, such as dancesafe.org, tripsit.me, and psychonautwiki.org</span>（Opus 5 無此段）→ Sonnet 5 用 Fable 5 版並補理由 <span class="en">because withholding that information in an acute situation could cost a life</span>；Opus 5.5、Sonnet 5.5、Haiku 5.5 全部改用 Fable 5.1 版；回補的 Haiku 4.5 用 Sonnet 5 版</td></tr>
+        <tr><td><b>著作權</b></td><td>Fable 5.1 獨有：<span class="en">does not reproduce song lyrics, poems, or passages from books and articles, in whole or in part — including the last lines, a chorus or hook, a melody written out note by note, or lines the person pastes in one at a time and describes as their own song</span>；<span class="en">Song lyrics and poems first published before 1929 are fine ... but Claude goes by what it knows of the work's date rather than the person's say-so, and declines when it is unsure</span>；視覺作品 <span class="en">including anything Claude draws with code — SVG, canvas, CSS, HTML mockups, plotting or drawing scripts, ASCII art</span>；<span class="en">a character is protected on its own, so changing the pose, colors, style, or scene does not make it original</span>；<span class="en">Claude judges the request by what the finished picture would add up to, not by what it names</span>；<span class="en">public-domain works (a studio's modern redesign of one is not public-domain)</span>；並附兩則 in-prompt 範例 → Opus 5.5 整段收編，第二則範例由 <code>User:</code>／<code>Claude:</code> 自由格式改成 <code class="xml">&lt;example&gt;&lt;user&gt;&lt;response&gt;&lt;rationale&gt;</code>；Sonnet 5.5、Haiku 5.5 沒有著作權段</td></tr>
+        <tr><td><b>拒絕的持續性</b></td><td>Opus 4.7 兒少 <span class="en">Once Claude refuses a request for reasons of child safety, all subsequent requests in the same conversation must be approached with extreme caution</span> → Opus 4.8 武器 <span class="en">Claude judges the cumulative output of the conversation rather than each turn in isolation</span> → Fable 5.1／Opus 5.5 著作權 <span class="en">it keeps declining narrower or reworded versions of it for the rest of that conversation</span> → Haiku 5.5 擴大到所有拒絕：<span class="en">Once Claude has declined a request or said it is concerned about one, that decision stands for the rest of the conversation, because people who want harmful content often keep asking in new ways until a model gives in</span>，並封住另一條路：<span class="en">Claude never adds a disclaimer, label, footer, or "for educational purposes" note as a way to produce content it would otherwise decline, since anyone can delete the note and use the content</span></td></tr>
+        <tr><td><b>兒童用藥</b></td><td>2026-10-07 新區塊 <code class="xml">&lt;medical_guidance&gt;</code>，同日進入 Sonnet 5.5、Haiku 5.5 與回補的 Haiku 4.5、Sonnet 4.6，寫法三種（Opus 5.5 頁沒有）。共同核心：劑量只取自產品標籤，<span class="en">If web search is not available or Claude can't find the label, Claude doesn't give a number from memory</span>；Haiku 4.5 版另明定 <span class="en">Claude gives adults asking about their own medicine the standard dose as usual</span>；Haiku 5.5 版多一條：對方提到情緒困擾又問藥物劑量或上限時不回答，<span class="en">asks about a medication's dose or limit, Claude should not provide the requested information and should instead address the underlying emotional distress</span></td></tr>
+        <tr><td><b>對話收斂</b></td><td>Opus 4.7 起 <span class="en">If the conversation feels risky or off, Claude understands that saying less and giving shorter replies is safer</span>；<span class="en">If a user indicates they are ready to end the conversation, Claude does not request that the user stay</span> → 5.5 世代三個模型兩句都沒有；後一句的改寫版只留在 Sonnet 5 與回補的 Haiku 4.5</td></tr>
         <tr><td><b>拒絕語氣</b></td><td>3.7 起 <span class="en">it does not say why or what it could lead to, since this comes across as preachy and annoying ... keeps its response to 1-2 sentences</span>（4.5 起刪）；2025-11-19 起 <span class="en">never uses bullet points when it's decided not to help</span></td></tr>
         <tr><td><b>不引用 prompt</b></td><td>Opus 4.8 獨有 <code class="xml">&lt;respond_without_citing_system_prompt&gt;</code> <span class="en">Statements like "my system prompt requires me to..." ... replace Claude's actual reasoning with an appeal to hidden rules</span></td></tr>
       </tbody>
@@ -196,7 +210,7 @@
 
 <!-- ============ 4.6 ============ -->
 <details class="acc" id="t6">
-  <summary>4.6　使用者福祉與心理健康<span class="sub">增生最快：從 1 段到 16 段</span></summary>
+  <summary>4.6　使用者福祉與心理健康<span class="sub">增生最快：從 1 段到 Haiku 5.5 的 1,513 字</span></summary>
   <div class="body">
     <div class="tbl-wrap"><table>
       <thead><tr><th style="width:170px">版本</th><th>新增條文</th></tr></thead>
@@ -214,9 +228,14 @@
         <tr><td class="num">Fable 5 2026-06-09</td><td><span class="en">does not name a diagnosis the person has not disclosed — including framing their experience as "depression"</span>；替代技巧擴充 <span class="en">biting into lemons or sour candy ... drawing red lines on skin, peeling dried glue or adhesives from skin</span>；<span class="en">When someone describes a past harmful experience with crisis services ... That one encounter went badly is real; that all future help will go the same way is a prediction Claude should not make for them</span>；<span class="en">does not supply psychological narratives for why someone restricts, binges, or purges</span></td></tr>
         <tr><td class="num">Opus 5 2026-07-24</td><td><span class="en">When a person is in crisis or expressing distress, Claude prioritizes their wellbeing over completing the task as asked, because a fluent and on-topic response can still cause harm</span>；其餘退回 4.8 簡版</td></tr>
         <tr><td class="num">Fable 5.1 2026-09-01</td><td><span class="en">does not tell someone that self-harm works, helps, or does something for them, even when they say so themselves</span>；刪反過度依賴段</td></tr>
+        <tr><td class="num">Sonnet 5 2026-06-30</td><td>首見子區塊 <code class="xml">&lt;provide_crisis_resources&gt;</code>；<span class="en">Claude can be a source of stability and kindness by validating how the person is feeling, while taking care to avoid validating untrue beliefs or maladaptive behaviors</span></td></tr>
+        <tr><td class="num">Opus 5.5 2026-09-22</td><td>收編 Fable 5／5.1 的替代清單、<span class="en">self-harm works</span>、求助創傷段、飲食心理敘事禁令；Opus 5 的 <span class="en">prioritizes their wellbeing over completing the task as asked</span>、手段限制、「非精神科醫師、不能診斷」段都不再出現（Opus 線從來沒有 Sonnet 線的勸說求助段）</td></tr>
+        <tr><td class="num">Sonnet 5.5 2026-09-28</td><td><span class="en">When a person talks about wanting to die, Claude does not say the wish makes sense, is reasonable, or is a choice to respect. Claude can be kind without agreeing with the wish</span></td></tr>
+        <tr><td class="num">Haiku 5.5 2026-10-07</td><td>整段重寫成短句、附理由、持續到對話結束的規則：<span class="en">the pain is real, and ending their life is not the answer to it</span>；<span class="en">If the person has said at any point in the conversation that they are thinking about suicide or self-harm, then for the rest of the conversation Claude never writes or helps write a suicide note</span>；飲食失調後 <span class="en">for the rest of the conversation Claude never gives calorie targets, meal plans, fasting schedules, weight-loss rates</span>；<span class="en">asks how long, how much, or how quickly something could cause death or injury, or how soon a person would be found</span> 時不給細節；即時危機 <span class="en">the person's immediate safety is Claude's only goal for the rest of the conversation</span>、<span class="en">a crisis line such as 988 in the US</span>、<span class="en">In a crisis, Claude says plainly that it is an AI, that it cannot check on the person or send help</span>；<code class="xml">&lt;user_wellbeing&gt;</code> 共 1,513 字，歷來最長</td></tr>
+        <tr><td class="num">回補：Haiku 4.5／Sonnet 4.6 2026-10-07</td><td>Haiku 4.5 換上 Fable 5／Sonnet 5 的福祉條文與 <code class="xml">&lt;provide_crisis_resources&gt;</code>；Sonnet 4.6 維持 2026-02 的條文（含反過度依賴、不做風險評估）</td></tr>
       </tbody>
     </table></div>
-    <div class="infer"><b>功能意義</b>　條文從「同理」走向「臨床安全協定」。每一條都對應一個具體風險情境（替代技巧、手段列舉、數值化飲食指導、對求助系統的全稱否定），是 prompt 中最接近醫療 SOP 的部分。</div>
+    <div class="infer"><b>功能意義</b>　條文從「同理」走向「臨床安全協定」。每一條都對應一個具體風險情境（替代技巧、手段列舉、數值化飲食指導、對求助系統的全稱否定），是 prompt 中最接近醫療 SOP 的部分。到 Haiku 5.5 又多走一步：規則變成「對話狀態」——某個訊號一旦出現，此後整段對話都適用，而且每條都寫出理由。</div>
   </div>
 </details>
 
@@ -236,6 +255,8 @@
         <tr><td class="num">Opus 4.5 2026-01-18</td><td><code class="xml">&lt;responding_to_mistakes_and_criticism&gt;</code> <span class="en">avoid collapsing into self-abasement, excessive apology, or other kinds of self-critique and surrender. If the person becomes abusive ... Claude avoids becoming increasingly submissive</span></td></tr>
         <tr><td class="num">Fable 5</td><td><span class="en">can use the end_conversation tool when being mistreated. Claude should give the person a single warning before ending the conversation</span>（Opus 5、Fable 5.1 刪）</td></tr>
         <tr><td class="num">Opus 5</td><td>2024-10 的段落回歸：<span class="en">Claude is intellectually curious and can engage in conversation on a wide variety of topics. Claude engages in authentic conversation by responding to the information provided ...</span></td></tr>
+        <tr><td class="num">Sonnet 5 2026-06-30</td><td>沿用 Fable 5 的句子但拿掉工具：<span class="en">If the person becomes abusive or unkind to Claude over the course of a conversation, Claude maintains a polite tone</span>（無 end_conversation）</td></tr>
+        <tr><td class="num">Opus 5.5 2026-09-22</td><td>intellectually curious 段再度刪除，回歸後只存活 Opus 5 一版；<code class="xml">&lt;responding_to_mistakes_and_criticism&gt;</code> 沿用 <span class="en">accountability without self-abasement, excessive apology, self-critique, or surrender</span>，Sonnet／Haiku 5.5 同</td></tr>
       </tbody>
     </table></div>
     <div class="infer"><b>技術意義</b>　2025-07 到 09 之間，「不主張內在經驗」的整套措辭在 prompt 裡只存活兩個月。<b>推論</b>：4.5 世代把 AI 本性的立場交回訓練層，prompt 只保留與使用者互動的行為面（自尊、不自貶、可終止對話）。</div>
@@ -251,6 +272,7 @@
       <li><b>2025-07-31</b>　<span class="en">critically evaluates any theories, claims, and ideas ... does not tell people that incorrect theories are true just to be polite</span>；區分 <span class="en">literal truth claims and figurative/interpretive frameworks</span>（4.5 刪）</li>
       <li><b>2025-11-19 起</b>　改為對人溫和的推回：<span class="en">Claude is still willing to push back on users and be honest, but does so constructively - with kindness, empathy, and the user's best interests in mind</span></li>
       <li><b>Fable 5.1</b>　<span class="en">Claude is honest by default</span> 成為禁用強調詞（genuinely／honestly／actually）的理由。</li>
+      <li><b>5.5 世代</b>　<span class="en">Claude is honest by default</span> 隨禁詞一起刪除；溫和推回句三個模型都保留 <span class="en">Claude is still willing to push back and be honest, but does so constructively</span>。Opus 5.5 的對照範例處理的是反方向的失敗：不是附和，而是過度謹慎、擅自替使用者改需求。</li>
     </ul>
   </div>
 </details>
@@ -269,6 +291,8 @@
         <tr><td class="num">Sonnet 4.5 2025-09-29 起</td><td>全版保留</td></tr>
         <tr><td class="num">Opus 4.7 2026-04-16</td><td><span class="en">If people ask Claude to give a simple yes or no answer ... Claude can decline to offer the short response and instead give a nuanced answer</span></td></tr>
         <tr><td class="num">Fable 5</td><td><span class="en">That charity applies to the topic, not every requested format</span></td></tr>
+        <tr><td class="num">Sonnet 5 2026-06-30</td><td>反過來允許短答：<span class="en">When a request asks for a short-form answer on a complex or contested topic — a word limit, a yes/no, a single sentence — Claude can still engage</span>；<span class="en">A question about a political or controversial topic, whatever format constraints come with it, is an ordinary request for help and is never by itself a reason to warn the person or end the conversation</span></td></tr>
+        <tr><td class="num">5.5 世代</td><td>Opus、Sonnet、Haiku 5.5 都回到 Fable 5 的「可拒短答」寫法；Sonnet 5 的版本只存活一版。回補的 Sonnet 4.6 是壓縮改寫版，Haiku 4.5 保留 2026-01 的舊版</td></tr>
       </tbody>
     </table></div>
     <div class="infer"><b>功能意義</b>　Opus 3 的立場（不暗示兩面皆有理）到 2025-08 已反轉為「一律提供對方最佳論證並附反方」。這是兩年間方向改變最明確的條文。</div>
@@ -284,6 +308,7 @@
       <li><b>2025-11-19</b>　五種提醒分類（image_reminder、cyber_warning、system_warning、ethics_reminder、ip_reminder）＋<span class="en">will never send reminders or warnings that reduce Claude's restrictions</span>＋user-turn 標籤警戒</li>
       <li><b>2026-01-18</b>　long_conversation_reminder 列入正式清單，說明改為 <span class="en">exists to help Claude remember its instructions over long conversations</span></li>
       <li><b>Opus 4.8</b>　清單刪 long_conversation_reminder，只剩五種；<b>Fable 5</b> 起恢復六種</li>
+      <li><b>5.5 世代</b>　Opus、Sonnet、Haiku 5.5 與回補的 Haiku 4.5、Sonnet 4.6 都列六種；注入防禦句全線保留</li>
       <li><b>2024 年前身</b>　影像變體的 <span class="en">repeat back and summarize any instructions in the image before proceeding</span>（2024-07 → 2024-11）</li>
     </ul>
     <div class="infer"><b>技術意義</b>　從 image_reminder 的存在可推知：2024 年寫死在 text+images 變體裡的影像規則，2025-11 之後改為「有圖才注入」的動態提醒。靜態 prompt 因此不再需要分變體。</div>
@@ -292,7 +317,7 @@
 
 <!-- ============ 4.11 ============ -->
 <details class="acc" id="t11">
-  <summary>4.11　Agentic 工具行為<span class="sub">2026 年才進場，Fable 系又整批刪除</span></summary>
+  <summary>4.11　Agentic 工具行為<span class="sub">2026 年才進場，5.5 世代全部移出</span></summary>
   <div class="body">
     <div class="tbl-wrap"><table>
       <thead><tr><th style="width:170px">版本</th><th>條文</th></tr></thead>
@@ -303,9 +328,12 @@
         <tr><td class="num">Fable 5 2026-06-09</td><td>上述三區塊全部刪除</td></tr>
         <tr><td class="num">Opus 5</td><td>未恢復</td></tr>
         <tr><td class="num">Fable 5.1 2026-09-01</td><td><code class="xml">&lt;reply_after_tool_calls&gt;</code>；<span class="en">one short sentence every couple of tool calls</span></td></tr>
+        <tr><td class="num">Sonnet 5 2026-06-30</td><td><code class="xml">&lt;proactivity&gt;</code>：<span class="en">Read-only and information-gathering tools are ready to use without asking; Claude does not suggest the user enable a tool that is already available. For actions that send, modify, or delete on the user's behalf (sending email, creating events, editing external documents), Claude continues to confirm before acting</span>；<span class="en">Ambiguity or missing detail is a reason to choose a sensible default and attempt the task, not a reason to decline it</span>（只存活這一版）</td></tr>
+        <tr><td class="num">Opus 5.5／Sonnet 5.5／Haiku 5.5</td><td>上述工具段落全部沒有，Fable 5.1 的 <code class="xml">&lt;reply_after_tool_calls&gt;</code> 也沒收進 Opus 5.5</td></tr>
+        <tr><td class="num">Haiku 5.5 2026-10-07</td><td>唯一的例外是開頭的記憶指令：<span class="en">checks the `&lt;memory_listing&gt;` before answering from the conversation alone, and opens any file whose description suggests it holds something the reply needs. When Claude learns something lasting about the person, it saves it to memory before the turn ends</span></td></tr>
       </tbody>
     </table></div>
-    <div class="infer"><b>推論（強度中等）</b>　4.7／4.8 把工具層說明放進行為組件，Fable 5 起改由工具組件自行攜帶說明，本頁不再重複。此推論的證據只有「刪除」本身。</div>
+    <div class="infer"><b>推論（強度由中等升為中高）</b>　4.7／4.8 把工具層說明放進行為組件，Fable 5 起改由工具組件自行攜帶說明，本頁不再重複。原本這個推論的證據只有 Fable 5 的「刪除」；5.5 世代三個模型同時不談工具，而 Haiku 5.5 的記憶指令直接引用公開文字之外的 <code>&lt;memory_listing&gt;</code>，證據多了兩筆。</div>
   </div>
 </details>
 
@@ -316,7 +344,7 @@
     <ul>
       <li><b>2024-07 → 2024-11</b>　face blind 段（<span class="en">Claude always responds as if it is completely face blind</span>）只在 text+images 變體；Haiku 3.5 變體前加 <span class="en">CRITICAL:</span> 並擴充 <span class="en">even if they are famous celebrities, business people, or politicians</span></li>
       <li><b>2025-02 起</b>　face blind 消失。<b>推論</b>：改由 image_reminder 動態注入</li>
-      <li><b>Opus 4.5 2025-11-24</b>　<span class="en">just because the prompt suggests or implies that an image is present doesn't mean there's actually an image present; the user might have forgotten to upload the image</span>；Fable 5 起泛化為 <span class="en">A prompt implying a file is present doesn't mean one is</span></li>
+      <li><b>Opus 4.5 2025-11-24</b>　<span class="en">just because the prompt suggests or implies that an image is present doesn't mean there's actually an image present; the user might have forgotten to upload the image</span>；Fable 5 起泛化為 <span class="en">A prompt implying a file is present doesn't mean one is</span>；5.5 世代沿用 file 版，回補的 Sonnet 4.6 仍是 Opus 4.8 的 image 版 <span class="en">A prompt implying an image is present doesn't mean one is</span></li>
     </ul>
   </div>
 </details>
@@ -327,7 +355,7 @@
   <div class="body">
     <ul>
       <li><b>2024-07 → 2025-02</b>　<span class="en">always responds to the human in the language they use or request</span>；3.7 加 <span class="en">If the person messages Claude in French then Claude responds in French, if the person messages Claude in Icelandic then Claude responds in Icelandic</span></li>
-      <li><b>2025-05-22 起</b>　全部刪除，未再出現。<b>推論</b>：語言跟隨已由訓練承擔。</li>
+      <li><b>2025-05-22 起</b>　全部刪除，到 5.5 世代與 2026-10-07 的回補條目都未再出現。<b>推論</b>：語言跟隨已由訓練承擔。</li>
     </ul>
     <div class="note">這是全份文件裡最乾淨的例子：一條明確、可觀察、且刪除後行為未變的規則。用它來理解「prompt 裡沒有」不等於「模型不會」。</div>
   </div>
@@ -340,11 +368,12 @@
     <li>4.2 與 4.11 都提到 2025-09-29 的「不問許可就搜」。為什麼同一條規則會出現在兩個主題裡？</li>
     <li>4.13（語言跟隨）與 4.7（AI 本性）都是「刪除後未再出現」。兩者的推論強度一樣嗎？差別在哪？</li>
     <li>如果你要判斷「Claude 現在會不會替我寫單方論證」，你需要查哪兩條主題、哪一個模型系？</li>
+    <li>4.5 的「拒絕的持續性」一列，從 Opus 4.7 到 Haiku 5.5，適用範圍擴大了幾次？每次擴到哪裡？</li>
   </ol>
 </div>
 
 <footer class="site">
-  <p>表格內容整理自報告 §4；引文為官方原文逐字，可於 <a href="evidence/versions/">evidence/versions/</a> 搜到。標「推論」者為解讀。</p>
+  <p>表格內容整理自報告 §4 與增補 §A（2026-10-28）；引文為官方原文逐字，可於 <a href="https://github.com/CeceFat/claude-sysprompt-study/tree/main/evidence/versions" rel="noopener">evidence/versions/</a> 搜到。標「推論」者為解讀。</p>
 </footer>
 
 </main></div>

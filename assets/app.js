@@ -83,7 +83,8 @@
     var body = reader.querySelector("[data-r-body]");
     if (!term) { body.textContent = rawText; return; }
     var safe = esc(rawText);
-    var re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+    /* 原文已跳脫，搜尋詞也要用同一套跳脫，含撇號、引號、<> 的詞才比得到 */
+    var re = new RegExp(esc(term).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
     body.innerHTML = safe.replace(re, function (m) { return "<mark>" + m + "</mark>"; });
     var first = body.querySelector("mark");
     if (first) first.scrollIntoView({ block: "center" });
