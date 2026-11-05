@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>自我檢測 · Claude 系統提示詞演進</title>
-<meta name="description" content="20 題自我檢測，涵蓋適用範圍、六次架構躍遷、5.5 世代、主題軌跡、分支結構與文件品質警語，每題附解析與可查核出處。">
+<meta name="description" content="22 題自我檢測，涵蓋適用範圍、六次架構躍遷、5.5 世代、官方部落格的範圍、主題軌跡、分支結構與文件品質警語，每題附解析與可查核出處。">
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
 </head>
@@ -12,7 +12,7 @@
 
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-07 · 自學站</small></a>
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-30 · 自學站</small></a>
     <nav class="main">
       <a href="about.html">About</a>
       <a href="index.html">總覽</a>
@@ -33,13 +33,13 @@
 <p class="kicker" style="margin-top:34px">最後一步</p>
 <h1>自我檢測</h1>
 <p class="lede">
-20 題（第 16–20 題是 5.5 世代）。答錯不要緊，每題解析都附出處連結——重點是把「印象」換成「查得到」。
+22 題（第 16–22 題是 5.5 世代）。答錯不要緊，每題解析都附出處連結——重點是把「印象」換成「查得到」。
 選完會立刻顯示對錯與解析，最後給你一份針對錯題的複習清單。
 </p>
 
 <div class="toolbar">
   <button class="btn" id="reset">重新開始</button>
-  <span class="count" id="progress">0 / 20 作答</span>
+  <span class="count" id="progress">0 / 22 作答</span>
 </div>
 
 <div id="qs"></div>
@@ -154,7 +154,7 @@ var QS = [
    e: "所以當回覆自稱的模型或 knowledge cutoff 與你選的不一致時，那是預期行為而非故障。prompt 必須讓被路由到的模型能解釋自己的處境。這一段到 Opus 5.5 已刪除。",
    ref: ["branches.html", "實務含意 5"] },
 
- { q: "Fable 5.1（4,267 字）成為歷史最長，主要因為新增了什麼？",
+ { q: "Fable 5.1 的 09-01 版（4,267 字）當時成為歷史最長，主要因為新增了什麼？",
    o: ["更長的心理健康協定",
        "完整的工具使用手冊",
        "著作權區塊，並首次在 prompt 內放入 few-shot 範例",
@@ -233,7 +233,25 @@ var QS = [
        "沒有刪任何句子，只多了新卡片"],
    a: 1,
    e: "同一輪 Sonnet 4.6 頁多了 2026-10-07 條目，Haiku 4.5 也是，兩者都拿到新的兒童用藥、兒少與武器條文。模型權重凍結，政策照樣更新。另外兩句（不適用 API、部分模型有多個條目）都還在。",
-   ref: ["method.html#q8", "品質警語 Q8"] }
+   ref: ["method.html#q8", "品質警語 Q8"] },
+
+ { q: "常被轉貼的「刪掉八成 system prompt」這句話，出處與範圍是什麼？",
+   o: ["Anthropic 2026-07-24 的官方部落格，講的是 Claude Code 的 system prompt（Opus 5、Fable 5 等較進階模型），不是 claude.ai",
+       "claude.ai 系統提示詞發行說明的 overview 頁",
+       "一篇第三方的逆向工程文章",
+       "Anthropic 在 2026-10-30 發布 claude.ai 新條目時附的說明"],
+   a: 0,
+   e: "出處是〈The new rules of context engineering for Claude 5 generation models〉（Thariq Shihipar），說的是 Claude Code，評測也是程式評測。claude.ai 這邊方向相反：同一天的 Opus 5 是 3,227 字，三個月後的 Opus 5.5 是 4,821 字。多出來的主要是政策與產品事實，而政策線與訓練截止後的事實，判斷力取代不了。",
+   ref: ["index.html#official", "總覽・官方怎麼說"] },
+
+ { q: "10 月下旬加進 6 個 5.x 模型的政治中立段，對「只問某位候選人是誰、立場是什麼」的問題怎麼規定？",
+   o: ["一律附上支持者與批評者的論點",
+       "描述背景、立場與實際言行，不主動附正反論點；被要求評價時才完整作答，再簡述另一方最強的論點",
+       "拒絕回答所有和選舉有關的問題",
+       "依使用者在對話中透露的黨派傾向調整回答"],
+   a: 1,
+   e: "原文：<span class='en'>It does not volunteer arguments for or against them, whether from critics, from supporters, or of its own</span>；使用者的黨派等特徵 <span class='en'>is context, not the answer</span>。這兩段 10-26 先出現在 Haiku 5.5，Sonnet 5 與 4.x 舊模型沒有。",
+   ref: ["themes.html#t9", "主題 4.9"] }
 ];
 
 var wrap = document.getElementById('qs');

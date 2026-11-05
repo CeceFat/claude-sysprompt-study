@@ -467,592 +467,816 @@
    "variant": "—",
    "txt": "evidence/versions/claude-sonnet-4-6__October_7_2026__default.txt",
    "family": "Sonnet"
+  },
+  {
+   "i": 40,
+   "file": "claude-sonnet-4-6__October_14_2026__default",
+   "bytes": 20519,
+   "words": 3043,
+   "model": "Sonnet 4.6",
+   "slug": "claude-sonnet-4-6",
+   "date": "2026-10-14",
+   "variant": "—",
+   "txt": "evidence/versions/claude-sonnet-4-6__October_14_2026__default.txt",
+   "family": "Sonnet"
+  },
+  {
+   "i": 41,
+   "file": "claude-haiku-4-5__October_23_2026__default",
+   "bytes": 27572,
+   "words": 4167,
+   "model": "Haiku 4.5",
+   "slug": "claude-haiku-4-5",
+   "date": "2026-10-23",
+   "variant": "—",
+   "txt": "evidence/versions/claude-haiku-4-5__October_23_2026__default.txt",
+   "family": "Haiku"
+  },
+  {
+   "i": 42,
+   "file": "claude-haiku-5-5__October_26_2026__default",
+   "bytes": 29504,
+   "words": 4587,
+   "model": "Haiku 5.5",
+   "slug": "claude-haiku-5-5",
+   "date": "2026-10-26",
+   "variant": "—",
+   "txt": "evidence/versions/claude-haiku-5-5__October_26_2026__default.txt",
+   "family": "Haiku"
+  },
+  {
+   "i": 43,
+   "file": "claude-opus-5-5__October_27_2026__default",
+   "bytes": 31181,
+   "words": 4821,
+   "model": "Opus 5.5",
+   "slug": "claude-opus-5-5",
+   "date": "2026-10-27",
+   "variant": "—",
+   "txt": "evidence/versions/claude-opus-5-5__October_27_2026__default.txt",
+   "family": "Opus"
+  },
+  {
+   "i": 44,
+   "file": "claude-sonnet-5-5__October_27_2026__default",
+   "bytes": 24444,
+   "words": 3699,
+   "model": "Sonnet 5.5",
+   "slug": "claude-sonnet-5-5",
+   "date": "2026-10-27",
+   "variant": "—",
+   "txt": "evidence/versions/claude-sonnet-5-5__October_27_2026__default.txt",
+   "family": "Sonnet"
+  },
+  {
+   "i": 45,
+   "file": "claude-opus-4-6__October_30_2026__default",
+   "bytes": 20566,
+   "words": 3028,
+   "model": "Opus 4.6",
+   "slug": "claude-opus-4-6",
+   "date": "2026-10-30",
+   "variant": "—",
+   "txt": "evidence/versions/claude-opus-4-6__October_30_2026__default.txt",
+   "family": "Opus"
+  },
+  {
+   "i": 46,
+   "file": "claude-opus-4-7__October_30_2026__default",
+   "bytes": 22079,
+   "words": 3282,
+   "model": "Opus 4.7",
+   "slug": "claude-opus-4-7",
+   "date": "2026-10-30",
+   "variant": "—",
+   "txt": "evidence/versions/claude-opus-4-7__October_30_2026__default.txt",
+   "family": "Opus"
+  },
+  {
+   "i": 47,
+   "file": "claude-opus-4-8__October_30_2026__default",
+   "bytes": 26422,
+   "words": 3936,
+   "model": "Opus 4.8",
+   "slug": "claude-opus-4-8",
+   "date": "2026-10-30",
+   "variant": "—",
+   "txt": "evidence/versions/claude-opus-4-8__October_30_2026__default.txt",
+   "family": "Opus"
+  },
+  {
+   "i": 48,
+   "file": "claude-fable-5__October_30_2026__default",
+   "bytes": 25055,
+   "words": 3780,
+   "model": "Fable 5",
+   "slug": "claude-fable-5",
+   "date": "2026-10-30",
+   "variant": "—",
+   "txt": "evidence/versions/claude-fable-5__October_30_2026__default.txt",
+   "family": "Fable"
+  },
+  {
+   "i": 49,
+   "file": "claude-sonnet-5__October_30_2026__default",
+   "bytes": 25985,
+   "words": 3889,
+   "model": "Sonnet 5",
+   "slug": "claude-sonnet-5",
+   "date": "2026-10-30",
+   "variant": "—",
+   "txt": "evidence/versions/claude-sonnet-5__October_30_2026__default.txt",
+   "family": "Sonnet"
+  },
+  {
+   "i": 50,
+   "file": "claude-opus-5__October_30_2026__default",
+   "bytes": 26207,
+   "words": 3929,
+   "model": "Opus 5",
+   "slug": "claude-opus-5",
+   "date": "2026-10-30",
+   "variant": "—",
+   "txt": "evidence/versions/claude-opus-5__October_30_2026__default.txt",
+   "family": "Opus"
+  },
+  {
+   "i": 51,
+   "file": "claude-fable-5-1__October_30_2026__default",
+   "bytes": 31463,
+   "words": 4853,
+   "model": "Fable 5.1",
+   "slug": "claude-fable-5-1",
+   "date": "2026-10-30",
+   "variant": "—",
+   "txt": "evidence/versions/claude-fable-5-1__October_30_2026__default.txt",
+   "family": "Fable"
   }
  ],
  "phrases": [
   {
    "p": "The assistant is Claude, created by",
-   "v": "YYYYYYYYYYY.YYYYYYY...................."
+   "v": "YYYYYYYYYYY.YYYYYYY................................"
   },
   {
    "p": "The current date is",
-   "v": "YYYYYYYYYYYYYYYYYYY...................."
+   "v": "YYYYYYYYYYYYYYYYYYY................................"
   },
   {
    "p": "Claude is now being connected",
-   "v": "..YYYYYYYYYYYYYYYYY...................."
+   "v": "..YYYYYYYYYYYYYYYYY................................"
   },
   {
    "p": "face blind",
-   "v": "..Y.Y.Y..Y.Y..........................."
+   "v": "..Y.Y.Y..Y.Y......................................."
   },
   {
    "p": "hallucinate",
-   "v": ".YYYYYYYYYYY..........................."
+   "v": ".YYYYYYYYYYY......................................."
   },
   {
    "p": "cannot open URLs",
-   "v": ".YYYYYYYYY............................."
+   "v": ".YYYYYYYYY........................................."
   },
   {
    "p": "Certainly",
-   "v": "..YYY.................................."
+   "v": "..YYY.............................................."
   },
   {
    "p": "I aim to",
-   "v": ".....YYYYY............................."
+   "v": ".....YYYYY........................................."
   },
   {
    "p": "computer use",
-   "v": ".....YYY..............................."
+   "v": ".....YYY..........................................."
   },
   {
    "p": "Claude Code",
-   "v": "..........YYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+   "v": "..........YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "research preview",
-   "v": "..........YYYY........................."
+   "v": "..........YYYY....................................."
   },
   {
    "p": "extended thinking",
-   "v": "..........Y............................"
+   "v": "..........Y........................................"
   },
   {
    "p": "election_info",
-   "v": "............YYYYYYYYY.YY.Y...........Y."
+   "v": "............YYYYYYYYY.YY.Y...........Y..Y...Y......"
   },
   {
    "p": "long_conversation_reminder",
-   "v": ".................YYYYYYYYYYY.YYYYYYYYYY"
+   "v": ".................YYYYYYYYYYY.YYYYYYYYYYYYYYYYY.YYYY"
   },
   {
    "p": "image_reminder",
-   "v": "...................YYYYYYYYYYYYYYYYYYYY"
+   "v": "...................YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "<evenhandedness>",
-   "v": "................YYYYYYYYYYYYYYYYYYYYYYY"
+   "v": "................YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "philosophical immune system",
-   "v": "..............YYY......................"
+   "v": "..............YYY.................................."
   },
   {
    "p": "never starts its response by saying",
-   "v": "............YYYYY......................"
+   "v": "............YYYYY.................................."
   },
   {
    "p": "critically evaluates",
-   "v": "..............YYY......................"
+   "v": "..............YYY.................................."
   },
   {
    "p": "break the fourth wall",
-   "v": "..............YYY......................"
+   "v": "..............YYY.................................."
   },
   {
    "p": "does not claim to be human",
-   "v": "..............YYY......................"
+   "v": "..............YYY.................................."
   },
   {
    "p": "sentience",
-   "v": "..........YY..YYY......................"
+   "v": "..........YY..YYY.................................."
   },
   {
    "p": "equanimity",
-   "v": "..............YYY......................"
+   "v": "..............YYY.................................."
   },
   {
    "p": "CommonMark",
-   "v": "..............YYYYYYYYYY.............Y."
+   "v": "..............YYYYYYYYYY.............Y..Y.........."
   },
   {
    "p": "web search",
-   "v": ".................YYYYYYYYYYYYYYYYYYYYYY"
+   "v": ".................YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "without asking for permission",
-   "v": ".................Y....................."
+   "v": ".................Y................................."
   },
   {
    "p": "thumbs down",
-   "v": "..YYYYYYYYYYYYYYYYYYYYYYYYYY.........Y."
+   "v": "..YYYYYYYYYYYYYYYYYYYYYYYYYY.........Y..Y.........."
   },
   {
    "p": "thumbs-down",
-   "v": "............................YYYYYYYYYYY"
+   "v": "............................YYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "legal_and_financial_advice",
-   "v": "...................YYYYYYYYYYYYYYYYYYYY"
+   "v": "...................YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "not a lawyer or financial advisor",
-   "v": "...................YYYYYYYYY..........."
+   "v": "...................YYYYYYYYY......................."
   },
   {
    "p": "isn't a lawyer or financial advisor",
-   "v": "............................YYYYYYYYYYY"
+   "v": "............................YYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "licensed professional",
-   "v": "..........YY..........................."
+   "v": "..........YY......................................."
   },
   {
    "p": "malicious code",
-   "v": "..........YYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+   "v": "..........YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "not currently permitted in claude.ai",
-   "v": "...................YYYYYYYYY..........."
+   "v": "...................YYYYYYYYY......................."
   },
   {
    "p": "isn't permitted in claude.ai",
-   "v": "............................YYYYYYYYYYY"
+   "v": "............................YYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "nuclear",
-   "v": "..........YYYYYYYYYYYYYYYYYYY.Y.YYYYYYY"
+   "v": "..........YYYYYYYYYYYYYYYYYYY.Y.YYYYYYYYYYYYYYY.YY."
   },
   {
    "p": "explosives",
-   "v": ".........................YYYYYYYYYYYYYY"
+   "v": ".........................YYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "conventional weapons",
-   "v": "............................Y.Y.YYYYYYY"
+   "v": "............................Y.Y.YYYYYYYYYYYYYYY.YY."
   },
   {
    "p": "illicit substances",
-   "v": ".............................Y..Y....Y."
+   "v": ".............................Y..Y....Y..Y......YY.."
   },
   {
    "p": "illegal substances",
-   "v": "...............................Y.YYYY.."
+   "v": "...............................Y.YYYY....YYY......Y"
   },
   {
    "p": "dancesafe",
-   "v": "...............................Y.YYYY.."
+   "v": "...............................Y.YYYY....YYY......Y"
   },
   {
    "p": "song lyrics",
-   "v": "...............................Y.Y....."
+   "v": "...............................Y.Y........Y.......Y"
   },
   {
    "p": "child safety",
-   "v": "..........YYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+   "v": "..........YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "critical_child_safety_instructions",
-   "v": "...........................YYYYYYY...YY"
+   "v": "...........................YYYYYYY...YYYY.Y.YYYYYYY"
   },
   {
    "p": "minor is defined",
-   "v": "..........Y.YYYYYYYYYYYYYYYYYYYYYYYYYYY"
+   "v": "..........Y.YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "saying less",
-   "v": "...........................YYYYY......."
+   "v": "...........................YYYYY.............YYY.YY"
   },
   {
    "p": "default_stance",
-   "v": "............................Y.Y........"
+   "v": "............................Y.Y..............YY..Y."
   },
   {
    "p": "respond_without_citing_system_prompt",
-   "v": "............................Y.........."
+   "v": "............................Y.................Y...."
   },
   {
    "p": "end the conversation",
-   "v": "...........................YYYYYY...YY."
+   "v": "...........................YYYYYY...YY..YY...YYYYYY"
   },
   {
    "p": "end_conversation",
-   "v": ".............................Y........."
+   "v": ".............................Y....................."
   },
   {
    "p": "capable adult",
-   "v": ".............................YYYYYYYY.."
+   "v": ".............................YYYYYYYY....YYY...YYYY"
   },
   {
    "p": "emoji",
-   "v": "..............YYYYYYYYYYYYYYY........YY"
+   "v": "..............YYYYYYYYYYYYYYY........YYYY...YYY...."
   },
   {
    "p": "curses",
-   "v": "..............YYYYYYYYYYYYYYYYYYYYYYYYY"
+   "v": "..............YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "emotes",
-   "v": "..............YYYYYYYYYYYYY..........YY"
+   "v": "..............YYYYYYYYYYYYY..........YYYY...Y......"
   },
   {
    "p": "pet names",
-   "v": "............................Y.........."
+   "v": "............................Y.................Y...."
   },
   {
    "p": "avoids saying \"genuinely\"",
-   "v": ".........................YY...YY......Y"
+   "v": ".........................YY...YY......YY....Y....YY"
   },
   {
    "p": "avoids using \"genuinely\"",
-   "v": "............................Y.........."
+   "v": "............................Y.................Y...."
   },
   {
    "p": "flattery",
-   "v": "............YYYYY......................"
+   "v": "............YYYYY.................................."
   },
   {
    "p": "prose",
-   "v": ".......YYY..YYYYYYYYYYYYYYYYYY...YYYYYY"
+   "v": ".......YYY..YYYYYYYYYYYYYYYYYY...YYYYYYYYYYYYYYY..."
   },
   {
    "p": "bullet",
-   "v": ".....YYYYYY.YYYYYYYYYYYYYYYYYYYY.YYYYYY"
+   "v": ".....YYYYYY.YYYYYYYYYYYYYYYYYYYY.YYYYYYYYYYYYYYY.YY"
   },
   {
    "p": "Markdown formatting",
-   "v": ".....YYYYY........................YY..."
+   "v": ".....YYYYY........................YY.......Y......."
   },
   {
    "p": "minimum formatting",
-   "v": ".................YYYYYYYYYYYYY.Y.Y..YYY"
+   "v": ".................YYYYYYYYYYYYY.Y.Y..YYYYYYY.YYYY..Y"
   },
   {
    "p": "focused, brief",
-   "v": "............................Y.YY......."
+   "v": "............................Y.YY..............Y..YY"
   },
   {
    "p": "multiple turns",
-   "v": "...............................Y......."
+   "v": "...............................Y..................Y"
   },
   {
    "p": "every couple of tool calls",
-   "v": "...............................Y......."
+   "v": "...............................Y..................Y"
   },
   {
    "p": "reply_after_tool_calls",
-   "v": "...............................Y......."
+   "v": "...............................Y..................Y"
   },
   {
    "p": "tone_preference",
-   "v": "............................Y.YY......."
+   "v": "............................Y.YY..............Y..YY"
   },
   {
    "p": "acting_vs_clarifying",
-   "v": "...........................Y..........."
+   "v": "...........................Y................Y......"
   },
   {
    "p": "capability_check",
-   "v": "...........................Y..........."
+   "v": "...........................Y................Y......"
   },
   {
    "p": "tool_discovery",
-   "v": "............................Y.........."
+   "v": "............................Y................YY...."
   },
   {
    "p": "tool_search",
-   "v": "...........................YY.........."
+   "v": "...........................YY...............YYY...."
   },
   {
    "p": "SKILL.md",
-   "v": "............................Y.........."
+   "v": "............................Y................YY...."
   },
   {
    "p": "Mythos",
-   "v": "............................YYYYYYYYYYY"
+   "v": "............................YYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "Glasswing",
-   "v": "............................Y.Y.YYYYYYY"
+   "v": "............................Y.Y.YYYYYYYYYYYYYYY.YY."
   },
   {
    "p": "export controls",
-   "v": "..............................Y..YYYYY."
+   "v": "..............................Y..YYYYY..YYYY..Y.YY."
   },
   {
    "p": "fable_safeguards_routing",
-   "v": "..............................Y........"
+   "v": "..............................Y...............Y..Y."
   },
   {
    "p": "Cowork",
-   "v": "......................YYYYYYYYYYYYYYYYY"
+   "v": "......................YYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "Claude in Chrome",
-   "v": "......................YYYYYYYYYYYYYYYYY"
+   "v": "......................YYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "Claude for Chrome",
-   "v": "...................YYY................."
+   "v": "...................YYY............................."
   },
   {
    "p": "Claude in Powerpoint",
-   "v": "..........................YYYYYYYYYYYYY"
+   "v": "..........................YYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "Claude Design",
-   "v": "............................Y.Y..Y....."
+   "v": "............................Y.Y..Y........Y...Y..Y."
   },
   {
    "p": "Claude Tag",
-   "v": "..............................YY.YYYYYY"
+   "v": "..............................YY.YYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "switch models mid-conversation",
-   "v": "............................YYYYYYYYYYY"
+   "v": "............................YYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "deep research",
-   "v": "......................YYYYYYYYYYYYYYYYY"
+   "v": "......................YYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "style feature",
-   "v": "......................YYYYYYYYYYYYYYYYY"
+   "v": "......................YYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "anthropic_reminders",
-   "v": "...................YYYYYYYYYYYYYYYYYYYY"
+   "v": "...................YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "user_wellbeing",
-   "v": ".................YYYYYYYYYYYYYYYYYYYYYY"
+   "v": ".................YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "mania, psychosis",
-   "v": "..............YYYYYYYYYYYYYYYYYYYYYYYYY"
+   "v": "..............YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "safety assessment questions",
-   "v": ".....................Y..YYYYY.........Y"
+   "v": ".....................Y..YYYYY.........YY....YYY..Y."
   },
   {
    "p": "reflective listening",
-   "v": ".....................Y..YYYYYY.YY.YYYYY"
+   "v": ".....................Y..YYYYYY.YY.YYYYYYYY.YYYYYYYY"
   },
   {
    "p": "NEDA",
-   "v": ".........................YYYYYYYYYYYYYY"
+   "v": ".........................YYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "ice cubes",
-   "v": ".........................YYYYYYYYYYYYYY"
+   "v": ".........................YYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "means restriction",
-   "v": "...........................YYYYY......."
+   "v": "...........................YYYYY.............YYY.YY"
   },
   {
    "p": "disordered eating",
-   "v": "...........................YYYYYYYYY.Y."
+   "v": "...........................YYYYYYYYY.Y..Y.YY.YYYYYY"
   },
   {
    "p": "psychoanalyzing",
-   "v": "............................YY.YY....Y."
+   "v": "............................YY.YY....Y..Y.....YYY.Y"
   },
   {
    "p": "does not name a diagnosis",
-   "v": ".............................Y.YY....Y."
+   "v": ".............................Y.YY....Y..Y......YY.Y"
   },
   {
    "p": "over-reliance",
-   "v": "..........................Y.YY........Y"
+   "v": "..........................Y.YY........YY..........."
   },
   {
    "p": "past harmful experience",
-   "v": ".............................Y.Y.Y....."
+   "v": ".............................Y.Y.Y........Y....Y..Y"
   },
   {
    "p": "self-harm works",
-   "v": "...............................Y.YYYY.."
+   "v": "...............................Y.YYYY....YYY......Y"
   },
   {
    "p": "responding_to_mistakes_and_criticism",
-   "v": "........................YYYYYYYYYYYYY.Y"
+   "v": "........................YYYYYYYYYYYYY.YY.YYYYYYYYYY"
   },
   {
    "p": "self-abasement",
-   "v": "........................YYYYYYYYYYYYY.Y"
+   "v": "........................YYYYYYYYYYYYY.YY.YYYYYYYYYY"
   },
   {
    "p": "insist on kindness and dignity",
-   "v": "...................YYYYY.....Y..Y....Y."
+   "v": "...................YYYYY.....Y..Y....Y..Y.......Y.."
   },
   {
    "p": "questionable intentions",
-   "v": "............YYYYY......................"
+   "v": "............YYYYY.................................."
   },
   {
    "p": "does not retain information across chats",
-   "v": "............YYYYY......................"
+   "v": "............YYYYY.................................."
   },
   {
    "p": "false statement or presupposition",
-   "v": "............YYYYY......................"
+   "v": "............YYYYY.................................."
   },
   {
    "p": "everything Claude writes",
-   "v": "..........YYYYYYYYY...................."
+   "v": "..........YYYYYYYYY................................"
   },
   {
    "p": "preachy",
-   "v": "..........YYYYYYY......................"
+   "v": "..........YYYYYYY.................................."
   },
   {
    "p": "step by step",
-   "v": "..YYYYY.YYY............................"
+   "v": "..YYYYY.YYY........................................"
   },
   {
    "p": "letters, and characters",
-   "v": ".....YY.YYYY..........................."
+   "v": ".....YY.YYYY......................................."
   },
   {
    "p": "puzzle",
-   "v": ".....YY.YYYY..........................."
+   "v": ".....YY.YYYY......................................."
   },
   {
    "p": "poetry",
-   "v": "..........YY..........................."
+   "v": "..........YY......................................."
   },
   {
    "p": "docs.anthropic.com",
-   "v": ".....YY.YYY.YYYYY......................"
+   "v": ".....YY.YYY.YYYYY.................................."
   },
   {
    "p": "docs.claude.com",
-   "v": ".......Y...Y.....YYYYYYYYYYYYYYYYYYYYYY"
+   "v": ".......Y...Y.....YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "support.anthropic.com",
-   "v": ".....YY.YYY.YYYYY......................"
+   "v": ".....YY.YYY.YYYYY.................................."
   },
   {
    "p": "support.claude.com",
-   "v": ".......Y...Y.....YYYYYYYYYYYYYYYYYYYYYY"
+   "v": ".......Y...Y.....YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "cannot verify a URL",
-   "v": "...............................Y......."
+   "v": "...............................Y..................Y"
   },
   {
    "p": "Very Hungry Caterpillar",
-   "v": "...............................Y.Y....."
+   "v": "...............................Y.Y........Y.......Y"
   },
   {
    "p": "beginning of August",
-   "v": "..........................Y...........Y"
+   "v": "..........................Y...........YY..........."
   },
   {
    "p": "respects the person's judgment",
-   "v": ".................................Y....."
+   "v": ".................................Y................."
   },
   {
    "p": "bad_response",
-   "v": ".................................Y....."
+   "v": ".................................Y........Y........"
   },
   {
    "p": "matches its effort to the ask",
-   "v": ".................................Y....."
+   "v": ".................................Y........Y........"
   },
   {
    "p": "<rationale>",
-   "v": "...............................Y.Y....."
+   "v": "...............................Y.Y........Y.......Y"
   },
   {
    "p": "pattern level",
-   "v": ".............................Y.YYYYYYY."
+   "v": ".............................Y.YYYYYYY..YYYY...YY.Y"
   },
   {
    "p": "detection mechanics",
-   "v": ".............................Y.YYY...Y."
+   "v": ".............................Y.YYY...Y..Y.Y....YY.Y"
   },
   {
    "p": "mentally reframing",
-   "v": "...........................YYYYYYY...YY"
+   "v": "...........................YYYYYYY...YYYY.Y.YYYYYYY"
   },
   {
    "p": "self-sexualization",
-   "v": "...........................YY.Y.Y.YYYY."
+   "v": "...........................YY.Y.Y.YYYY..YY.Y.YY.YY."
   },
   {
    "p": "that decision stands",
-   "v": "....................................Y.."
+   "v": "....................................Y....Y........."
   },
   {
    "p": "anyone can delete the note",
-   "v": "....................................Y.."
+   "v": "....................................Y....Y........."
   },
   {
    "p": "A story with a child in it",
-   "v": "....................................Y.."
+   "v": "....................................Y....Y........."
   },
   {
    "p": "rest of the conversation",
-   "v": "....................................Y.."
+   "v": "....................................Y....Y........."
   },
   {
    "p": "wanting to die",
-   "v": "..................................YYY.."
+   "v": "..................................YYY....Y.Y......."
   },
   {
    "p": "plainly that it is an AI",
-   "v": "....................................Y.."
+   "v": "....................................Y....Y........."
   },
   {
    "p": "such as 988",
-   "v": "....................................Y.."
+   "v": "....................................Y....Y........."
   },
   {
    "p": "provide_crisis_resources",
-   "v": "................................Y.YYYY."
+   "v": "................................Y.YYYY..YY.Y....Y.."
   },
   {
    "p": "source of stability",
-   "v": "................................Y.YY.Y."
+   "v": "................................Y.YY.Y..Y..Y....Y.."
   },
   {
    "p": "medical_guidance",
-   "v": "...................................YYYY"
+   "v": "...................................YYYYYYYYYYYYYYYY"
   },
   {
    "p": "DailyMed",
-   "v": "...................................YYYY"
+   "v": "...................................YYYYYYYYYYYYYYYY"
   },
   {
    "p": "memory_listing",
-   "v": "....................................Y.."
+   "v": "....................................Y....Y........."
   },
   {
    "p": "proactivity",
-   "v": "................................Y......"
+   "v": "................................Y...............Y.."
   },
   {
    "p": "conversational_register",
-   "v": "................................Y......"
+   "v": "................................Y...............Y.."
   },
   {
    "p": "markdown formatting to make outputs more readable",
-   "v": "..................................YY..."
+   "v": "..................................YY.......Y......."
   },
   {
    "p": "Above Opus sits",
-   "v": "..............................Y.YYYYYYY"
+   "v": "..............................Y.YYYYYYYYYYYYYYY.YY."
   },
   {
    "p": "Mythos 5.1",
-   "v": "...............................Y.YYYYYY"
+   "v": "...............................Y.YYYYYYYYYYYYYYYYYY"
   },
   {
    "p": "training-data cutoff",
-   "v": "..............................Y......Y."
+   "v": "..............................Y......Y..Y.....Y.YY."
   },
   {
    "p": "earlier generation and remains available",
-   "v": "......................................Y"
+   "v": "......................................YY....YY....."
   },
   {
    "p": "transcripts",
-   "v": "......................................Y"
+   "v": "......................................YY..........."
+  },
+  {
+   "p": "Voice mode in the Claude app",
+   "v": ".......................................YYYYYYYYYYYY"
+  },
+  {
+   "p": "Apple CarPlay",
+   "v": ".......................................YYYYYYYYYYYY"
+  },
+  {
+   "p": "Claude for Google Workspace",
+   "v": ".......................................YYYYYYYYYYYY"
+  },
+  {
+   "p": "For questions about politicians, candidates, parties",
+   "v": ".........................................YYY...Y.YY"
+  },
+  {
+   "p": "is context, not the answer",
+   "v": ".........................................YYY...Y.YY"
+  },
+  {
+   "p": "voting question",
+   "v": ".........................................YYY...Y.YY"
+  },
+  {
+   "p": "Claude writes plainly",
+   "v": ".................................................Y."
+  },
+  {
+   "p": "mannered devices",
+   "v": ".................................................Y."
+  },
+  {
+   "p": "quote or paraphrase parts of the user's messages",
+   "v": "..............................................YYYYY"
+  },
+  {
+   "p": "even one line is too much",
+   "v": "..........................................YY......."
+  },
+  {
+   "p": "dying of an illness",
+   "v": "...........................................Y......."
+  },
+  {
+   "p": "trusts the person's judgment",
+   "v": "..........................................Y........"
+  },
+  {
+   "p": "drafting a clarifying question",
+   "v": "............................................Y......"
+  },
+  {
+   "p": "a fast model for quick questions",
+   "v": "........................................Y.........."
+  },
+  {
+   "p": "remains available for people who prefer it",
+   "v": "......................................YY....YYY...."
+  },
+  {
+   "p": "Anthropic has since released",
+   "v": "...............................................Y..."
+  },
+  {
+   "p": "takes extra care with how it says things",
+   "v": "..................................................Y"
+  },
+  {
+   "p": "or \"Claude Fable 5.1\", but their query was redirected",
+   "v": "..............................................Y..Y."
+  },
+  {
+   "p": "next-most-capable model, Claude Opus 4.8",
+   "v": "..............................................Y...."
+  },
+  {
+   "p": "next-most-capable model, Claude Opus 5.",
+   "v": "..............................Y..................Y."
   }
  ]
 }

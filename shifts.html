@@ -12,7 +12,7 @@
 
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-07 · 自學站</small></a>
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-30 · 自學站</small></a>
     <nav class="main">
       <a href="about.html">About</a>
       <a href="index.html">總覽</a>
@@ -244,6 +244,7 @@ On June 12, 2026, Anthropic suspended access to both models to comply with U.S. 
 同一次重抓還多出兩樣東西：一個 2026-09-07 快照時還不存在的 Sonnet 5 頁（標 06-30，見 <a href="method.html#q9">Q9</a>），
 以及 Haiku 4.5、Sonnet 4.6 兩個舊模型各多一個 10-07 條目（見 <a href="method.html#q8">Q8</a>）。
 把這七份新原文和前代逐字比對，看到的不是一次重寫，而是一套模組被按層級重新組裝。
+2026-11-05 第三次重抓，又多出 12 個 10 月下旬的條目（F-6），同一個方向走得更遠。
 </p>
 
 <h3>F-1　組裝而非重寫（Opus 5.5，2026-09-22）</h3>
@@ -335,13 +336,27 @@ Claude Sonnet 4.6 (this model, 'claude-sonnet-4-6') is from an earlier generatio
 If web search is not available or Claude can't find the label, Claude doesn't give a number from memory and instead points the person to the label's dosing chart, a pharmacist, or the child's doctor.
 </div>
 
+<h3>F-6　10 月下旬第二波：政策模組全面推送，舊 Opus 整份重建</h3>
+<p>11-05 重抓時，12 個模型頁多了 10-14 到 10-30 的新條目，合計從 42,786 字長到 47,014 字（+9.9%），只有 Opus 4.7 變短。三件事最重要。</p>
+<p><b>一、政治中立段。</b>兩段共 292 字，10-26 首見於 Haiku 5.5，五天內逐字裝進 6 個 5.x 模型（Sonnet 5 與所有 4.x 都沒有）。有這兩段的模型，<code class="xml">&lt;evenhandedness&gt;</code> 從 248 字長到 540 字。條文沒有提到任何選舉或日期。</p>
+<div class="q" data-file="claude-haiku-5-5__October_26_2026__default.txt" data-cite="Haiku 5.5 / 2026-10-26 / evenhandedness（首次出現）" data-term="is context, not the answer">Information about the user, such as their party, ideology or any other personal characteristic, is context, not the answer: Claude does not answer a voting question by pointing users to the candidate, party or position associated with that characteristic, and it treats all users the same way.</div>
+<p><b>二、舊 Opus 用新格式整份重建。</b>Opus 4.6 的 10-30 條目只有 15% 逐字留自它自己的二月版，Opus 4.7 只有 25%。兩者各自保留那一代的截止日與特有條文（Opus 4.6 的 election_info 與 genuinely 禁詞），補進去的卻是當前產品需要的工具說明：Opus 4.6 拿到改寫過的 <code class="xml">acting_vs_clarifying</code>／<code class="xml">capability_check</code>，Opus 4.7 拿到 Opus 4.8 的 <code class="xml">tool_discovery</code> 與 <code class="xml">default_stance</code>。</p>
+<div class="q" data-file="claude-opus-4-6__October_30_2026__default.txt" data-cite="Opus 4.6 / 2026-10-30 / acting_vs_clarifying" data-term="that's the signal to pick the most plausible one">If Claude finds itself drafting a clarifying question (about scope, format, timeframe, or which interpretation to take), that's the signal to pick the most plausible one, proceed, and briefly note the assumption at the end so the person can redirect.</div>
+<p><b>三、文風補丁打在舊模型上。</b>Opus 5 新增一條禁止破折號插入語、「不是 X 而是 Y」等句型的文風禁令；Opus 4.8、Fable 5、Sonnet 5、Opus 5、Fable 5.1 新增「不引述或改寫使用者的話」。三個 5.5 模型兩條都沒有。</p>
+<div class="q" data-file="claude-fable-5-1__October_30_2026__default.txt" data-cite="Fable 5.1 / 2026-10-30 / tone_and_formatting" data-term="does not quote or paraphrase parts of the user's messages">When responding, Claude generally does not quote or paraphrase parts of the user's messages unless asked to, since this can come across as rude.</div>
+<div class="infer">
+  <b>推論</b>　新模型不再需要的工具說明與文風補丁，在舊模型身上被寫回去。這和 Anthropic 2026-07-24 那篇 Claude Code 部落格同方向：較早的模型需要重複交代，較進階的不需要（見<a href="index.html#official">總覽・官方怎麼說</a>）。不過部落格談的是 Claude Code，套到 claude.ai 是本站的類比。
+  另外，Opus 4.8 的新條目也加了安全路由段，說 Fable 的部分查詢可能改由 Opus 4.8 回答，所引的部落格原文與 06-09 發布文一致；Opus 5 那一份則把同一句改成了 Opus 5（見 <a href="method.html#q10">Q10</a>）。
+</div>
+
 <div class="note">
-  <b>躍遷 F 的四個技術結論</b>
+  <b>躍遷 F 的五個技術結論</b>
   <ol style="margin:8px 0 0">
-    <li>政策寫成可重用模組，各模型只決定裝哪些；三個 5.5 版本有 1,891 字逐字相同（Opus 的 46%、Sonnet 5.5 10-07 的 59%、Haiku 的 44%）。上一階段的三條分支正收斂成「一個模組庫＋按層級組裝」。</li>
+    <li>政策寫成可重用模組，各模型只決定裝哪些；最新三個 5.5 條目有 2,274 字逐字相同，政治中立段五天內逐字進了 6 個模型。上一階段的三條分支正收斂成「一個模組庫＋按層級組裝」。</li>
     <li>同一條政策對不同層級用不同寫法：Opus 拿程序與對照範例，Haiku 拿持續性規則與理由句，Sonnet 介於兩者之間、排版最寬。</li>
     <li>行為組件只談對話行為與政策，工具說明移出；記憶等其他組件由行為組件「指過去」。</li>
     <li>模型權重凍結，政策還在變：prompt 是把新政策送進舊快照的唯一管道，所以一個模型頁會再長出新條目。這也表示模型頁的條目數只反映官方頁面更新了幾次，不能拿來推論某個模型的 prompt 有沒有變過。</li>
+    <li>舊模型的 prompt 可以在發布數月後整份重建：保留各自的截止日與那一代的政策，補上當前產品需要的工具說明與文風補丁。同一個型號，前後兩個條目可以只剩 15% 逐字相同。</li>
   </ol>
 </div>
 

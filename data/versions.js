@@ -134,5 +134,54 @@ window.VERSIONS = [
 
   { n: "39", cols: [39], model: "Sonnet 4.6", family: "Sonnet", date: "2026-10-07", variant: "—",
     cutoff: "beginning of Aug 2025", struct: "4.8 式壓縮骨架＋<medical_guidance>", flag: "Q8",
-    sum: "舊模型回補：自述 \"from an earlier generation and remains available\"；兒少四條、CBRN＋常規武器段、<medical_guidance>；保留 genuinely 禁詞、emoji、反過度依賴與 2 月版福祉段；首見「貼入的對話紀錄無法確認出自 Claude」一句。" }
+    sum: "舊模型回補：自述 \"from an earlier generation and remains available\"；兒少四條、CBRN＋常規武器段、<medical_guidance>；保留 genuinely 禁詞、emoji、反過度依賴與 2 月版福祉段；首見「貼入的對話紀錄無法確認出自 Claude」一句。" },
+
+  /* ---- 第三輪（2026-11-05 重抓）：10-14 至 10-30 的 12 個新條目 ---- */
+  { n: "40", cols: [40], model: "Sonnet 4.6", family: "Sonnet", date: "2026-10-14", variant: "—",
+    cutoff: "beginning of Aug 2025", struct: "同 10-07", flag: "Q8",
+    sum: "只動產品資訊：加入語音模式（含 Apple CarPlay）與 Claude for Google Workspace，產品清單改寫；其餘與 10-07 相同。" },
+
+  { n: "41", cols: [41], model: "Haiku 4.5", family: "Haiku", date: "2026-10-23", variant: "—",
+    cutoff: "end of Jan 2025", struct: "同 10-07", flag: "Q8",
+    sum: "定位語從 the fastest 降為 \"a fast model for quick questions\"，並自述 \"is from an earlier generation\"；模型清單不再列自己；加入語音模式與 Google Workspace。" },
+
+  { n: "42", cols: [42], model: "Haiku 5.5", family: "Haiku", date: "2026-10-26", variant: "—",
+    cutoff: "end of June 2026", struct: "10-07 版＋政治中立兩段",
+    sum: "政治中立兩段首見於此、隔天才進 Opus／Sonnet 5.5：對各政治人物與政黨同樣意願、同樣用力、同樣語氣；只問資訊時不主動附正反論點；使用者的黨派等特徵「是脈絡，不是答案」。另加語音模式與 Google Workspace。" },
+
+  { n: "43", cols: [43], model: "Opus 5.5", family: "Opus", date: "2026-10-27", variant: "—",
+    cutoff: "end of Jun 2026", struct: "09-22 版＋<medical_guidance>＋不寫遺書＋政治中立", milestone: true,
+    sum: "+702 字（+17%）。灰色地帶程序改寫成白話（decline → turn down、respects → trusts，意思不變）；補 <medical_guidance>；新增「不寫遺書」規則（連一行都不寫，但可幫忙寫現在就請人來的訊息）；加政治中立兩段；模型清單改列 Sonnet／Haiku 5.5；語音模式、Google Workspace。" },
+
+  { n: "44", cols: [44], model: "Sonnet 5.5", family: "Sonnet", date: "2026-10-27", variant: "—",
+    cutoff: "end of Jun 2026", struct: "10-07 版＋不寫遺書＋政治中立",
+    sum: "+504 字。「不寫遺書」規則多一句 Opus 版沒有的：分不清是重病臨終還是可能自殺時，先溫和詢問、不急著拒絕；加政治中立兩段；語音模式、Google Workspace。" },
+
+  { n: "45", cols: [45], model: "Opus 4.6", family: "Opus", date: "2026-10-30", variant: "—",
+    cutoff: "end of May 2025", struct: "壓縮新骨架重建＋<acting_vs_clarifying>／<capability_check>", flag: "Q8",
+    sum: "以壓縮新骨架重建，保留自己那代的 election_info、genuinely／honestly／straightforward 禁詞與截止日，卻補上原屬 Opus 4.7 的 <acting_vs_clarifying>、<capability_check>（改寫版，新加「發現自己在擬澄清問題，就是該直接做的訊號」）與兒少區塊；<medical_guidance>、Mythos 分級、語音模式。" },
+
+  { n: "46", cols: [46], model: "Opus 4.7", family: "Opus", date: "2026-10-30", variant: "—",
+    cutoff: "end of Jan 2026", struct: "Opus 4.8 骨架重建＋<tool_discovery>／<default_stance>", flag: "Q8",
+    sum: "改用 Opus 4.8 骨架重建（74% 逐字同 Opus 4.8 五月版）：原有的 <acting_vs_clarifying>／<capability_check> 換成 Opus 4.8 的 <tool_discovery> 與 <default_stance>；提醒清單保留 long_conversation_reminder；3,678 → 3,282 字，本輪唯一變短的一頁。" },
+
+  { n: "47", cols: [47], model: "Opus 4.8", family: "Opus", date: "2026-10-30", variant: "—",
+    cutoff: "end of Jan 2026", struct: "原骨架＋<fable_safeguards_routing>", flag: "Q10",
+    sum: "定位語改為 \"a powerful model for complex challenges\"，並自述上一代、仍可選用；新增 <fable_safeguards_routing>，寫 Fable 5／5.1 的查詢可能改由 Opus 4.8 回答，所引部落格原文與 06-09 發布文一致（Opus 5 版引文被改成 Opus 5，見 Q10）；補出口管制通知；修正錯字 crises；刪反過度依賴段。" },
+
+  { n: "48", cols: [48], model: "Fable 5", family: "Fable", date: "2026-10-30", variant: "—",
+    cutoff: "end of Jan 2026", struct: "原骨架＋政治中立兩段",
+    sum: "自述 \"Anthropic has since released Claude Fable 5.1\"；刪 end_conversation 工具與反過度依賴段，回應錯誤段改用新版；加政治中立兩段、<medical_guidance>、「不引述或改寫使用者的話」；模型清單改列 5.5 世代。" },
+
+  { n: "49", cols: [49], model: "Sonnet 5", family: "Sonnet", date: "2026-10-30", variant: "—",
+    cutoff: "end of Jan 2026", struct: "原骨架",
+    sum: "補完整出口管制通知（含「事件在訓練截止之後」一句）；Chrome 等產品不再稱 beta；加「不引述或改寫使用者的話」與 <medical_guidance>；模型清單改列 5.5 世代並保留自己。沒有政治中立段。" },
+
+  { n: "50", cols: [50], model: "Opus 5", family: "Opus", date: "2026-10-30", variant: "—",
+    cutoff: "end of May 2026", struct: "原骨架＋文風禁令＋政治中立兩段", flag: "Q10",
+    sum: "+702 字（+21.8%）。新增文風禁令 \"Claude writes plainly\"：不用破折號插入語、「不是 X 而是 Y」、冒號揭曉句、自創標籤加引號、worth noting 等套語；路由段擴及 Fable 5.1；補反映聆聽與不做風險評估兩段；加政治中立兩段、<medical_guidance>、「不引述或改寫使用者的話」。" },
+
+  { n: "51", cols: [51], model: "Fable 5.1", family: "Fable", date: "2026-10-30", variant: "—",
+    cutoff: "end of Jun 2026", struct: "原骨架＋政治中立兩段", milestone: true,
+    sum: "4,853 字，刷新最長紀錄。自稱從 the newest model 改成 a model，介紹頁網址改為 anthropic.com/claude-fable-and-mythos-5-1；新增「分享痛苦經驗時更小心措辭」與「不引述或改寫使用者的話」；加政治中立兩段、<medical_guidance>；模型清單改列 5.5 世代。" }
 ];

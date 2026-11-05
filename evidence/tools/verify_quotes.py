@@ -25,6 +25,9 @@ for p in glob.glob(os.path.join(ROOT, "evidence", "diffs", "*.diff")):
     d = re.sub(r"\[-|-\]|\{\+|\+\}", "", d)
     d = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", d)
     alltext += "\n" + norm(d)
+# 官方部落格等外部來源：只收被引用的逐字句（出處與 SHA-256 見 evidence/external/excerpts.txt）
+for p in glob.glob(os.path.join(ROOT, "evidence", "external", "*.txt")):
+    alltext += "\n" + norm(open(p, encoding="utf-8").read())
 SPLIT = re.compile(r"\s*(?:…|\.\.\.)\s*")
 TAG = re.compile(r"<[^>]+>")
 

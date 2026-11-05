@@ -19,6 +19,19 @@ NEW_COLS = [  # (i, file stem, model, family, date)
     (37, "claude-haiku-5-5__October_7_2026__default", "Haiku 5.5", "Haiku", "2026-10-07"),
     (38, "claude-haiku-4-5__October_7_2026__default", "Haiku 4.5", "Haiku", "2026-10-07"),
     (39, "claude-sonnet-4-6__October_7_2026__default", "Sonnet 4.6", "Sonnet", "2026-10-07"),
+    # 第三輪（2026-11-05 重抓）：同日多頁時依模型首發順序排列
+    (40, "claude-sonnet-4-6__October_14_2026__default", "Sonnet 4.6", "Sonnet", "2026-10-14"),
+    (41, "claude-haiku-4-5__October_23_2026__default", "Haiku 4.5", "Haiku", "2026-10-23"),
+    (42, "claude-haiku-5-5__October_26_2026__default", "Haiku 5.5", "Haiku", "2026-10-26"),
+    (43, "claude-opus-5-5__October_27_2026__default", "Opus 5.5", "Opus", "2026-10-27"),
+    (44, "claude-sonnet-5-5__October_27_2026__default", "Sonnet 5.5", "Sonnet", "2026-10-27"),
+    (45, "claude-opus-4-6__October_30_2026__default", "Opus 4.6", "Opus", "2026-10-30"),
+    (46, "claude-opus-4-7__October_30_2026__default", "Opus 4.7", "Opus", "2026-10-30"),
+    (47, "claude-opus-4-8__October_30_2026__default", "Opus 4.8", "Opus", "2026-10-30"),
+    (48, "claude-fable-5__October_30_2026__default", "Fable 5", "Fable", "2026-10-30"),
+    (49, "claude-sonnet-5__October_30_2026__default", "Sonnet 5", "Sonnet", "2026-10-30"),
+    (50, "claude-opus-5__October_30_2026__default", "Opus 5", "Opus", "2026-10-30"),
+    (51, "claude-fable-5-1__October_30_2026__default", "Fable 5.1", "Fable", "2026-10-30"),
 ]
 
 NEW_PHRASES = [
@@ -50,6 +63,27 @@ NEW_PHRASES = [
     "training-data cutoff",
     "earlier generation and remains available",
     "transcripts",
+    # 第三輪（2026-11-05）
+    "Voice mode in the Claude app",
+    "Apple CarPlay",
+    "Claude for Google Workspace",
+    "For questions about politicians, candidates, parties",
+    "is context, not the answer",
+    "voting question",
+    "Claude writes plainly",
+    "mannered devices",
+    "quote or paraphrase parts of the user's messages",
+    "even one line is too much",
+    "dying of an illness",
+    "trusts the person's judgment",
+    "drafting a clarifying question",
+    "a fast model for quick questions",
+    "remains available for people who prefer it",
+    "Anthropic has since released",
+    "takes extra care with how it says things",
+    "or \"Claude Fable 5.1\", but their query was redirected",
+    "next-most-capable model, Claude Opus 4.8",
+    "next-most-capable model, Claude Opus 5.",
 ]
 
 
@@ -101,7 +135,7 @@ js = json.dumps(out, ensure_ascii=False, indent=1)
 with open(os.path.join(ROOT, "data", "matrix.json"), "w", encoding="utf-8", newline="\n") as fh:
     fh.write(js + "\n")
 with open(os.path.join(ROOT, "data", "matrix.js"), "w", encoding="utf-8", newline="\n") as fh:
-    fh.write("/* 由 evidence/feature_matrix.txt 產生：%d 欄版本索引 + %d 個片語出現矩陣 */\n" % (len(cols), len(rows)))
+    fh.write("/* 由 evidence/tools/build_matrix.py 產生（同 evidence/feature_matrix.txt）：%d 欄版本索引 + %d 個片語出現矩陣 */\n" % (len(cols), len(rows)))
     fh.write("window.MATRIX = " + js + ";\n")
 
 lines = ["=== COLUMN KEY (index: file | bytes | words) ==="]

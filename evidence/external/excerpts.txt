@@ -1,0 +1,15 @@
+# 外部官方來源的出處紀錄（本站只存被引用的逐字句，不存全文）
+# 每段前三行為：網址｜轉址後網址｜抓取時間與原始 HTML 的 SHA-256；其後每行一句，皆由腳本從該 HTML 逐字擷取。
+
+URL https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
+FINAL https://claude.dev/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models/
+FETCHED 2026-11-05 sha256=8dedc2db6539d8c2f85795942be728bf6a15110e24e4473606cbc98fe9aabbdd
+We removed over 80% of Claude Code's system prompt for more advanced models.
+PUBLISHED Jul 24, 2026
+Thariq Shihipar
+
+URL https://www.anthropic.com/news/claude-fable-5-mythos-5
+FINAL https://www.anthropic.com/news/claude-fable-5-mythos-5
+FETCHED 2026-11-05 sha256=f9b7ba2bc562fa0e6149fa72fd2c3d828e7845cb861302c7b9a45583d19c92fd
+receive a response from our next-most-capable model, Claude Opus 4.8
+Published Jun 9, 2026

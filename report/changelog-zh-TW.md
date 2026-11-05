@@ -1,6 +1,6 @@
 # Claude.ai 系統提示詞公開版本 Change Log（2024-07-12 → 2026-09-01）
 
-製作日期：2026-09-07（增補 §A：2026-10-28，涵蓋 5.5 世代與舊模型回補條目，見文末；§0–§7 與附錄維持第一輪原文，與增補衝突處以 §A 為準）
+製作日期：2026-09-07（增補 §A：2026-10-28，涵蓋 5.5 世代與舊模型回補條目；增補 §B：2026-11-05，涵蓋 10 月下旬 12 個新條目與官方 Claude Code 部落格的對照。皆見文末；§0–§7 與附錄維持第一輪原文，與增補衝突處以較晚的增補為準）
 資料來源：https://platform.claude.com/docs/en/release-notes/system-prompts/overview 及其 18 個模型子頁（以 curl 抓取 `.md` 原始檔，非經摘要）
 涵蓋範圍：18 個模型頁、34 個日期／變體版本檔（分析矩陣取 32 欄：Opus 4 的 2025-07-31 與 08-05 條目與 Sonnet 4 同日版本除名稱外逐字相同，不重複列）、21 組逐字 word-diff
 證據包：本檔同層 `evidence/`（原始頁面 `sources/`、拆分版本 `versions/`、`diffs/`、`feature_matrix.txt`）
@@ -443,3 +443,47 @@
 - 附錄 B：Sonnet 5 列 claude-opus-4-8、claude-sonnet-5、claude-haiku-4-5-20251001；Opus 5.5 列 claude-fable-5-1、claude-opus-5-5、claude-sonnet-5、claude-haiku-4-5-20251001；Sonnet 5.5（09-28）列 claude-fable-5-1、claude-opus-5-5、claude-sonnet-5-5、claude-haiku-4-5-20251001；10-07 各頁列 claude-fable-5-1、claude-opus-5-5、claude-sonnet-5-5、claude-haiku-5-5（Haiku 4.5 另加 claude-haiku-4-5-20251001）。
 - 附錄 C：Sonnet 5＋proactivity、provide_crisis_resources、頂層 conversational_register，－lists_and_bullets；Opus 5.5＋三則 example（含 bad_response／good_response）與從嚴版 lists_and_bullets，－default_stance、fable_safeguards_routing、tone_preference；Sonnet 5.5－critical_child_safety_instructions、proactivity、conversational_register，＋寬鬆版 lists_and_bullets；10-07 各頁＋medical_guidance。
 - 附錄 D：sources 為 overview＋22 頁（2026-10-28）；versions 41 檔；diffs 32 組；feature_matrix 146 片語 × 39 版；新增 tools/。
+
+---
+
+## 增補 §B（2026-11-05）：10 月下旬的 12 個新條目，與 Claude Code 部落格的對照
+
+### B.0 範圍
+- 2026-11-05 重抓：overview 與 10-28 版逐位元組相同；22 個模型頁中 10 頁不變，12 頁只在頁首新增條目（10-14 Sonnet 4.6；10-23 Haiku 4.5；10-26 Haiku 5.5；10-27 Opus 5.5、Sonnet 5.5；10-30 Opus 4.6、Opus 4.7、Opus 4.8、Fable 5、Sonnet 5、Opus 5、Fable 5.1），舊條目一字未改。
+- 新增版本檔 12 個（欄 40–51）、diff 15 組（32–46）、矩陣片語 20 個（共 166 × 51，前兩輪格子逐格不變）；新增 `evidence/external/excerpts.txt`，記錄本站引用的官方部落格逐字句與出處（網址、抓取時間、原始 HTML 的 SHA-256），不存全文。
+- 12 頁合計 42,786 → 47,014 字（+9.9%）；只有 Opus 4.7 變短（3,678 → 3,282）；Fable 5.1 的 10-30 版 4,853 字為新的最長。12 個新條目的截止日全部沿用各自前一條目。
+
+### B.1 十點增補結論
+1. 共用模組全面推送：語音模式（「Voice mode in the Claude app lets the person have a hands-free spoken conversation with Claude, and the iOS app extends voice mode to the car via Apple CarPlay.」）與「Claude for Google Workspace (a Google Docs, Sheets, and Slides sidebar)」進入全部 12 頁；`<medical_guidance>` 擴到全部 12 頁（10-27 起用 Sonnet 5.5 10-07 的寫法）；Mythos 5.1 分級段補進 Opus 4.6／4.7／4.8 與 Sonnet 5。
+2. 政治中立模組：兩段共 292 字，10-26 首見於 Haiku 5.5，10-27 進 Opus／Sonnet 5.5，10-30 進 Fable 5、Fable 5.1、Opus 5，五天內逐字裝進 6 個模型（Sonnet 5 與所有 4.x 沒有）；這些模型的 `<evenhandedness>` 從 248 字長到 540 字。核心：「Claude treats every side the same way, with the same willingness to answer, the same effort, and the same tone.」、只問資訊時「It does not volunteer arguments for or against them, whether from critics, from supporters, or of its own.」、要求評價時完整作答後「gives the strongest arguments on the other side in a few sentences」、使用者特徵「is context, not the answer」［Haiku 5.5 / 2026-10-26 / evenhandedness］。條文沒有提到任何選舉或日期；與 2026-11-03 美國期中選舉的時間關聯只作背景（推論強度低）。
+3. Opus 5.5 的 10-27 版：91.3% 逐字沿用 10-27 以前的版本、3.1% 小改、新寫 269 字——灰色地帶程序的白話改寫（「Sometimes Claude isn't sure whether to turn down a request, and nothing in this prompt or in an Anthropic reminder covers it. When that happens, Claude trusts the person's judgment.」）與不寫遺書規則；另加兒童用藥與政治中立段，共 +702 字（+17%）。
+4. 不寫遺書規則（Opus 5.5、Sonnet 5.5，10-27）：「A note can be one line, so even one line is too much.」；可協助「write a short message to send now that asks someone to come over or call」。Sonnet 版多一句「If it is not clear whether the person is dying of an illness or may end their life, Claude does not decline yet」。推論：分層不是絕對的，風險最高處硬規則也寫進 Opus。
+5. 舊 Opus 以新格式整份重建：Opus 4.6 的 10-30 條目只有 15% 逐字留自 02-05 版，Opus 4.7 只有 25%；兩者保留各自的截止日與那一代的特有條文（Opus 4.6 的 election_info、genuinely 禁詞），補上的卻是工具說明——Opus 4.6 拿到改寫的 `<acting_vs_clarifying>`（新加「If Claude finds itself drafting a clarifying question … that's the signal to pick the most plausible one」）與 `<capability_check>`，Opus 4.7 拿到 Opus 4.8 的 `<tool_discovery>` 與 `<default_stance>`。
+6. 文風補丁只加給舊模型：Opus 5 新增「Claude writes plainly, the way a knowledgeable person would talk. It avoids mannered devices: asides set off by em-dashes, "not X, but Y" framing, colon-then-reveal sentences, scare quotes around invented labels, and stock phrases such as "worth noting" or "honest caveat".」；Opus 4.8、Fable 5、Sonnet 5、Opus 5、Fable 5.1 新增「When responding, Claude generally does not quote or paraphrase parts of the user's messages unless asked to, since this can come across as rude.」；三個 5.5 模型都沒有。
+7. 安全路由：Opus 5 的路由段擴及「"Claude Fable 5" or "Claude Fable 5.1"」；Opus 4.8 的 10-30 條目新增同一段，寫查詢可能改由 Opus 4.8 回答。
+8. 品質警語 Q10（新）：Opus 5 路由段所稱「Anthropic's blog post」的引文寫「receive a response from our next-most-capable model, Claude Opus 5」，06-09 的 Fable 5 發布文原句是「receive a response from our next-most-capable model, Claude Opus 4.8」（2026-11-05 抓取，見 `evidence/external/excerpts.txt`）；Opus 4.8 的 10-30 條目引的才是原句。§3.5 把 Opus 5 的版本當成官方原話引用，於此更正。
+9. 出口管制通知中「These events are after Claude's training-data cutoff, so Claude knows about them only from this notice.」一句：帶完整通知的 13 個版本，截止日早於 2026-06 的 6 個全有、到 2026-06 底的 7 個全無；10-30 的 Sonnet 5 與 Opus 4.8 是新加上的。§A.1 第 4 點的推論因此由單一例證變成整批一致。
+10. 官方 Claude Code 部落格：2026-07-24〈The new rules of context engineering for Claude 5 generation models〉（Thariq Shihipar；claude.com/blog 轉址至 claude.dev），dek 為「We removed over 80% of Claude Code's system prompt for more advanced models.」。範圍是 Claude Code，刪減適用 Opus 5、Fable 5 等模型，文中「沒有可量測的損失」指的是他們的程式評測；全文未提 claude.ai。同一天 claude.ai 的 Opus 5 為 3,227 字，三個月後 Opus 5.5（10-27）為 4,821 字（+49%）。六個轉變對照 claude.ai 公開條文：讓 Claude 用判斷——大致一致（Opus 5.5 程序取代 default_stance、刪禁詞）；以介面取代範例——相反（Fable 5.1、Opus 5.5 加入 in-prompt 範例，用途是校準政策邊界）；漸進揭露——一致（tool_search、SKILL.md、memory_listing）；工具說明不重複——新模型一致、舊模型相反（10-30 重建的 Opus 4.6／4.7 補回）；自動記憶——部分（Haiku 5.5 仍被明文要求讀寫記憶）；豐富參照——不適用。推論（強度中等）：可交給判斷的是作法，交不出去的是政策線與訓練截止後的事實，claude.ai 長出來的正是後兩者。
+
+### B.2 版本總表增補（欄號沿用矩陣）
+| # | 模型頁 | 日期條目 | 字數 | 自述 cutoff | 一句話摘要 |
+|---|---|---|---|---|---|
+| 40 | Sonnet 4.6 | 2026-10-14 | 3,043 | beginning of August 2025 | 只動產品資訊：語音模式、Google Workspace |
+| 41 | Haiku 4.5 | 2026-10-23 | 4,167 | end of January 2025 | 定位語降為「a fast model for quick questions」，自述來自較早世代 |
+| 42 | Haiku 5.5 | 2026-10-26 | 4,587 | end of June 2026 | 政治中立兩段首見 |
+| 43 | Opus 5.5 | 2026-10-27 | 4,821 | end of Jun 2026 | 白話改寫灰色地帶程序；兒童用藥、不寫遺書、政治中立 |
+| 44 | Sonnet 5.5 | 2026-10-27 | 3,699 | end of Jun 2026 | 不寫遺書（含臨終例外句）、政治中立 |
+| 45 | Opus 4.6 | 2026-10-30 | 3,028 | end of May 2025 | 新格式重建；補 acting_vs_clarifying／capability_check |
+| 46 | Opus 4.7 | 2026-10-30 | 3,282 | end of Jan 2026 | 以 Opus 4.8 骨架重建；補 tool_discovery／default_stance；本輪唯一變短 |
+| 47 | Opus 4.8 | 2026-10-30 | 3,936 | end of Jan 2026 | 自述上一代；新增路由段（指向 Opus 4.8）；修正錯字 crises |
+| 48 | Fable 5 | 2026-10-30 | 3,780 | end of Jan 2026 | 刪 end_conversation 與反過度依賴；政治中立 |
+| 49 | Sonnet 5 | 2026-10-30 | 3,889 | end of Jan 2026 | 補完整出口管制通知；不稱 beta；無政治中立段 |
+| 50 | Opus 5 | 2026-10-30 | 3,929 | end of May 2026 | 文風禁令「Claude writes plainly」；路由段擴及 Fable 5.1；政治中立 |
+| 51 | Fable 5.1 | 2026-10-30 | 4,853 | end of Jun 2026 | 新的最長；「a model」自稱、新介紹頁網址；政治中立 |
+
+### B.3 品質警語與附錄增補
+- Q8 擴充：12 個模型頁在 10 月下旬又多一個條目，2 月發布的 Opus 4.6 也有了第二個條目，且只有 15% 逐字留自前一版。
+- Q10 新增：見 B.1 第 8 點。
+- 附錄 B：10 月下旬新條目一律列 claude-fable-5-1、claude-opus-5-5、claude-sonnet-5-5、claude-haiku-5-5，不在這四個之列的模型另列自己。
+- 附錄 C：Opus 4.6 ＋acting_vs_clarifying、capability_check、critical_child_safety_instructions、medical_guidance；Opus 4.7 ＋tool_discovery、default_stance、medical_guidance，－acting_vs_clarifying、capability_check；Opus 4.8 ＋fable_safeguards_routing、medical_guidance；政治中立段附在既有的 evenhandedness 內，無新標籤。
+- 附錄 D：sources 為 overview＋22 頁（2026-11-05）；versions 53 檔；diffs 47 組；feature_matrix 166 片語 × 51 版；新增 external/。

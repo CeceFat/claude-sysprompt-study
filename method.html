@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>方法與證據 · Claude 系統提示詞演進</title>
-<meta name="description" content="資料抓取與比對方法、2026-10-28 重抓與血緣算法、九項文件品質警語、知識截止與 model string 附錄、XML schema 演變，以及本站的獨立查核紀錄。">
+<meta name="description" content="資料抓取與比對方法、2026-10-28 與 11-05 兩次重抓、血緣算法、十項文件品質警語、知識截止與 model string 附錄、XML schema 演變，以及本站的獨立查核紀錄。">
 <link rel="stylesheet" href="assets/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
 </head>
@@ -12,7 +12,7 @@
 
 <header class="topbar">
   <div class="topbar-in">
-    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-07 · 自學站</small></a>
+    <a class="brand" href="index.html">Claude 系統提示詞演進<small>2024-07-12 → 2026-10-30 · 自學站</small></a>
     <nav class="main">
       <a href="about.html">About</a>
       <a href="index.html">總覽</a>
@@ -39,15 +39,15 @@
 
 <h2>資料怎麼來</h2>
 <ol>
-  <li>以 <code>curl</code> 抓取 overview 與各模型子頁的 <code>.md</code> 原始檔（Mintlify 原始 MDX），不經任何摘要模型。2026-09-07 抓 overview＋18 頁；2026-10-28 重抓 overview＋22 頁。
+  <li>以 <code>curl</code> 抓取 overview 與各模型子頁的 <code>.md</code> 原始檔（Mintlify 原始 MDX），不經任何摘要模型。2026-09-07 抓 overview＋18 頁；2026-10-28、2026-11-05 各重抓 overview＋22 頁。
     <div class="q" style="font-family:var(--mono);font-size:12.5px">curl -sL -H "Accept: text/markdown" https://platform.claude.com/docs/en/release-notes/system-prompts/&lt;slug&gt;.md</div>
   </li>
-  <li>依每頁的 <code>## &lt;日期&gt;</code> 標題與 <code>Text only:</code> ／ <code>Text and images:</code> 標籤，把 <code>```text</code> 圍欄內文切成版本檔：第一輪 34 個，10-28 新增 7 個，共 41 個（分析矩陣取 39 欄）。同一條目被 MDX 切成多個圍欄時依序接回（<a href="#q6">Q6</a>）。</li>
-  <li>以 <code>git diff --no-index -U0 --word-diff=plain</code> 做逐字比對（同頁相鄰日期、同日兄弟模型、跨世代承接），輸出 <code>[-舊-]{+新+}</code> 格式：第一輪 21 組，10-28 新增 11 組，共 32 組。</li>
-  <li>以關鍵片語對各版做出現矩陣（不分大小寫子字串比對），交叉驗證 diff 結論：第一輪 118 片語 × 32 欄以 PowerShell <code>IndexOf(OrdinalIgnoreCase)</code> 產生；10-28 改用 Python 重算，先確認舊 118 × 32 逐格重現，再追加 28 片語與 7 欄，共 146 × 39。</li>
-  <li>10-28 另做逐段血緣比對，算出各版「逐字沿用／小幅改寫／新寫」的比例，見下方<a href="#lineage">血緣算法</a>。</li>
+  <li>依每頁的 <code>## &lt;日期&gt;</code> 標題與 <code>Text only:</code> ／ <code>Text and images:</code> 標籤，把 <code>```text</code> 圍欄內文切成版本檔：第一輪 34 個，10-28 新增 7 個，11-05 新增 12 個，共 53 個（分析矩陣取 51 欄）。同一條目被 MDX 切成多個圍欄時依序接回（<a href="#q6">Q6</a>）。</li>
+  <li>以 <code>git diff --no-index -U0 --word-diff=plain</code> 做逐字比對（同頁相鄰日期、同日兄弟模型、跨世代承接），輸出 <code>[-舊-]{+新+}</code> 格式：第一輪 21 組，10-28 新增 11 組，11-05 新增 15 組，共 47 組。</li>
+  <li>以關鍵片語對各版做出現矩陣（不分大小寫子字串比對），交叉驗證 diff 結論：第一輪 118 片語 × 32 欄以 PowerShell <code>IndexOf(OrdinalIgnoreCase)</code> 產生；10-28 改用 Python 重算，先確認舊 118 × 32 逐格重現，再追加 28 片語與 7 欄，共 146 × 39；11-05 再追加 20 片語與 12 欄，共 166 × 51，前兩輪的格子逐格不變。</li>
+  <li>10-28 起另做逐段血緣比對，算出各版「逐字沿用／小幅改寫／新寫」的比例，見下方<a href="#lineage">血緣算法</a>。</li>
 </ol>
-<p><code>evidence/sources/</code> 是官方頁面原文（現存為 2026-10-28 版本）；<code>versions/</code>、<code>diffs/</code>、<code>feature_matrix.txt</code> 是分析產物；<code>evidence/tools/</code> 是 10-28 這一輪用的腳本。</p>
+<p><code>evidence/sources/</code> 是官方頁面原文（現存為 2026-11-05 版本）；<code>versions/</code>、<code>diffs/</code>、<code>feature_matrix.txt</code> 是分析產物；<code>evidence/tools/</code> 是 10-28 起使用的腳本；<code>evidence/external/</code> 記錄本站引用的官方部落格逐字句與出處（不存全文）。</p>
 
 <h2 id="lineage">血緣算法：「逐字沿用／小幅改寫／新寫」怎麼算</h2>
 <ol>
@@ -64,6 +64,8 @@
     <tr><td>Sonnet 5.5（10-07）</td><td class="num">3,195</td><td class="num">92.2%</td><td class="num">1.1%</td><td class="num">6.7%（215 字）</td><td><code class="xml">&lt;medical_guidance&gt;</code></td></tr>
     <tr><td>Haiku 5.5（10-07）</td><td class="num">4,255</td><td class="num">55.5%</td><td class="num">7.5%</td><td class="num">37.1%（1,577 字）</td><td>記憶指令、兒童用藥、拒絕後不改判、故事滑坡、福祉段重寫</td></tr>
     <tr><td>Sonnet 5（06-30）</td><td class="num">3,470</td><td class="num">39.7%</td><td class="num">28.0%</td><td class="num">32.3%（1,120 字）</td><td><code class="xml">&lt;proactivity&gt;</code>、<code class="xml">&lt;conversational_register&gt;</code>、危機段重組、短答可答</td></tr>
+    <tr><td>Haiku 5.5（10-26）</td><td class="num">4,587</td><td class="num">93.6%</td><td class="num">0.0%</td><td class="num">6.4%（292 字）</td><td>政治中立兩段（首次出現）</td></tr>
+    <tr><td>Opus 5.5（10-27）</td><td class="num">4,821</td><td class="num">91.3%</td><td class="num">3.1%</td><td class="num">5.6%（269 字）</td><td>灰色地帶程序的白話改寫（與舊段相似度 0.75，未達小改門檻）、不寫遺書規則</td></tr>
   </tbody>
 </table></div>
 <p style="font-size:13.5px;color:var(--muted)">
@@ -104,7 +106,20 @@ Opus 5.5 的逐字段落再依出處拆分（<code>tools/lineage.py</code>）：
   </table>
 </div>
 
-<h2 id="quality">九項文件品質警語</h2>
+<h3>2026-11-05 第三次重抓的查核</h3>
+<div class="tbl-wrap">
+  <table>
+    <thead><tr><th style="width:190px">查核項目</th><th style="width:80px">結果</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>overview 與舊頁</td><td><span class="tag add">通過</span></td><td>overview 與 10-28 版逐位元組相同；22 個模型頁中 10 頁完全沒變，12 頁只在頁首新增 10-14 到 10-30 的條目，舊條目一字未改。</td></tr>
+      <tr><td>矩陣能否重現</td><td><span class="tag add">通過</span></td><td>重建後第一輪 118 × 32、第二輪 146 × 39 的格子與欄位資料逐格相同，第三輪只在其後追加。</td></tr>
+      <tr><td>新增引文逐字存在</td><td><span class="tag add">通過</span></td><td>全站引文查核（<code>tools/verify_quotes.py</code>）0 失敗；官方部落格的引句改對 <code>evidence/external/excerpts.txt</code> 查核，該檔記錄原始網址、轉址後網址、抓取時間與原始 HTML 的 SHA-256，句子由腳本從 HTML 逐字擷取。</td></tr>
+      <tr><td><b>Opus 5 的部落格引文</b></td><td><span class="tag del">不符</span></td><td>Opus 5 的路由段聲稱引用官方部落格，句中寫 Claude Opus 5；06-09 的 Fable 5 發布文原句是 Claude Opus 4.8。第一輪報告 §3.5 把這段當成官方原話引用，於此更正。見 <a href="#q10">Q10</a>。</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 id="quality">十項文件品質警語</h2>
 <p>這些是<strong>官方文件本身</strong>的瑕疵，不是整理過程造成的。引用前先看一眼。</p>
 
 <details class="acc" id="q1" open>
@@ -177,7 +192,7 @@ Opus 5.5 的逐字段落再依出處拆分（<code>tools/lineage.py</code>）：
   <summary>Q8　overview 刪掉自己的說法：「4.6 世代起一個模型一個條目」不再成立</summary>
   <div class="body">
     <p>2026-09-07 的 overview 寫著 <span class="en">Starting with the Claude 4.6 generation, each model ID is a single fixed snapshot, so those models have one entry.</span>，2026-10-28 重抓時這句已刪（見 <a href="evidence/diffs/31_overview_0907_to_1028.diff">diff 31</a>）。同時 Sonnet 4.6 頁多了 2026-10-07 條目，Sonnet 5.5 頁也有兩個條目。</p>
-    <p><b>影響</b>：模型權重固定，不代表 prompt 固定；舊模型仍會拿到新條目（本站稱為「回補」）。模型頁的條目數只反映官方頁面更新了幾次，不能拿來推論某模型的 prompt 有沒有變過。引用 overview 時要註明抓取日期。</p>
+    <p><b>影響</b>：模型權重固定，不代表 prompt 固定；舊模型仍會拿到新條目（本站稱為「回補」）。模型頁的條目數只反映官方頁面更新了幾次，不能拿來推論某模型的 prompt 有沒有變過。引用 overview 時要註明抓取日期。11-05 重抓時更明顯：12 個模型頁在 10 月下旬又多一個條目，連 2 月發布的 Opus 4.6 都有了第二個條目，而且新條目只有 15% 逐字留自前一版。</p>
   </div>
 </details>
 
@@ -186,6 +201,15 @@ Opus 5.5 的逐字段落再依出處拆分（<code>tools/lineage.py</code>）：
   <div class="body">
     <p>09-07 的 overview 沒有 Sonnet 5 這張卡片，但當時已公開的 Opus 5（07-24）與 Fable 5.1（09-01）都在模型清單裡寫了 <code>claude-sonnet-5</code>。10-28 重抓時 Sonnet 5 頁才出現，條目日期標 2026-06-30，內容寫的是出口管制「暫停中」，與那個日期吻合。</p>
     <p><b>影響</b>：發行說明不是即時同步的紀錄，頁面可以事後補上；「某版本在某日不在官方頁面上」不能推論它當時沒有部署。本站把它編為第 33 欄（依加入順序），在版本總表與走勢圖則依標註日期排序。</p>
+  </div>
+</details>
+
+<details class="acc" id="q10">
+  <summary>Q10　prompt 裡的「官方部落格引文」被改過型號</summary>
+  <div class="body">
+    <p>Opus 5（2026-07-24 起，含 10-30 的新條目）的 <code class="xml">&lt;fable_safeguards_routing&gt;</code> 說 Claude 可以 <span class="en">directly cite or just let its response be informed by this quote from Anthropic's blog post on the subject</span>，引文中寫的是 <span class="en">receive a response from our next-most-capable model, Claude Opus 5</span>。
+    06-09 的 Fable 5 發布文（2026-11-05 抓取）原句是 <span class="en">receive a response from our next-most-capable model, Claude Opus 4.8</span>；10-30 新增同一段的 Opus 4.8 條目，引的正是這個原句。</p>
+    <p><b>影響</b>：prompt 裡標示為「引文」的文字不一定逐字。推論是同一段範本代入了各模型自己的型號。引用 prompt 轉述的外部文件時要回頭對原始出處；本站的出處紀錄見 <code>evidence/external/excerpts.txt</code>。第一輪報告 §3.5 曾把 Opus 5 的版本當成官方原話引用，已在增補 §B 更正。</p>
   </div>
 </details>
 
@@ -205,6 +229,7 @@ Opus 5.5 的逐字段落再依出處拆分（<code>tools/lineage.py</code>）：
     <tr><td class="num">end of May 2026</td><td>Opus 5</td></tr>
     <tr><td class="num">end of Jun 2026</td><td>Fable 5.1、Opus 5.5、Sonnet 5.5（兩個條目）、Haiku 5.5（寫作 end of June 2026）</td></tr>
     <tr><td class="num">回補條目（2026-10-07）</td><td>Haiku 4.5 仍為 end of January 2025、Sonnet 4.6 仍為 beginning of August 2025——回補不改截止日</td></tr>
+    <tr><td class="num">10 月下旬新條目（10-14 → 10-30）</td><td>12 個新條目的截止日全部沿用各自前一條目（例如重建的 Opus 4.6 仍是 end of May 2025）</td></tr>
   </tbody>
 </table></div>
 <p style="font-size:13.5px;color:var(--muted)">注意這是<strong>條文自述</strong>的 cutoff，不等於實際訓練資料截止；2025-05-22 起的措辭是 <span class="en">reliable knowledge cutoff date</span>，本身就是一個保守值。</p>
@@ -232,6 +257,7 @@ Opus 5.5 的逐字段落再依出處拆分（<code>tools/lineage.py</code>）：
     <tr><td>Sonnet 5.5（09-28）</td><td><code>claude-fable-5-1</code>、<code>claude-opus-5-5</code>、<code>claude-sonnet-5-5</code>、<code>claude-haiku-4-5-20251001</code></td></tr>
     <tr><td>Sonnet 5.5（10-07）、Haiku 5.5、Sonnet 4.6（10-07）</td><td><code>claude-fable-5-1</code>、<code>claude-opus-5-5</code>、<code>claude-sonnet-5-5</code>、<code>claude-haiku-5-5</code>（Sonnet 4.6 另以 <code>claude-sonnet-4-6</code> 自稱）</td></tr>
     <tr><td>Haiku 4.5（10-07）</td><td>上列四個＋<code>claude-haiku-4-5-20251001</code></td></tr>
+    <tr><td>10 月下旬 12 個新條目</td><td>一律列 <code>claude-fable-5-1</code>、<code>claude-opus-5-5</code>、<code>claude-sonnet-5-5</code>、<code>claude-haiku-5-5</code>；不在這四個之列的模型另列自己（<code>claude-opus-4-6</code>／<code>4-7</code>／<code>4-8</code>、<code>claude-opus-5</code>、<code>claude-sonnet-5</code>、<code>claude-fable-5</code>、<code>claude-sonnet-4-6</code>、<code>claude-haiku-4-5-20251001</code>）</td></tr>
   </tbody>
 </table></div>
 <p style="font-size:13.5px;color:var(--muted)">Opus 4.6 起改為 undated ID，與 overview 當時「Starting with the Claude 4.6 generation, each model ID is a single fixed snapshot」的說法一致；該句在 2026-10 已從 overview 刪除（<a href="#q8">Q8</a>）。</p>
@@ -256,6 +282,8 @@ Opus 5.5 的逐字段落再依出處拆分（<code>tools/lineage.py</code>）：
     <tr><td class="num">Sonnet 5.5（09-28）</td><td><code>claude_behavior</code></td><td>－<code>critical_child_safety_instructions</code>、<code>proactivity</code>、<code>conversational_register</code>；＋寬鬆版 <code>lists_and_bullets</code></td></tr>
     <tr><td class="num">Sonnet 5.5（10-07）、Haiku 5.5</td><td><code>claude_behavior</code></td><td>＋<code>medical_guidance</code>；Haiku 5.5 開頭一句引用不在公開文字內的 <code>memory_listing</code></td></tr>
     <tr><td class="num">回補：Haiku 4.5、Sonnet 4.6（10-07）</td><td><code>claude_behavior</code></td><td>＋<code>medical_guidance</code>；Haiku 4.5 另＋<code>critical_child_safety_instructions</code>、<code>provide_crisis_resources</code>，保留 <code>when_to_use_lists_and_bullets</code>、<code>election_info</code>、<code>additional_info</code></td></tr>
+    <tr><td class="num">10-30 重建的舊 Opus</td><td><code>claude_behavior</code></td><td>Opus 4.6 ＋<code>acting_vs_clarifying</code>、<code>capability_check</code>、<code>critical_child_safety_instructions</code>、<code>medical_guidance</code>（保留 <code>election_info</code>）；Opus 4.7 ＋<code>tool_discovery</code>、<code>default_stance</code>、<code>medical_guidance</code>，－<code>acting_vs_clarifying</code>、<code>capability_check</code>；Opus 4.8 ＋<code>fable_safeguards_routing</code>、<code>medical_guidance</code></td></tr>
+    <tr><td class="num">10 月下旬其餘新條目</td><td><code>claude_behavior</code></td><td>Opus 5.5、Fable 5／5.1、Opus 5、Sonnet 5 ＋<code>medical_guidance</code>；政治中立兩段附在既有的 <code>evenhandedness</code> 內，沒有新標籤</td></tr>
   </tbody>
 </table></div>
 
@@ -263,23 +291,27 @@ Opus 5.5 的逐字段落再依出處拆分（<code>tools/lineage.py</code>）：
 <div class="grid c2">
   <div class="card">
     <p class="kicker"><a href="https://github.com/CeceFat/claude-sysprompt-study/tree/main/evidence/sources" rel="noopener">evidence/sources/</a></p>
-    <p style="font-size:14.5px;margin:0">overview 與 22 個模型頁的原始 <code>.md</code>（2026-10-28 重抓；09-07 版留在 git 歷史，差異見上方查核紀錄）。這是唯一的一手資料。</p>
+    <p style="font-size:14.5px;margin:0">overview 與 22 個模型頁的原始 <code>.md</code>（2026-11-05 重抓；09-07、10-28 版留在 git 歷史，差異見上方查核紀錄）。這是 prompt 文字唯一的一手資料。</p>
   </div>
   <div class="card">
     <p class="kicker"><a href="https://github.com/CeceFat/claude-sysprompt-study/tree/main/evidence/versions" rel="noopener">evidence/versions/</a></p>
-    <p style="font-size:14.5px;margin:0">41 個拆分後的版本純文字，檔名格式 <code>模型__日期__變體.txt</code>。全站所有引文都能在這裡搜到。</p>
+    <p style="font-size:14.5px;margin:0">53 個拆分後的版本純文字，檔名格式 <code>模型__日期__變體.txt</code>。全站所有引文都能在這裡搜到。</p>
   </div>
   <div class="card">
     <p class="kicker"><a href="https://github.com/CeceFat/claude-sysprompt-study/tree/main/evidence/diffs" rel="noopener">evidence/diffs/</a></p>
-    <p style="font-size:14.5px;margin:0">32 組 word-diff，<code>[-舊-]{+新+}</code> 格式（21–31 為 10-28 新增，31 是 overview 本身的變更）。想看某次改版到底動了什麼，直接讀這裡最快。</p>
+    <p style="font-size:14.5px;margin:0">47 組 word-diff，<code>[-舊-]{+新+}</code> 格式（21–31 為 10-28 新增，31 是 overview 本身的變更；32–46 為 11-05 新增）。想看某次改版到底動了什麼，直接讀這裡最快。</p>
   </div>
   <div class="card">
     <p class="kicker"><a href="evidence/feature_matrix.txt">evidence/feature_matrix.txt</a></p>
-    <p style="font-size:14.5px;margin:0">146 個片語 × 39 版出現矩陣與字數表。互動版在<a href="matrix.html">特徵矩陣</a>。</p>
+    <p style="font-size:14.5px;margin:0">166 個片語 × 51 版出現矩陣與字數表。互動版在<a href="matrix.html">特徵矩陣</a>。</p>
   </div>
   <div class="card">
     <p class="kicker"><a href="https://github.com/CeceFat/claude-sysprompt-study/tree/main/evidence/tools" rel="noopener">evidence/tools/</a></p>
-    <p style="font-size:14.5px;margin:0">10-28 這一輪的 Python 腳本：切版本檔、重建矩陣、血緣比例、結構指標、引文查核。全部只讀證據包、不連網。</p>
+    <p style="font-size:14.5px;margin:0">10-28 起使用的 Python 腳本：切版本檔、重建矩陣、血緣比例、結構指標、引文查核。全部只讀證據包、不連網。</p>
+  </div>
+  <div class="card">
+    <p class="kicker"><a href="evidence/external/excerpts.txt">evidence/external/excerpts.txt</a></p>
+    <p style="font-size:14.5px;margin:0">本站引用的兩篇官方部落格：只存被引用的逐字句，加上原始網址、轉址後網址、抓取時間與原始 HTML 的 SHA-256，不存全文。</p>
   </div>
 </div>
 <p style="margin-top:16px">
@@ -293,7 +325,7 @@ Opus 5.5 的逐字段落再依出處拆分（<code>tools/lineage.py</code>）：
   <li>標「推論」者為本站解讀，非文件明文。同一段裡若有推論成分，會另外標出。</li>
   <li>本站為個人研究整理，<strong>非 Anthropic 官方出版品</strong>，也不代表任何雇主立場。</li>
   <li>引文著作權屬 Anthropic，僅為研究、評註與教學目的節錄使用；如需完整原文請直接參閱<a href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview" rel="noopener">官方頁面</a>。</li>
-  <li>官方頁面會持續更新，本站快照時間為 2026-09-07（第一輪）與 2026-10-28（第二輪）；新模型頁或新條目出現後需重抓才會反映，而且頁面可能事後補上（<a href="#q9">Q9</a>）。</li>
+  <li>官方頁面會持續更新，本站快照時間為 2026-09-07（第一輪）、2026-10-28（第二輪）與 2026-11-05（第三輪）；新模型頁或新條目出現後需重抓才會反映，而且頁面可能事後補上（<a href="#q9">Q9</a>）。</li>
 </ul>
 
 <footer class="site">
