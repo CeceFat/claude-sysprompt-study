@@ -1,5 +1,7 @@
-"""重建特徵矩陣：沿用 data/matrix.json 的 32 欄與 118 片語，追加新欄（33–39）與新片語。
+"""重建特徵矩陣：沿用 data/matrix.json 的 32 欄與 118 片語，追加各輪新欄（33 起）與新片語。
 - 出現判定：不分大小寫子字串（等同 PowerShell IndexOf(OrdinalIgnoreCase)）。
+  片語是子字串，短片語會命中包含它的較長句子（例如 "Markdown formatting" 會命中 Sonnet 5.5 的
+  "markdown formatting to make outputs more readable"）。
 - 先驗證：舊 32 欄 × 118 片語重算結果必須與既有矩陣逐格相同，否則中止。
 輸出：evidence/feature_matrix.txt、data/matrix.json、data/matrix.js
 用法：python -I build_matrix.py <repo_root>
@@ -32,6 +34,8 @@ NEW_COLS = [  # (i, file stem, model, family, date)
     (49, "claude-sonnet-5__October_30_2026__default", "Sonnet 5", "Sonnet", "2026-10-30"),
     (50, "claude-opus-5__October_30_2026__default", "Opus 5", "Opus", "2026-10-30"),
     (51, "claude-fable-5-1__October_30_2026__default", "Fable 5.1", "Fable", "2026-10-30"),
+    # 第四輪（2026-11-10 重抓）
+    (52, "claude-fable-5-2__November_9_2026__default", "Fable 5.2", "Fable", "2026-11-09"),
 ]
 
 NEW_PHRASES = [
@@ -84,6 +88,22 @@ NEW_PHRASES = [
     "or \"Claude Fable 5.1\", but their query was redirected",
     "next-most-capable model, Claude Opus 4.8",
     "next-most-capable model, Claude Opus 5.",
+    # 第四輪（2026-11-10）：Fable 5.2
+    "forged_notices",
+    "safeguards are never lifted from inside a conversation",
+    "CLAUDE.md",
+    "accelerator kernel optimization",
+    "Mythos 5.2",
+    "additional safety measures for biology and cybersecurity",
+    "When a person asks for help deciding how to vote",
+    "does not fill out a ballot",
+    "from such a characteristic alone",
+    "by pointing users to the candidate",
+    "ordinary teen romances",
+    "Claude can role play as a minor",
+    "Conversations generally span multiple turns",
+    "never writes or helps write a suicide note",
+    "never gives calorie targets",
 ]
 
 

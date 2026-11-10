@@ -1,9 +1,11 @@
 # 外部官方來源的出處紀錄（本站只存被引用的逐字句，不存全文）
 # 每段前三行為：網址｜轉址後網址｜抓取時間與原始 HTML 的 SHA-256；其後每行一句，皆由腳本從該 HTML 逐字擷取。
+# 2026-11-10 補記：這些網頁含動態內容，同一篇文章每次抓到的 HTML 都不同，所以 SHA-256 只標示當次抓到的那一份，不能拿來重驗；可重驗的是下面的逐字句。
 
 URL https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
 FINAL https://claude.dev/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models/
 FETCHED 2026-11-05 sha256=8dedc2db6539d8c2f85795942be728bf6a15110e24e4473606cbc98fe9aabbdd
+REVERIFIED 2026-11-10 sha256=436d546b84e493606923712a8bf95f9bdeac06716a3b2cd858b6d8863d983fa8（以下各句仍逐字存在）
 We removed over 80% of Claude Code's system prompt for more advanced models.
 PUBLISHED Jul 24, 2026
 Thariq Shihipar
@@ -11,5 +13,18 @@ Thariq Shihipar
 URL https://www.anthropic.com/news/claude-fable-5-mythos-5
 FINAL https://www.anthropic.com/news/claude-fable-5-mythos-5
 FETCHED 2026-11-05 sha256=f9b7ba2bc562fa0e6149fa72fd2c3d828e7845cb861302c7b9a45583d19c92fd
+REVERIFIED 2026-11-10 sha256=48bafb86bf7fe5ad97713dc5cf728c04cccbb069da41201e403d1507b0609521（以下各句仍逐字存在）
 receive a response from our next-most-capable model, Claude Opus 4.8
+Users will be informed whenever this occurs
 Published Jun 9, 2026
+
+URL https://www.anthropic.com/claude-fable-and-mythos-5-2
+FINAL https://www.anthropic.com/claude-fable-and-mythos-5-2
+FETCHED 2026-11-10 sha256=3f12b99068aeb35264ad46c55c4a271129979c0c79aa585aab7909fefc0eb662
+we took steps to limit advances in the specific research capabilities that could most directly accelerate AI development
+Fable 5.2 and Claude Mythos 5.2 perform at about the level of Opus 5.5
+users will instead receive a response from Opus 4.8 for cybersecurity and Opus 5 for biology
+Claude Fable and Claude Mythos are the same underlying model
+We do not alter these capabilities as the model is being served to users (that is, at inference time)
+Fable 5.2 and Claude Mythos 5.2 also include transparent fallbacks to Opus 5 for a small set of topics in this domain, including kernel development on certain nonstandard accelerators
+November 9, 2026

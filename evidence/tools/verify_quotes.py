@@ -1,11 +1,13 @@
 """全站引文查核：每一句英文引文都必須能在證據包的版本檔裡逐字找到。
 
 檢查兩種標記：
-1. <div class="q" data-file="X" data-term="T">：T 必須出現在 X（不分大小寫）；
+1. <div class="q" data-file="X" data-term="T">：T 必須出現在 X；
    引文本文以「…」或「...」切段，每段都必須出現在 X。
 2. <span class="en">…</span>：每段（同樣以 … / ... 切開）必須出現在至少一個版本檔；
    引自 overview 的句子不在版本檔，改在 evidence/diffs/ 找（去掉 [-舊-]{+新+} 標記與 markdown 連結語法）。
-比對前先做 HTML 反跳脫、合併連續空白。
+比對前先做 HTML 反跳脫、合併連續空白。2026-11-10 起一律區分大小寫（原本不分）。
+限制：行內引文（.en）只確認「出現在某個版本」，不確認是不是文字所說的那個版本；
+那一步要靠 tools/audit/a4_worksheet.py 列出每段引文實際出現的版本，再由人逐一對照。
 用法：python -I evidence/tools/verify_quotes.py <repo_root>
 """
 import glob
@@ -17,7 +19,7 @@ import sys
 ROOT = sys.argv[1]
 VDIR = os.path.join(ROOT, "evidence", "versions")
 texts = {os.path.basename(p): open(p, encoding="utf-8").read() for p in glob.glob(os.path.join(VDIR, "*.txt"))}
-norm = lambda s: re.sub(r"\s+", " ", html.unescape(s)).strip().lower()
+norm = lambda s: re.sub(r"\s+", " ", html.unescape(s)).strip()
 ntexts = {k: norm(v) for k, v in texts.items()}
 alltext = "\n".join(ntexts.values())
 for p in glob.glob(os.path.join(ROOT, "evidence", "diffs", "*.diff")):

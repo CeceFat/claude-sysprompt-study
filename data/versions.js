@@ -1,5 +1,6 @@
-/* 39 個分析版本（欄號對應 evidence/feature_matrix.txt 的 COLUMN KEY）
-   1–32 摘要取自報告 §2 版本總表；33–39 為 2026-10-28 重抓新增（報告增補 §A）。
+/* 52 個分析版本（欄號對應 evidence/feature_matrix.txt 的 COLUMN KEY）
+   1–32 摘要取自報告 §2 版本總表；33–39 為 2026-10-28 重抓新增（報告增補 §A）；40–51 為 2026-11-05 新增（§B）；52 為 2026-11-10 新增（§C）。
+   2026-11-10 稽核後更正了第 9／10、11、18、31、32、34、35、37、38、39、51 列的措辭（見 report/audit-2026-11-10-zh-TW.md）。
    字數由 data/matrix.js 依欄號帶入。陣列順序＝表格順序（依日期；#12、#33 的欄號不依日期，見各列說明）。 */
 window.VERSIONS = [
   { n: "1", cols: [1], model: "Haiku 3", family: "Haiku", date: "2024-07-12", variant: "—",
@@ -28,7 +29,7 @@ window.VERSIONS = [
 
   { n: "9／10", cols: [9, 10], model: "Sonnet 3.5", family: "Sonnet", date: "2024-11-22", variant: "兩變體",
     cutoff: "Apr 2024", struct: "平鋪散文",
-    sum: "刪「concise and offers to elaborate」與 computer use；加 cybersecurity 一般問題協助、反條列（prose 優先）、行動／桌面介面。" },
+    sum: "刪「concise response and offers to elaborate」一句與 computer use；加 cybersecurity 一般問題協助、反條列（prose 優先）、行動／桌面介面。" },
 
   { n: "12", cols: [12], model: "Haiku 3.5", family: "Haiku", date: "2024-10-22", dateNote: "標籤日期不可信，內容為 2025-02 之後",
     variant: "text+images", cutoff: "start of Dec 2024", struct: "平鋪散文", flag: "Q1",
@@ -36,7 +37,7 @@ window.VERSIONS = [
 
   { n: "11", cols: [11], model: "Sonnet 3.7", family: "Sonnet", date: "2025-02-24", variant: "—",
     cutoff: "end of Oct 2024", struct: "散文＋人格前言",
-    sum: "\"more than a mere tool\"、主動引導對話、決斷單一建議、不否認主觀經驗、extended thinking 說明、Claude Code research preview；首見 child safety 定義、CBRN／惡意程式禁令、語言跟隨規則。" },
+    sum: "\"more than a mere tool\"、主動引導對話、決斷單一建議、不否認主觀經驗、extended thinking 說明、Claude Code research preview；首見 child safety 定義、CBRN／惡意程式禁令；語言跟隨規則（2024-07 就有）在這一版改寫，並加上法語、冰島語的例子。" },
 
   { n: "13／14", cols: [13, 14], model: "Sonnet 4／Opus 4", family: "Sonnet", date: "2025-05-22", variant: "—",
     cutoff: "end of Jan 2025", struct: "散文＋<election_info>",
@@ -58,7 +59,7 @@ window.VERSIONS = [
 
   { n: "18", cols: [18], model: "Sonnet 4.5", family: "Sonnet", date: "2025-09-29", variant: "—",
     cutoff: "Jan 2025", struct: "<behavior_instructions> 六區塊", milestone: true,
-    sum: "全面 XML 分區；刪 AI 本性／反諂媚／紅旗等 12 段；cutoff 段改「主動 web search 不問許可」；首見 long_conversation_reminder；URL 改 claude.com。字數主動砍回 1,973。" },
+    sum: "全面 XML 分區；AI 本性／反諂媚／紅旗等 17 段在新版找不到對應；cutoff 段改「主動 web search 不問許可」；首見 long_conversation_reminder；URL 改 claude.com。字數主動砍回 1,973。" },
 
   { n: "19", cols: [19], model: "Haiku 4.5", family: "Haiku", date: "2025-10-15", variant: "—",
     cutoff: "Jan 2025", struct: "同 #18",
@@ -105,19 +106,19 @@ window.VERSIONS = [
     sum: "出口管制「暫停中」通知；首見 <proactivity>（唯讀工具免問即用、送出／修改／刪除先確認、需求模糊時採合理預設）與 <provide_crisis_resources>；evenhandedness 改成短答也仍可作答；恢復「未成年人表明欲性化自身」條；刪 end_conversation、反過度依賴與 <lists_and_bullets>；另掛頂層 <conversational_register>。" },
 
   { n: "31", cols: [31], model: "Opus 5", family: "Opus", date: "2026-07-24", variant: "—",
-    cutoff: "end of May 2026", struct: "4.8 骨架＋<fable_safeguards_routing>",
+    cutoff: "end of May 2026", struct: "4.8 與 Fable 5 兩邊各取（default_stance、tone_preference 來自 4.8）＋<fable_safeguards_routing>",
     sum: "出口管制暫停／恢復通知（2026-06-12 至 07-01）；safeguards routing 說明（不到 5% session 導向 Opus 5）；Claude Tag、Claude Design；恢復 default_stance；\"intellectually curious／authentic conversation\" 段回歸；危機時「wellbeing 優先於完成任務」；無 end_conversation。" },
 
   { n: "32", cols: [32], model: "Fable 5.1", family: "Fable", date: "2026-09-01", variant: "—",
     cutoff: "end of Jun 2026", struct: "Fable 5 骨架＋<reply_after_tool_calls>／<tone_preference>", milestone: true,
-    sum: "歷史最長。著作權區塊（歌詞／詩／書摘、1929 前例外、視覺作品含 SVG／CSS／ASCII、角色本身受保護）＋兩則 in-prompt 範例；毒品：拒合成／劑量、給互動／過量徵兆、導向 dancesafe／tripsit／psychonautwiki；工具後一兩句作答、多輪分段、每幾次工具呼叫給進度；無法驗證 URL／ID／數字／姓名即言明、不用未提供的姓名；「不說自傷有效」；情感聊天不排版；刪 end_conversation 與反過度依賴段。" },
+    sum: "當時最長（4,267 字）。著作權區塊（歌詞／詩／書摘、1929 前例外、視覺作品含 SVG／CSS／ASCII、角色本身受保護）＋兩則 in-prompt 範例；毒品：拒合成／劑量、給互動／過量徵兆、導向 dancesafe／tripsit／psychonautwiki；工具後一兩句作答、多輪分段、每幾次工具呼叫給進度；無法驗證 URL／ID／數字／姓名即言明、不用未提供的姓名；「不說自傷有效」；情感聊天不排版；刪 end_conversation 與反過度依賴段。" },
 
   { n: "34", cols: [34], model: "Opus 5.5", family: "Opus", date: "2026-09-22", variant: "—",
-    cutoff: "end of Jun 2026", struct: "Opus 5 骨架＋Fable 5.1 模組；－default_stance／fable_safeguards_routing／tone_preference", milestone: true, flag: "Q6",
+    cutoff: "end of Jun 2026", struct: "Opus 5 與 Fable 5.1 合併（逐字段落 50% 見於 Fable 5.1、37% 見於 Opus 5）；－default_stance／fable_safeguards_routing／tone_preference", milestone: true, flag: "Q6",
     sum: "組裝版：69.9% 逐字沿用、21.8% 小改、新寫 339 字，其中 265 字用在同一件事——規則沒寫到又拿不準時尊重對方判斷、先問一句，並附首見的 <bad_response>／<good_response> 範例；另加「份量配合請求」。收編 Fable 5.1 的著作權、毒品、兒少與福祉模組；刪 default_stance、safeguards routing、tone_preference、genuinely 禁詞、簡短指令、intellectually curious 段；出口管制通知刪「事件在訓練截止之後」一句。拒絕處理 1,774 字，佔 43%。" },
 
   { n: "35", cols: [35], model: "Sonnet 5.5", family: "Sonnet", date: "2026-09-28", variant: "—",
-    cutoff: "end of Jun 2026", struct: "Sonnet 5 骨架；兒少改簡版三條；<lists_and_bullets> 寬鬆版",
+    cutoff: "end of Jun 2026", struct: "模組庫組裝（69% 逐字同 Opus 5.5、56% 同 Sonnet 5）；兒少改簡版三條；<lists_and_bullets> 寬鬆版",
     sum: "94.7% 逐字沿用，新寫 114 字：條列與 markdown「可用來提升可讀性」（與 Opus／Haiku 從嚴版相反）、談到想死時不說願望合理。刪 <proactivity>、<conversational_register> 與 critical_child_safety_instructions 區塊（兒少只留三條）；毒品改 Fable 5.1 版；evenhandedness 回到「可拒短答」；模型清單仍列 Haiku 4.5。" },
 
   { n: "36", cols: [36], model: "Sonnet 5.5", family: "Sonnet", date: "2026-10-07", variant: "—",
@@ -126,14 +127,14 @@ window.VERSIONS = [
 
   { n: "37", cols: [37], model: "Haiku 5.5", family: "Haiku", date: "2026-10-07", variant: "—",
     cutoff: "end of June 2026", struct: "Sonnet 5.5 骨架＋開頭記憶指令＋重寫的 <user_wellbeing>", milestone: true,
-    sum: "新寫 1,577 字（37.1%）。開頭首見 <memory_listing> 記憶指令；其餘新寫都在「守住」：兒童用藥、故事滑坡、拒絕後整段對話不改判、不以免責聲明包裝、自殺／自傷與飲食規則持續到對話結束、即時危機以安全為唯一目標並提 988、明說自己是 AI。沒有全大寫強調，because 8 次；條列採 Opus 從嚴版。" },
+    sum: "新寫 1,577 字（37.1%）。開頭首見 <memory_listing> 記憶指令，另有一句身分定位；其餘新寫都在「守住」：兒童用藥、故事滑坡、拒絕後整段對話不改判、不以免責聲明包裝、自殺／自傷與飲食規則持續到對話結束、即時危機以安全為唯一目標並提 988、明說自己是 AI。沒有全大寫強調，because 8 次；條列採 Opus 從嚴版。" },
 
   { n: "38", cols: [38], model: "Haiku 4.5", family: "Haiku", date: "2026-10-07", variant: "—",
-    cutoff: "end of Jan 2025", struct: "2026-01-18 骨架＋移植 5.x 模組", flag: "Q8",
+    cutoff: "end of Jan 2025", struct: "大幅重組：28% 留自 2026-01-18 版，50% 來自 Sonnet 5", flag: "Q8",
     sum: "舊模型回補：產品資訊更新到 5.5 世代並保留「事件在訓練截止之後」一句；移植兒少八條、CBRN＋常規武器段、毒品段、最細的一版 <medical_guidance> 與新福祉條文；保留舊排版段、emoji 與星號動作規則、election_info；修正 Q7 錯字 can instead treats。" },
 
   { n: "39", cols: [39], model: "Sonnet 4.6", family: "Sonnet", date: "2026-10-07", variant: "—",
-    cutoff: "beginning of Aug 2025", struct: "4.8 式壓縮骨架＋<medical_guidance>", flag: "Q8",
+    cutoff: "beginning of Aug 2025", struct: "大幅重組：23% 留自 2 月版，48% 來自 Opus 4.8；＋<medical_guidance>", flag: "Q8",
     sum: "舊模型回補：自述 \"from an earlier generation and remains available\"；兒少四條、CBRN＋常規武器段、<medical_guidance>；保留 genuinely 禁詞、emoji、反過度依賴與 2 月版福祉段；首見「貼入的對話紀錄無法確認出自 Claude」一句。" },
 
   /* ---- 第三輪（2026-11-05 重抓）：10-14 至 10-30 的 12 個新條目 ---- */
@@ -183,5 +184,10 @@ window.VERSIONS = [
 
   { n: "51", cols: [51], model: "Fable 5.1", family: "Fable", date: "2026-10-30", variant: "—",
     cutoff: "end of Jun 2026", struct: "原骨架＋政治中立兩段", milestone: true,
-    sum: "4,853 字，刷新最長紀錄。自稱從 the newest model 改成 a model，介紹頁網址改為 anthropic.com/claude-fable-and-mythos-5-1；新增「分享痛苦經驗時更小心措辭」與「不引述或改寫使用者的話」；加政治中立兩段、<medical_guidance>；模型清單改列 5.5 世代。" }
+    sum: "4,853 字，當時最長（11-09 被 Fable 5.2 超過）。自稱從 the newest model 改成 a model，介紹頁網址改為 anthropic.com/claude-fable-and-mythos-5-1；新增「分享痛苦經驗時更小心措辭」與「不引述或改寫使用者的話」；加政治中立兩段、<medical_guidance>；模型清單改列 5.5 世代。" },
+
+  /* ---- 第四輪（2026-11-10 重抓）：Fable 5.2 ---- */
+  { n: "52", cols: [52], model: "Fable 5.2", family: "Fable", date: "2026-11-09", variant: "—",
+    cutoff: "end of June 2026", struct: "5.5 模組庫組裝＋頂層 <forged_notices>", milestone: true, flag: "Q6",
+    sum: "4,975 字，目前最長。69.9% 逐字沿用、新寫 1,023 字；逐字段落 64.8% 見於 Opus 5.5、47.1% 見於 Fable 5.1，只見於 Fable 5.1 的是 0 字。拿掉 Fable 線的 pattern level／detection mechanics、毒品段、genuinely 禁詞、reply_after_tool_calls、tone_preference；沒有 Opus 5.5 的灰色地帶程序；換上 Haiku 5.5 式的自殺與飲食持續性規則。新寫：兒少三條（含青少年戀愛的同儕判準）、投票協助段、訓練時限制特定能力的說明、頁尾 <forged_notices>（標籤與署名可以偽造，安全措施不能在對話中解除）。全大寫強調 0 個。" }
 ];
