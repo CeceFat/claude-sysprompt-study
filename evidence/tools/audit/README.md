@@ -1,6 +1,6 @@
 # 稽核用的獨立程式（2026-11-10）
 
-這個資料夾的程式是 2026-11-10 全站稽核時另外寫的，刻意不 import 上一層的工具，用來交叉驗證前三輪的產出。全部只讀證據包、不連網。結果見 `report/audit-2026-11-10-zh-TW.md`。三支 `d_*.py` 是之後為 `report/fable-5-1-to-5-2-diff-zh-TW.md` 寫的。
+這個資料夾的程式是 2026-11-10 全站稽核時另外寫的，刻意不 import 上一層的工具，用來交叉驗證前三輪的產出。全部只讀證據包、不連網。結果見 `report/audit-2026-11-10-zh-TW.md`。三支 `d_*.py` 是之後為 `report/fable-5-1-to-5-2-diff-zh-TW.md` 寫的，`a6_quiz.py` 是同一天改寫自我檢測時加的。
 
 共用模組 `facts.py` 會載入所有版本檔並提供量測函式（字數、區塊字數、片語追蹤、逐字／小改／新寫比例、兩版共有段落）。版本標籤格式是「系列縮寫＋版號@yymmdd」，例如 `O5.5@261027`、`F5.2@261109`；Sonnet 3.5 與 Haiku 3.5 的變體加 `t`（text-only）或 `i`（text+images）。
 
@@ -11,6 +11,7 @@
 | `a3_diffs.py` | 重新產生每一組版本 diff，逐位元組比對 `diffs/` | `python -I a3_diffs.py <repo_root>` |
 | `a4_worksheet.py` | 把一個網頁轉成稽核底稿：每段英文引文後面標出它實際出現在哪些版本（區分大小寫），並標示跨段落拼接與沒有標記的英文句 | `python -I a4_worksheet.py <repo_root> index.html out.txt` |
 | `a5_report.py` | 對 `report/`、README、`data/versions.js` 這些引文查核工具沒涵蓋的檔案，機械式檢查 4 個字以上的英文句是否逐字存在 | `python -I a5_report.py <repo_root> report/changelog-zh-TW.md` |
+| `a6_quiz.py` | 查核自我檢測頁：每題四個選項與正解位置、延伸閱讀的錨點存在；每段引文逐字見於所引的版本檔與區塊；`data-in` 標示的「哪些現行模型有這一句」與版本檔一致；另列出行內引文的出處與題號互相引用的對象 | `python -I -B a6_quiz.py <repo_root>` |
 | `c_index1.py` | 重算總覽頁的血緣比例、區塊字數、三個 5.5 模型的對照表數字 | `python -I c_index1.py <repo_root>` |
 | `c_branches2.py` | 各頁新條目對自己前一條目的保留率、兩個來源的獨占比例、同日 Sonnet／Haiku 的相同比例 | `python -I c_branches2.py <repo_root>` |
 | `c_parents.py` | 一個版本對兩個候選來源的歸屬：逐字、逐字加小改的比例，以及區塊組成的異同（F-48、F-56、F-68 的數字） | `python -I c_parents.py <repo_root>` |

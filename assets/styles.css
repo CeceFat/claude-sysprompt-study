@@ -286,6 +286,16 @@ table.hm-t tbody tr:hover th.ph { background: var(--accent-soft); color: var(--a
 .expl { display: none; margin-top: 10px; font-size: 14px; border-top: 1px dashed var(--line); padding-top: 10px; color: var(--ink-soft); }
 .expl.show { display: block; }
 .score { position: sticky; bottom: 14px; margin-top: 22px; }
+.quiz-q .kicker { margin: 0 0 6px; }
+.quiz-q .qn { color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+.quiz-q .expl p { margin: 0 0 10px; }
+.quiz-q .expl .note { margin: 10px 0; }
+.quiz-q .verdict { font-weight: 700; margin: 0 0 8px; }
+.quiz-q .verdict.ok { color: var(--ok); }
+.quiz-q .verdict.no { color: var(--warn); }
+.quiz-q .expl .more { margin: 0; font-size: 13px; }
+.quiz-q.done .opt { cursor: default; }
+.quiz-q.done .opt:not(.correct):not(.wrong):hover { border-color: var(--line); }
 
 /* ---------- footer ---------- */
 footer.site {
