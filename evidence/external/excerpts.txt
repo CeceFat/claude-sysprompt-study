@@ -1,6 +1,7 @@
 # 外部官方來源的出處紀錄（本站只存被引用的逐字句，不存全文）
 # 每段前三行為：網址｜轉址後網址｜抓取時間與原始 HTML 的 SHA-256；其後每行一句，皆由腳本從該 HTML 逐字擷取。
 # 2026-11-10 補記：這些網頁含動態內容，同一篇文章每次抓到的 HTML 都不同，所以 SHA-256 只標示當次抓到的那一份，不能拿來重驗；可重驗的是下面的逐字句。
+# 2026-11-10 補記二：第三行標 READ 的段落是用瀏覽器讀頁面文字，沒有存 HTML，所以沒有 SHA-256；各句在頁面文字中逐字核對過。
 
 URL https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
 FINAL https://claude.dev/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models/
@@ -27,4 +28,65 @@ users will instead receive a response from Opus 4.8 for cybersecurity and Opus 5
 Claude Fable and Claude Mythos are the same underlying model
 We do not alter these capabilities as the model is being served to users (that is, at inference time)
 Fable 5.2 and Claude Mythos 5.2 also include transparent fallbacks to Opus 5 for a small set of topics in this domain, including kernel development on certain nonstandard accelerators
+Testers have found that Fable 5.2 and Mythos 5.2 communicate more clearly than past Fable and Mythos models
+For most coding and knowledge tasks, we recommend that users start with Claude Opus 5.5, our strongest daily driver
+Claude Fable 5.2 and Claude Mythos 5.2 show improvements in areas like coding, reasoning, and vision
+The benchmarks table below shows that Claude Fable 5.2 and Mythos 5.2 are a step above Opus 5.5 in almost all the capabilities we evaluated
+Scores for Fable 5.2, Fable 5.1, and Opus 5.5 show results with safeguards on unless otherwise noted
+All scores show each model’s highest-available effort unless otherwise noted
+The model that underlies Claude Fable 5.2 and Claude Mythos 5.2 is a step forward in general capabilities
+in relevant areas, including accelerator kernel optimization and improving large language model architectures
+we observed about 55% fewer blocks with Fable 5.2 compared with Fable 5.1
+Fable and Mythos are best for the most ambitious, open-ended technical work
+On Medium effort (the default in Claude apps and Claude Code), Fable 5.2 can accomplish challenging tasks with fewer tokens than Fable 5.1
+full details can be found in the Claude Fable 5.2 and Mythos 5.2 System Card
+we ensured that the training changes did not affect related capabilities like agentic coding, hardware development, and traditional AI or machine learning research
+# 以下 16 行是公告評測表的表頭與各列，依頁面文字逐字擷取；欄序為 Fable 5.2｜Fable 5.1｜Opus 5.5｜GPT-6 Astra｜Gemini 4 Carbon，Elo 那一行接在 AA-Briefcase 之下
+Fable 5.2 Fable 5.1 Opus 5.5 GPT-6 Astra Gemini 4 Carbon
+Agentic coding FrontierCode 2.0 49.1% Xhigh effort 32.4% Xhigh effort 45.5% 42.8% 41.1% Medium effort
+Agentic coding FrontierSWE v2 69.9% 56.3% 62.3% 65.5% 61.2%
+Business workflows AutomationBench 51.4% 31.4% 42.5% 41.4% 53.9%
+Agentic scientific research Terminal-Bench-Science 0.1 74.6% 75.3% (Mythos 5.2) 52.6% 58.7% 68.1% 64.8%
+Cybersecurity CyScenarioBench † 76.3% Mythos 5.2 61.7% Mythos 5.1 67.6% without safeguards 61% GPT-6 Cyber —
+Cybersecurity CVE Rediscovery 89.6% Mythos 5.2 78.3% Mythos 5.1 81.3% without safeguards — —
+Protein design De novo binder design (24 hr) 85.1% Mythos 5.2 79.1% Mythos 5.1 82.6% without safeguards — —
+Agentic search WANDR (relaxed score) 82.1% 68.7% 72.3% — —
+Computer use OSWorld 2.1 (offline set, partial) 89.3% 83.5% 87.2% 79.5% 81.5%
+Robotics RoboDojo Sim ‡ 64.9% 27.6% 39.4% 29.8% —
+Knowledge work AA-Briefcase v1.1 66.1% rubric 61.5% rubric 61.2% rubric 52.0% rubric 61.8% rubric
+1785 Elo 1669 Elo 1800 Elo 1569 Elo 1611 Elo
+Knowledge work Remote Labor Index (RLI) 41.3% High effort 17.9% 21.3% 20.8% —
+Multidisciplinary reasoning Humanity’s Last Exam (with tools) 74.2% 65.6% 67.7% 57.2% —
+Visual chart recognition Chartography (no tools) 73.4% 44.8% 64.4% 71.0% 72.5%
 November 9, 2026
+
+URL https://claude.dev/blog/which-claude-model-should-you-build-with/
+FINAL https://claude.dev/blog/which-claude-model-should-you-build-with/
+READ 2026-11-10（以瀏覽器讀取頁面文字，未存 HTML，故無 SHA-256；以下各句已在頁面文字中逐字核對）
+The quick answer is that you should start most work on Opus 5.5 at its default effort level, medium.
+it's the model we recommend starting with for most coding and knowledge work
+Move up to Claude Fable 5.2 for the hardest technical projects in coding, finance and the sciences.
+Also move up when Opus 5.5 at high still falls short, or for long unattended runs.
+the previous Fable, 5.1, at max scored 58.0%, while Opus 5.5 at high scored 58.9% with half the tokens
+Our daily driver for complex coding and knowledge work
+The most ambitious, open-ended technical work
+Then test the candidates on your own tasks before you commit.
+PUBLISHED Nov 09, 2026
+Addy Osmani
+
+URL https://claude.dev/blog/getting-the-most-out-of-opus-5-5/
+FINAL https://claude.dev/blog/getting-the-most-out-of-opus-5-5/
+READ 2026-11-10（以瀏覽器讀取頁面文字，未存 HTML，故無 SHA-256；以下各句已在頁面文字中逐字核對）
+it works for longer on its own, it tells you plainly what it did, and it thinks before every reply
+Opus 5.5 reports on its work more clearly than Opus 5.
+Its updates and its final summary say what it did, what it found, and what it needs from you, in plain language.
+PUBLISHED Sep 22, 2026
+Addy Osmani
+
+URL https://claude.dev/blog/spending-your-effort/
+FINAL https://claude.dev/blog/spending-your-effort/
+READ 2026-11-10（以瀏覽器讀取頁面文字，未存 HTML，故無 SHA-256；以下各句已在頁面文字中逐字核對）
+higher effort will involve Claude taking more independent action for judgement and verification
+same score, half the tokens
+PUBLISHED Sep 25, 2026
+Thariq Shihipar

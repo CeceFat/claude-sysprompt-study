@@ -36,6 +36,7 @@ evidence/
 └── README.md          重現步驟
 report/changelog-zh-TW.md         完整中文報告原檔（含 §A、§B、§C 增補）
 report/audit-2026-11-10-zh-TW.md  2026-11-10 稽核報告（逐項發現、修正前後對照、重現方式）
+report/fable-5-1-to-5-2-diff-zh-TW.md  Fable 5.1 → 5.2 逐句差異分析（刪除、新增、改寫的句子全表；第 8 節對照官方評測與 Opus 5.5 的寫作指示）
 ```
 
 抓取方式：
